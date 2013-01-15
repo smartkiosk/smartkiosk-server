@@ -1,0 +1,33 @@
+ru:
+  support:
+    array:
+      two_words_connector: ', '
+  errors:
+    messages:
+      blank: не может быть пустым
+      taken: должно быть уникальным
+      extension_white_list_error: некорректное расширение
+  time:
+    am: утра
+    formats:
+      default: ! '%a, %d.%m.%Y, %H:%M:%S %z'
+      long: ! '%d.%m.%y, %H:%M:%S'
+      short: ! '%d.%m, %H:%M:%S'
+    pm: вечера
+  formtastic:
+    select_all: Выбрать все
+    cancel: Отменить
+    create: Создать
+    'no': Нет
+    required: обязательное
+    reset: Откатить
+    submit: Отправить
+    update: Обновить
+    'yes': Да
+  views:
+    pagination:
+      first: Первая
+      last: Последняя
+      next: Вперед
+      previous: Назад
+      truncate: ...

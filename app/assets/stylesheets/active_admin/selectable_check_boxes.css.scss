@@ -1,0 +1,12 @@
+body.active_admin form fieldset > ol > li.selectable_check_boxes fieldset ol li {
+  margin: 0.1em 0 0.5em 0;
+
+  label {
+    float: none;
+    width: 100%;
+
+    input {
+      margin-right: 0.2em;
+    }
+  }
+}

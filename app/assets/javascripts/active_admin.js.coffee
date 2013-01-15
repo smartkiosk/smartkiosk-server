@@ -1,0 +1,9 @@
+# encoding: utf-8
+#= require active_admin/base
+#= require chosen.jquery
+#= require qtip.jquery
+#= require datepicker-ru.jquery
+#= require nestedSortable.jquery
+#= require_tree ./active_admin
+#= require terminals
+#= require report_templates

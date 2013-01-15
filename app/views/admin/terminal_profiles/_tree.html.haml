@@ -1,0 +1,35 @@
+- if entry.is_a?(TerminalProfileProviderGroup)
+  %li.input{:style => 'padding-right: 0px; padding-left: 0px; cursor: move', :'data-id' => entry.provider_group.id, :'data-parent' => entry.provider_group.provider_group_id}
+    %div{:style => 'padding-left: 10px; padding-bottom: 5px; border-bottom: 1px dashed gray'}
+      &#8645;
+      = image_tag(entry.icon.url(:thumb), :style => 'vertical-align: middle') unless entry.icon.blank?
+      &nbsp;
+      %b{:style => 'font-size:1.2em'}= entry.provider_group.title
+      %span{:style => "float: right; display: block"}
+        %em= entry.class.human_attribute_name(:icon).mb_chars.downcase + ':'
+        &nbsp;
+        %input{:type => 'file', :name => "terminal_profile_provider_groups[][icon]"}
+        %input{:type => 'hidden', :name => "terminal_profile_provider_groups[][terminal_profile_id]", :value => entry.terminal_profile_id}
+        %input{:type => 'hidden', :name => "terminal_profile_provider_groups[][provider_group_id]", :value => entry.provider_group_id}
+        %input{:type => 'hidden', :name => "terminal_profile_provider_groups[][priority]", :value => entry.priority}
+    %ol{:style => 'padding-left:30px'}
+      - subs  = @terminal_profile.terminal_profile_provider_groups
+      - subs  = subs.select{|x| x.provider_group.provider_group == entry.provider_group}
+      - subs += entry.terminal_profile_providers
+
+      - subs.sort_by{|x| x.priority}.each_with_index do |x|
+        = render 'tree', :entry => x, :level => level+1
+- else
+  %li.input{:style => 'padding-right: 0px; padding-left: 0px; cursor: move', :'data-id' => entry.provider.id, :'data-parent' => entry.provider.provider_group_id}
+    %div{:style => 'padding-left: 10px; padding-bottom: 5px; border-bottom: 1px dashed gray'}
+      &#8645;
+      = image_tag(entry.icon.url(:thumb), :style => 'vertical-align: middle') unless entry.icon.blank?
+      &nbsp;
+      = entry.provider.title
+      %span{:style => "float: right; display: block"}
+        %em= entry.class.human_attribute_name(:icon).mb_chars.downcase + ':'
+        &nbsp;
+        %input{:type => 'file', :name => "terminal_profile_providers[][icon]"}
+        %input{:type => 'hidden', :name => "terminal_profile_providers[][terminal_profile_id]", :value => entry.terminal_profile_id}
+        %input{:type => 'hidden', :name => "terminal_profile_providers[][provider_id]", :value => entry.provider_id}
+        %input{:type => 'hidden', :name => "terminal_profile_providers[][priority]", :value => entry.priority}

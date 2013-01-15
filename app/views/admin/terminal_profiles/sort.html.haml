@@ -1,0 +1,21 @@
+:coffeescript
+  $ ->
+    $('fieldset.sortable > ol').nestedSortable
+      handle: 'div'
+      items: 'li'
+      toleranceElement: '> div'
+      update: ->
+        sortInputs = $("fieldset.sortable > ol input[name$='[priority]']")
+        sortInputs.each (index) -> $(this).val index
+      isAllowed: (item, parent) ->
+        item   = $(item).attr('data-parent')
+        parent = $(parent).attr('data-id')
+
+        item == parent
+
+= semantic_form_for [:admin, @terminal_profile], :html => { :multipart => true } do |f|
+  = f.inputs :class => 'sortable', :style => 'padding: 0px; margin: 0px' do
+    - @terminal_profile.terminal_profile_provider_groups.select{|x| x.provider_group.provider_group.blank?}.each_with_index do |g, i|
+      = render 'tree', :entry => g, :level => 0
+
+  = f.actions

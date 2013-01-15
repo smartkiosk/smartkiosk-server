@@ -1,0 +1,30 @@
+table :style => 'width: 80%', :align => 'center' do
+  tr do
+    td :style => 'width: 40%;' do
+      div :style => 'padding-right: 20px;' do
+        h3 I18n.t('smartkiosk.admin.messages.terminals.terminals_to_upgrade'), :style => 'font-weight: bold;'
+        assigns[:terminals].each_with_index do |t, i|
+          div t.keyword, :style => 'width: 33%; float: left'
+        end
+      end
+    end
+    td :style => 'width: 1px;' do
+      div :style => 'padding: 40px; background-color: #FFADAD' do
+        h2 I18n.t('smartkiosk.admin.messages.terminals.build_to_upgrade'), :style => 'white-space: nowrap'
+        form :action => upgrade_admin_terminal_path(assigns[:ids]), :method => :post do
+          input :type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token
+          select :name => 'build_id', :class => 'chosen', :style => 'width: 400px' do
+            TerminalBuild.all.each do |tb|
+              option tb.version, :value => tb.id
+            end
+          end
+          div :style => 'margin-top: 15px' do
+            input :value => I18n.t('smartkiosk.admin.actions.terminals.upgrade'), :type => 'submit'
+          end
+        end
+      end
+    end
+    td do
+    end
+  end
+end

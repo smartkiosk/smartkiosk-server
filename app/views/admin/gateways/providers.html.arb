@@ -1,0 +1,10 @@
+div do
+  if assigns[:providers][:success] == false
+    para do
+      span "Произошла ошибка:"
+      strong I18n.t('smartkiosk.gateways.'+assigns[:gateway].keyword+'.errors')[assigns[:providers][:error]]
+    end
+  else
+    p assigns[:providers][:data]
+  end
+end

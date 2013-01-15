@@ -1,0 +1,18 @@
+body.active_admin .table_tools_segmented_control li a,
+body.active_admin #title_bar .action_items a,
+body.active_admin form .buttons input[type="submit"],
+body.active_admin form .actions input[type="submit"],
+body.active_admin form.filter_form a.clear_filters_btn,
+body.active_admin .pagination a,
+body.active_admin a.table_tools_button,
+body.active_admin .table_tools .dropdown_menu_button,
+body.active_admin .dropdown_menu_button,
+body.active_admin form input[type="submit"],
+body.active_admin a.table_tools_button,
+body.active_admin .table_tools_segmented_control li a,
+body.active_admin a.table_tools_button {
+  position:relative;
+  z-index:10;
+  behavior: url(assets/modules/PIE.htc);
+  filter:none !important;
+}

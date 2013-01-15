@@ -1,0 +1,5 @@
+---
+:verbose: false
+:pidfile: tmp/pids/sidekiq.pid
+:namespace: sidekiq_namespace
+:concurrency:  25

@@ -1,0 +1,636 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        terminal_build:
+          no_version: В архиве не найден файл версии
+        payment:
+          declined: Платеж не прошел проверку шлюза
+        collection:
+          attributes:
+            session_ids:
+              not_an_array: содержат неправильный формат
+            banknotes:
+              not_a_hash: содержат неправильный формат
+        rebate:
+          attributes:
+            start: 
+              too_large: должна быть меньше даты окончания
+          conditions_intersect: Условия выборки пересекаются
+          requires_commission_intersects: Нельзя указать разные типы связи с комиссией в рамках одного шлюза
+          payment_type_intersects: Нельзя указать разные типы связи типа платежа в рамках одного шлюза
+        provider_rebate:
+          attributes:
+            min:
+              too_large: должно быть меньше До
+        commission:
+          attributes:
+            start: 
+              too_large: должна быть меньше даты окончания
+          conditions_intersect: Условия выборки пересекаются
+          payment_type_intersects: Нельзя указать разные типы связи типа платежа в рамках одного провайдера
+        commission_section:
+          attributes:
+            min:
+              too_large: должно быть меньше До
+        limit:
+          attributes:
+            start: 
+              too_large: должна быть меньше даты окончания
+          conditions_intersect: Условия выборки пересекаются
+          payment_type_intersects: Нельзя указать разные типы связи типа платежа в рамках одного провайдера
+        limit_section:
+          attributes:
+            min:
+              too_large: должно быть меньше До
+    models:
+      terminal_profile_promotion:
+        few: Быстрые иконки
+        many: Быстрых иконок
+        one: Быстрая иконка
+        other: Быстрые иконки
+      terminal_profile_provider_group:
+        few: Категории провайдеров профиля терминалов
+        nany: Категорий провайдеров профиля терминалов
+        one: Категория провайдеров профиля терминалов
+        other: Категории провайдеров профиля терминалов
+      terminal_profile:
+        few: Профиля терминалов
+        many: Профилей терминалов
+        one: Профиль терминалов
+        other: Профили терминалов
+      terminal_build:
+        few: Сборки терминалов
+        many: Сборок терминалов
+        one: Сборка терминала
+        other: Сборки терминалов
+      provider_provider_receipt_template:
+        few: Связи с провайдерами
+        many: Связей с провайдерами
+        one: Связь с провайдерами
+        other: Связи с провайдерами
+      provider_receipt_template:
+        few: Шаблона чеков
+        many: Шаблонов чеков
+        one: Шаблон чека
+        other: Шаблоны чеков
+      system_receipt_template:
+        few: Системных шаблона
+        many: Системных шаблонов
+        one: Системный шаблон
+        other: Системные шаблоны
+      agent:
+        few: Агента
+        many: Агентов
+        one: Агент
+        other: Агенты
+      collection:
+        few: Инкассации
+        many: Инкассаций
+        one: Инкассация
+        other: Инкассации
+      rebate:
+        few: Вознаграждения
+        many: Вознаграждений
+        one: Вознаграждение
+        other: Вознаграждения
+      provider_rebate:
+        few: Раздела вознаграждения
+        many: Разделов вонаграждения
+        one: Раздел вознаграждения
+        other: Разделы вознаграждения
+      commission:
+        few: Комиссии
+        many: Комиссий
+        one: Комиссия
+        other: Комиссии
+      commission_section:
+        few: Разделы комиссий
+        many: Разделов комиссий
+        one: Раздел комиссий
+        other: Разделы комиссий
+      gateway:
+        few: Шлюза
+        many: Шлюзов
+        one: Шлюз
+        other: Шлюзы
+      limit:
+        few: Лимита
+        many: Лимитов
+        one: Лимит
+        other: Лимиты
+      limit_section:
+        few: Раздела лимита
+        many: Разделов лимита
+        one: Раздел лимита
+        other: Разделы лимита
+      parent_agent:
+        many: Владельцев
+        one: Владелец
+        other: Владельцы
+      payment:
+        few: Платежа
+        many: Платежей
+        one: Платеж
+        other: Платежи
+      provider_profile:
+        few: Профиля получателей
+        many: Профилей получателей
+        one: Профиль получателей
+        other: Профили получателей
+      provider_field:
+        few: Поля получателя
+        many: Полей получателя
+        one: Поле получателя
+        other: Поля получателя
+      provider:
+        few: Получателя
+        many: Получателей
+        one: Получатель
+        other: Получатели
+      provider_group:
+        few: Категории получателей
+        many: Категорий получателей
+        one: Категория получателей
+        other: Категории получателей
+      provider_gateway:
+        few: Активных шлюза
+        many: Активных шлюзов
+        one: Активный шлюз
+        other: Активные шлюзы
+      report:
+        few: Отчета
+        many: Отчетов
+        one: Отчет
+        other: Отчеты
+      report_result:
+        few: Результата отчета
+        many: Результатов отчетов
+        one: Результат отчета
+        other: Результаты отчетов
+      report_template:
+        few: Шаблона отчета
+        many: Шаблонов отчетов
+        one: Шаблон отчета
+        other: Шаблоны отчетов
+      revision:
+        few: Сверки
+        many: Сверок
+        one: Сверка
+        other: Сверки
+      terminal: 
+        few: Терминала
+        many: Терминалов
+        one: Терминал
+        other: Терминалы
+      terminal_condition:
+        few: Состояния терминала
+        many: Состояний терминалов
+        one: Состояние терминала
+        other: Состояния терминалов
+      terminal_type:
+        few: Модели терминала
+        many: Моделей терминала
+        one: Модель терминала
+        other: Модели терминала
+      terminal_order:
+        few: Команды терминала
+        many: Команд терминала
+        one: Команда терминала
+        other: Команды терминала
+      user_role:
+        few: Роли
+        many: Ролей
+        one: Роль
+        other: Роли
+      user:
+        few: Администратора
+        many: Администраторов
+        one: Администратор
+        other: Администраторы
+      version:
+        few: Действия пользователя
+        many: Действий пользователей
+        one: Действие пользователя
+        other: Действия пользователей
+    scopes:
+      rebate:
+        active: Активные
+        outdated: Истекшие
+      agent:
+        root: Корневые
+      commission:
+        basic: Базовые
+      payment:
+        queued: В очереди
+        error: Ошибки
+      revision:
+        unmoderated: На модерацию
+        error: С ошибками
+      terminal:
+        ok: ОК
+        warning: Внимание
+        error: Ошибки
+    attributes:
+      terminal_profile_promotion:
+        provider: Получатель
+        provider_id: Получатель
+      terminal_profile:
+        title: Название
+        support_phone: Телефон поддержки
+        created_at: Дата добавления
+        updated_at: Дата изменения
+      terminal_build:
+        version: Версия
+        source: Источник (ZIP)
+        created_at: Дата создания
+        updated_at: Дата обновления
+      provider_receipt_template:
+        providers: Получатели
+        providers_id: Получатели
+        template: Шаблон
+        created_at: Дата добавления
+        updated_at: Дата изменения
+      system_receipt_template:
+        keyword: Тип
+        template: Шаблон
+        created_at: Дата добавления
+        updated_at: Дата изменения
+      terminal_order:
+        terminal: Терминал
+        terminal_id: Терминал
+        keyword: Команда
+        args: Аргументы
+        state: Статус
+        error: Ошибка
+        created_at: Дата
+        percent: Процент
+      agent:
+        agent: Владелец
+        agent_id: Владелец
+        agent_title: Название владельца
+        bookkeeper_contact_info: Контактная информация бухгалтера
+        bookkeeper_name: ФИО бухгалтера
+        contact_info: 'Физический адрес, Город'
+        contact_name: 'ФИО контактного лица'
+        created_at: Дата добавления
+        director_contact_info: Контактная информация директора
+        director_name: ФИО директора
+        inn: ИНН
+        juristic_address_city: 'Юридический адрес, Город'
+        juristic_address_home: 'Юридический адрес, Дом'
+        juristic_address_street: 'Юридический адрес, Улица'
+        juristic_name: Юридическое наименование
+        physical_address_city: 'Физический адрес, Город'
+        physical_address_district: 'Физический адрес, Округ'
+        physical_address_home: 'Физический адрес, Дом'
+        physical_address_street: 'Физический адрес, Улица'
+        physical_address_subway: 'Физический адрес, Метро'
+        support_phone: Телефон поддержки
+        terminals_count: Кол-во терминалов
+        title: Название
+        updated_at: Дата изменения
+      parent_agent:
+        agent: Владелец
+        agent_id: Владелец
+        agent_title: Название владельца
+        bookkeeper_contact_info: Контактная информация бухгалтера
+        bookkeeper_name: ФИО бухгалтера
+        contact_info: 'Физический адрес, Город'
+        contact_name: 'ФИО контактного лица'
+        created_at: Дата добавления
+        director_contact_info: Контактная информация директора
+        director_name: ФИО директора
+        inn: ИНН
+        juristic_address_city: 'Юридический адрес, Город'
+        juristic_address_home: 'Юридический адрес, Дом'
+        juristic_address_street: 'Юридический адрес, Улица'
+        juristic_name: Юридическое наименование
+        physical_address_city: 'Физический адрес, Город'
+        physical_address_district: 'Физический адрес, Округ'
+        physical_address_home: 'Физический адрес, Дом'
+        physical_address_street: 'Физический адрес, Улица'
+        physical_address_subway: 'Физический адрес, Метро'
+        support_phone: Телефон поддержки
+        terminals_count: Кол-во терминалов
+        title: Название
+        updated_at: Дата изменения
+      collection:
+        session_ids: Внешние ID
+        agent: Агент
+        agent_id: Агент
+        payments_sum: Платежей
+        approved_payments_sum: Подтвержденных платежей
+        difference: Разница
+        banknotes: Купюры
+        cash_sum: В купюроприемнике
+        cash_payments_count: Кол-во наличных платежей
+        cashless_payments_count: Кол-во безналичных платежей
+        collected_at: Дата
+        created_at: Дата добавления
+        day: День
+        hour: Час
+        month: Месяц
+        payments_count: Кол-во платежей
+        payments_sum: Сумма платежей
+        terminal: Терминал
+        terminal_id: Терминал
+        terminal_keyword: ID терминала
+        updated_at: Дата изменения
+      rebate:
+        gateway: Шлюз
+        gateway_id: Шлюз
+        start: Дата начала
+        finish: Дата конца
+        created_at: Дата добавления
+        updated_at: Дата изменения
+        period_fee: Сумма за период
+        period_kind: Период
+      provider_rebate:
+        max: До
+        min: От
+        percent_fee: Процент
+        provider: Получатель
+        provider_id: Получатель
+        requires_commission: Наличие комиссии
+        payment_type: Тип платежа
+        static_fee: Сумма
+        terminal: Терминал
+        terminal_id: Терминал
+        min_percent_amount: Мин. процент
+      commission:
+        start: Дата начала
+        finish: Дата конца
+        range: Временная граница
+        created_at: Дата добавления
+        provider_profile: Профиль получателей
+        provider_profile_id: Профиль получателей
+        updated_at: Дата изменения
+      commission_section:
+        terminal: Терминал
+        terminal_id: Терминал
+        agent: Агент
+        agent_id: Агент
+        max: До
+        min: От
+        payment_type: Тип платежа
+        percent_fee: Процент
+        static_fee: Сумма
+      gateway:
+        created_at: Дата добавления
+        debug_level: Уровень отладки
+        enabled: Активен
+        keyword: Код
+        requires_revisions_moderation: Модерировать сверки?
+        title: Название
+        updated_at: Дата изменения
+      limit:
+        start: Дата начала
+        finish: Дата конца
+        created_at: Дата добавления
+        provider_profile: Профиль получателей
+        provider_profile_id: Профиль получателей
+        updated_at: Дата изменения
+      limit_section:
+        terminal: Терминал
+        terminal_id: Терминал
+        agent: Агент
+        agent_id: Агент
+        max: До
+        min: От
+        payment_type: Тип платежа
+      payment:
+        meta: Мета-данные
+        card_number: Номер карты
+        card_number_hash: Хэш карты
+        date: Дата
+        account: Лицевой счет
+        agent: Агент
+        agent_id: Агент
+        commission_amount: Комиссия
+        rebate_amount: Начисление
+        corrected_by: Скоректирован платежом
+        corrected_payment: Скорректированный платеж
+        corrected_payment_id: ID корректируемого платежа
+        created_at: Дата создания
+        day: День
+        enrolled_amount: Зачислено
+        fields: Данные платежа
+        foreign_id: Сессия
+        session_id: Сессия
+        gateway: Шлюз
+        gateway_error: Ошибка шлюза
+        gateway_id: Шлюз
+        gateway_payment_id: ID платежа шлюза
+        gateway_provider_id: ID получателя шлюза
+        hour: Час
+        human_fields: Данные платежа
+        human_raw_fields: Сырые данные платежа
+        id: ID
+        month: Месяц
+        paid_amount: Платеж
+        paid_at: Дата проведения
+        provider: Получатель
+        provider_id: Получатель
+        provider_keyword: ID провайдера
+        raw_fields: Сырые данные платежа
+        source: Источник
+        state: Состояние
+        terminal: Терминал
+        terminal_id: Терминал
+        terminal_keyword: Название терминала
+        title: Описание
+        updated_at: Дата изменения
+        user_id: Автор
+        user: Автор
+        collection: Инкассация
+        collection_id: Инкассация
+        revision: Сверки
+        revision_id: Сверки
+        currency: Валюта
+        payment_type: Тип платежа
+        receipt_number: Номер чека
+      provider_profile:
+        title: Название
+        created_at: Дата добавления
+        updated_at: Дата изменения
+      terminal_profile_provider_group:
+        icon: Иконка
+      terminal_profile_provider:
+        icon: Иконка
+      provider:
+        provider_group: Категория
+        provider_group_id: Категория
+        provider_profile: Профиль
+        provider_profile_id: Профиль
+        inn: ИНН
+        juristic_name: Юридическое лицо
+        created_at: Дата добавления
+        gateway_ids: Шлюз
+        keyword: Код
+        provider_gateways_count: Активных шлюзов
+        requires_print: Требует печати чека?
+        title: Название
+        updated_at: Дата изменения
+        icon: Иконка
+        priority: Приоритет
+      provider_group:
+        title: Название
+        icon: Иконка
+        provider_group: Вложенность
+        provider_group_id: Вложенность
+        created_at: Дата добавления
+        updated_at: Дата изменения
+      provider_field:
+        keyword: Ключ
+        title: Название
+        kind: Тип
+        mask: Маска
+        priority: Приоритет
+        values: Значения
+        created_at: Дата добавления
+        updated_at: Дата изменения
+      provider_gateway:
+        account_mapping: 'Маппинг поля "л/с"'
+        fields_mapping: Маппинг других полей
+        gateway: Шлюз
+        gateway_provider_id: ID получателя шлюза
+        human_fields_mapping: Маппинг других полей
+        priority: Приоритет
+        provider: Получатель
+      report:
+        created_at: Дата добавления
+        updated_at: Дата изменения
+        report_template: Шаблон
+        report_template_id: Шаблон
+        start: С
+        finish: По
+        state: Состояние
+        user: Автор
+        user_id: Автор
+      report_result:
+        created_at: Дата добавления
+        report: Отчет
+        report_id: Отчет
+        rows: Рядов
+        updated_at: Дата изменения
+      report_template:
+        calculations: Расчеты
+        conditions: Условия
+        created_at: Дата добавления
+        email: E-Mail
+        fields: Поля
+        groupping: Группировка
+        kind: Тип
+        open: Открытый
+        sort_desc: Сортировать по убыванию?
+        sorting: Сортировка
+        title: Название
+        updated_at: Дата изменения
+        user: Ответственный
+        user_id: Ответственный
+      revision:
+        created_at: Дата добавления
+        data: Тело сверки
+        date: Дата
+        error: Ошибка
+        gateway: Шлюз
+        moderated: Отмодерирован
+        payments_count: Платежей
+        paid_sum: Оплачено
+        enrolled_sum: Зачисленно
+        commission_sum: Коммиссия
+        state: Состояние
+        updated_at: Дата изменения
+      terminal:
+        id: ID
+        foreign_id: Внешний ID
+        terminal_orders: Команды
+        address: Адрес
+        agent: Агент
+        agent_id: Агент
+        agent_title: Название агента
+        cash_acceptor_error: Ошибка купюроприемника
+        check_phone_number: Номер телефона на чеке
+        collected_at: Дата инкассации
+        collection_zone: Зона инкассации
+        condition: Состояние
+        contact_email: E-Mail контактного лица
+        contact_name: Имя контактного лица
+        contact_phone: Телефон контактного лица
+        contract_number: Номер договора
+        created_at: Дата добавления
+        ip: IP
+        issues_started_at: Старт проблем
+        incomplete_orders_count: Кол-во активных задач
+        juristic_name: Юридическое лицо
+        keyword: Ключ
+        title: Название
+        manager: Менеджер
+        modem_error: Ошибка модема
+        notified_at: Время связи
+        printer_error: Ошибка принтера
+        rent: Аренда
+        rent_finish_date: Дата окончания аренды
+        schedule: Расписание работы
+        sector: Сектор
+        state: Статус
+        terminal_profile: Профиль
+        terminal_profile_id: Профиль
+        title: Название
+        description: Описание
+        updated_at: Дата изменения
+        version: Версия ПО
+        has_adv_monitor: Рекламный монитор
+      terminal_ping:
+        terminal: Терминал
+        condition: Состояние
+        version: Версия
+        state: Статус
+        ip: IP
+        cash_count: Купюр
+        cash_sum: Сумма
+        created_at: Дата связи
+        cash_acceptor_model: Модель купюроприемника
+        cash_acceptor_error: Ошибка купюроприемника
+        cash_acceptor_version: Версия купюроприемника
+        printer_model: Модель принтера
+        printer_error: Ошибка принтера
+        printer_version: Версия принтера
+        modem_model: Модель принтера
+        modem_balance: Баланс SIM
+        modem_signal_level: Уровень GSM
+        modem_version: Версия модема
+        queues: Очереди
+        banknotes: Купюры
+      terminal_type:
+        created_at: Дата добавления
+        description: Описание
+        title: Название
+        updated_at: Дата изменения
+      user_role:
+        role: Роль
+        priveleges: Привелегии
+      user:
+        created_at: Дата добавления
+        current_sign_in_at: Начало текущей сессии
+        current_sign_in_ip: IP текущей сессии
+        email: E-Mail
+        full_name: Имя
+        last_sign_in_at: Начало последней сессии
+        last_sign_in_ip: IP последней сессии
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        roles: Роли
+        roles_id: Роли
+        root: Суперпользователь
+        updated_at: Дата изменения
+      version:
+        changeset: Изменения
+        fields: Поля
+        created_at: Дата
+        item: Сущность
+        item_type: Тип сущности
+        item_id: ID сущности
+        event: Действие
+        user: Пользователь

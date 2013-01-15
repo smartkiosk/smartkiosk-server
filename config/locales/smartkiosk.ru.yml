@@ -1,0 +1,162 @@
+ru:
+  smartkiosk:
+    welcome: 
+      header: Вы авторизованы как %{user}
+      roles: Доступные роли
+      properties: Свойства аккаунта
+    unlocalized: Нет локализации
+    full_list: Полный список
+    main_currency: руб.
+    admin:
+      title: Панель управления
+      menu:
+        manage: Управление
+      actions:
+        gateways:
+          enable: Активировать
+          disable: Отключить
+          pay: Создать платеж
+          providers: Получатели шлюза
+        payments:
+          paid_manually: Проведен вручную
+          repay: Перепровести
+        report_results:
+          excel: Выгрузить в Excel
+        report_templates:
+          report: Построить отчет
+        reports:
+          refresh: Обновить
+        revisions:
+          payments: Платежи
+          approve: Подтвердить
+        terminals:
+          reload: Перезапустить
+          reboot: Перезагрузить
+          disable: Заблокировать
+          enable: Разблокировать
+          upgrade: Обновить
+          pings_excel: Выгрузить в Excel
+        terminal_profiles:
+          sort: Сортировка
+      messages:
+        user_roles:
+          save_required: Сохраните пользователя чтобы настроить привелегии
+        payments:
+          choose_gateway: Выберите шлюз для проведения ручного платежа
+          no_providers: Данный шлюз не содержит подключенных получателей
+        rebates:
+          choose_gateway: Выберите шлюз для создания вознаграждения
+          no_providers: Данный шлюз не содержит подключенных получателей
+        report_templates:
+          choose_report_type: Выберите тип отчета для заполнения этих полей
+        terminals:
+          terminals_to_upgrade: 'Вы собираетесь обновить терминалы:'
+          build_to_upgrade: 'Сборка для заливки на терминал:'
+        provider_fields:
+          values_hint: Значения для списка через запятую
+          keyword_hint: Не требуется для поля лицевого счета
+          mask_hint: "Маска ввода (5-4-x: три поля на 5, 4 и неогр. кол-во символов)"
+      panels:
+        gateways:
+          settings: Настройки
+        report_results:
+          data: Данные
+        report_templates:
+          conditions: Условия
+          report: Построить отчет
+          recent: Недавние готовые отчеты
+          form:
+            basic: Основные
+            select: Выборка
+            conditions: Условия
+            more: Параметры
+        reports:
+          last_result: Последний результат
+        terminals:
+          hardware: Железо
+          juridical: Юридическая информация
+          upgrade: Обновление терминалов
+          all_pings: Полная история связи
+          pings: История связи
+    role_priveleges:
+      basic:
+        create: Создание
+        edit: Редактирование
+        destroy: Удаление
+        read: Просмотр
+      terminals:
+        reload: Перезапуск
+        reboot: Перезагрузка
+        enable: Разблокировка
+        disable: Блокировка
+        upgrade: Обновление
+    debug_levels:
+      '0': 'DEBUG'
+      '1': 'INFO'
+      '2': 'WARN'
+    version_actions:
+      create: создана
+      update: изменена
+      destroy: удалена
+      payment:
+        paid_manually: проведен вручную
+        requeued: перепроведен
+    system_receipt_templates:
+      payment: Платеж
+      collection: Инкассация
+      touchtest: Тест тач-скрина
+      balance: Баланс
+    rebate_periods:
+      0: месяц
+      1: неделя
+    payment_types:
+      0: Наличные
+      1: Внутренняя карта
+      2: Чужая карта
+      3: Интернет-банк
+      4: Мобильный банк
+      5: Электронный кошелек
+      6: Банковский счет
+    payment_sources:
+      0: Внутренний
+      1: Ручная проводка
+      2: Импорт из внешней базы
+    payment_states:
+      checked: Проверен
+      declined: Отклонен
+      error: Ошибка
+      manual: Вручную
+      new: Создан
+      paid: Проведен
+      queue: В очереди
+    revision_states:
+      done: Проведена
+      error: Ошибка
+      new: Создана
+      queue: В очереди
+    terminal_states:
+      active: Активен
+      disabled: Заблок.
+      rebooting: Перезагр.
+      unknown: Неизвестно
+      upgrading: Обнов.
+    terminal_conditions:
+      error: Проблемы
+      ok: ОК
+      warning: Внимание
+    terminal_orders:
+      reload: Перезапустить
+      enable: Разблокировать
+      disable: Заблокировать
+      reboot: Перезагрузить
+      upgrade: Обновить
+    terminal_order_states:
+      new: Создана
+      sent: Доставлена
+      complete: Завершена
+    provider_field_kinds:
+      phone: Телефон
+      string: Строка
+      date: Дата
+      select: Список
+      number: Число

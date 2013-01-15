@@ -1,0 +1,71 @@
+ru:
+  active_admin:
+    all: "Все"
+    any: "Любой"
+    not_found: "Не найдено"
+    filters:
+      multiple_select:
+        placeholder: "Нажмите для выбора"
+    batch_actions:
+      action_label: "%{title} выбранное"
+      button_label: "Групповые операции"
+      delete_confirmation: "Вы уверены, что хотите удалить это? Вы не сможете это отменить."
+      labels:
+        destroy: "Удалить"
+      link: "Создать"
+      selection_toggle_explanation: "(Отметить всё / Снять выделение)"
+      succesfully_destroyed:
+        one: "Успешно удалено: 1 %{model}"
+        other: "Успешно удалено: %{count} %{plural_model}"
+    blank_slate:
+      content: "%{resource_name} не найдены."
+      link: "Создать"
+    cancel: "Отмена"
+    clear_filters: "Очистить"
+    comments:    
+      add: "Добавить Комментарий"
+      author: "Автор"
+      body: "Текст"
+      errors:
+        empty_text: "Комментарий не сохранен, текст не должен быть пустым."
+      no_comments_yet: "Пока нет комментариев."
+      resource: "Ресурс"
+      title: "Комментарий"
+      title_content: "Комментарии (%{count})"
+    create_model: "Создать"
+    dashboard: Dashboard
+    dashboard_welcome:
+      call_to_action: "Чтобы добавить сюда что-нибудь загляните в 'app/admin/dashboards.rb'"
+      welcome: "Добро пожаловать в Active Admin. Это стандартная страница управления сайтом."
+    delete: "Удалить"
+    delete_confirmation: "Вы уверены, что хотите удалить это?"
+    delete_model: "Удалить"
+    details: "Подробнее"
+    download: "Загрузка:"
+    edit: "Изменить"
+    edit_model: "Изменить"
+    empty: "Пусто"
+    equal_to: "="
+    filter: "Фильтровать"
+    greater_than: "больше"
+    has_many_delete: "Удалить"
+    has_many_new: "%{model} – добавить"
+    less_than: "меньше"
+    logout: "Выйти"
+    main_content: "Создайте %{model}#main_content для отображения содержимого."
+    new_model: "Создать"
+    next: "След."
+    pagination:
+      empty: "%{model} не найдено"
+      entry:
+        one: "запись"
+        other: "записей"
+      multiple: "Результат: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> из <b>%{total}</b>"
+      one: "Результат: <b>1</b> %{model}"
+      one_page: "Результат: <b>%{n}</b> %{model}"
+    previous: "Пред."
+    search_field: "Искать по: %{field}"
+    sidebars:
+      filters: "Фильтры"
+    update_model: "Изменить"
+    view: "Открыть"

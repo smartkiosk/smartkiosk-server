@@ -1,0 +1,54 @@
+ru:
+  smartkiosk:
+    reports:
+      data:
+        agents:
+          calculations:
+            quantity: Количество
+          conditions:
+            agent:
+              agent_id:
+                title: Агент
+        collections:
+          calculations:
+            approved_payments_sum: Сумма проведенных платежей
+            cash_sum: Сумма купюроприемника
+            payments_sum: Общая сумма платежей
+        payments:
+          calculations:
+            commission: Комиссия
+            enrolled: Зачислено
+            paid: Заплачено
+            quantity: Количество
+          conditions:
+            payment:
+              state:
+                title: Состояние
+              payment_type:
+                title: Тип
+        terminals:
+          calculations:
+            quantity: Количество
+          conditions:
+            terminal:
+              condition:
+                title: Состояние
+      kinds:
+        # preprocessing: Предпроцессинг
+        agents: Агенты
+        # commands: Команды
+        # events: Журнал событий
+        # summary: Итоговая сводка
+        collections: Инкассации
+        payments: Платежи
+        # repayments: Перепроводки
+        # turnovers: Суточные обороты
+        terminals: Терминалы
+        # terminals_statistics: Статистика по терминалам
+        # terminals_history: История терминалов
+        # terminals_condition: Работа терминалов
+      states:
+        done: Готов
+        error: Ошибка
+        new: Создан
+        queue: В очереди

@@ -1,0 +1,28 @@
+paginated_collection assigns[:payments] do
+  table_for(assigns[:payments], :i18n => Payment, :class => 'index_table index') do |t|
+    t.column :id
+    t.column :terminal do |p|
+      unless p.terminal.blank?
+        link_to p.terminal.keyword, admin_terminal_path(p.terminal)
+      end
+    end
+    t.column :id, :sortable => :id do |p|
+      link_to p.id, [:admin, p]
+    end
+    t.column :foreign_id
+    t.column :account
+    t.column :terminal
+    t.column :state, :sortable => :state do |p|
+      condition = :ok
+      condition = :warning if ['queue', 'checked'].include?(p.state)
+      condition = :error if p.state == 'error'
+      status_tag I18n.t("smartkiosk.payment_states.#{p.state}"), condition
+    end
+    t.column :paid_amount
+    t.column :enrolled_amount
+    t.column :commission_amount
+    t.column :provider
+    t.column :paid_at
+    t.column :created_at
+  end
+end

@@ -1,0 +1,9 @@
+development:
+  scheme: smartkiosk
+
+test:
+  scheme: smartkiosk
+  db: 9
+
+production:
+  scheme: smartkiosk

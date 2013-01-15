@@ -1,0 +1,125 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+@import "active_admin/PIE";
+@import "active_admin/filter_numeric_range";
+@import "active_admin/selectable_check_boxes";
+@import "active_admin/sortable_forms";
+@import "chosen.jquery";
+@import "qtip.jquery";
+
+@import "provider_receipt_templates";
+@import "terminals";
+@import "provider_groups";
+
+body.active_admin {
+
+  //
+  // INDEX
+  //
+  .index_as_table {
+    td.id {
+      font-weight: bold;
+    }
+  }
+
+  div.nowrap {
+    white-space: nowrap;
+  }
+
+  div.centered {
+    text-align: center
+  }
+
+  div.important {
+    font-weight: bold;
+  }
+
+  div.error {
+    color: red;
+
+    a {
+      color: rgb(212, 95, 83);
+    }
+  }
+
+  .status_tag.raw {
+    background-color: #F0F0F0;
+    color: black;
+  }
+
+  //
+  // DATEPICKER
+  //
+  .ui-datepicker {
+    z-index: 1000 !important;
+  }
+
+  //
+  // FORMS
+  //
+  p.inline-errors {
+    text-transform: none !important;
+  }
+
+  form {
+    ul.errors { 
+      background: lighten($error-color, 60%);
+      @include rounded(4px);
+      color: $error-color;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding: 10px;
+      list-style:square; 
+      li { margin-left:15px; padding:0; border:none; display:list-item; }
+    }
+
+    fieldset.inputs {
+      margin-bottom: 10px;
+      padding-top: 5px;
+
+      li.input {
+        padding: 5px 10px;
+        padding-left: 10px;
+
+        select {
+          width: 70%;
+        }
+
+        &.phone, &.email, &.string, &.number, &.text, &.password {
+          input, textarea {
+            width: 70%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+          }
+        }
+
+        &.boolean {
+          padding-bottom: 10px;
+        }
+
+        &.hidden {
+          padding: 0px;
+        }
+      }
+
+      div.has_many {
+        padding-bottom: 10px;
+
+        fieldset.has_many_fields {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
