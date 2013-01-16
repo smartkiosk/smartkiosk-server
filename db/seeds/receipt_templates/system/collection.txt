@@ -14,7 +14,7 @@
 Р/счет:     12345678900123456789
 -------------------------------------
 {% for banknote in banknotes %}
-{{ banknote.nominal }} | {{ banknote.count }} | {{ banknote.product }}
+{{ banknote.nominal }} * {{ banknote.count }} = {{ banknote.product }}
 {% endfor %}
 -------------------------------------
 *************************************

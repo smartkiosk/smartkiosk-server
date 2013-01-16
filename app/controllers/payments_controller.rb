@@ -60,8 +60,10 @@ class PaymentsController < ApplicationController
   def pay
     payment = @terminal.payments.find(params[:id])
 
-    payment.plog :info, :transport, "Sent to queue" do
-      payment.enqueue!(params[:payment])
+    unless payment.queue?
+      payment.plog :info, :transport, "Sent to queue" do
+        payment.enqueue!(params[:payment])
+      end
     end
 
     render :text => nil, :status => 200
