@@ -167,6 +167,14 @@ body.active_admin {
     box-shadow: 0px 1px 5px rgba(8, 8, 8, 0.35);
     padding: 11px 17px 11px 33px;
 
+    #titlebar_left {
+      width: 30% !important;
+    }
+
+    #titlebar_right {
+      width: 70% !important;
+    }
+
     h2 {
       font-weight: normal;
       color: #835881;
