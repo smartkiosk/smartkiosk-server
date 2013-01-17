@@ -14,12 +14,15 @@ module Smartkiosk
           config.paths['db/migrate'] += Smartkiosk::Server::Engine.paths['db/migrate'].existent
         end
 
-        
         # ActiveAdmin
         ActiveAdmin.setup do |config|
           config.load_paths << Smartkiosk::Server::Engine.root.join('app/admin')
         end
-        
+
+        # TODO: Remove this as soon as AA fixed
+        config.after_initialize do
+          I18n.reload!
+        end
       end
     end
   end

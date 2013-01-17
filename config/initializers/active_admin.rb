@@ -10,6 +10,7 @@ require 'formtastic/inputs/selectable_check_boxes'
 require 'dav4rack/build_resource'
 
 ActiveAdmin.setup do |config|
+  # TODO: Remove this as soon as AA fixed
   I18n.locale = :ru
   I18n.load_path += Dir[File.expand_path("../../locales/**/*.yml", __FILE__)]
   I18n.reload!
