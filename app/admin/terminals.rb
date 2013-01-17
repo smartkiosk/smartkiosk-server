@@ -1,6 +1,6 @@
 ActiveAdmin.register Terminal do
 
-  SIMPLE_ORDERS = Terminal::ORDERS.select{|x| x != 'upgrade'}
+  SIMPLE_ORDERS = Terminal::ORDERS.select{|x| x != 'upgrade'} unless defined?(SIMPLE_ORDERS)
 
   menu :parent   => I18n.t('activerecord.models.terminal.other'), 
        :label    => I18n.t('smartkiosk.admin.menu.manage'), 

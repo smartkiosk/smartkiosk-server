@@ -1,5 +1,5 @@
 ActiveAdmin.register Payment do
-  actions :index, :show, :new
+  actions :index, :show, :new, :create
 
   controller do
     def scoped_collection
