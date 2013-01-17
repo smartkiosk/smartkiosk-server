@@ -1,4 +1,6 @@
 require 'rails/engine'
+require 'activeadmin'
+require 'activeadmin-cancan'
 
 module Smartkiosk
   module Server
