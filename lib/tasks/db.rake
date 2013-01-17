@@ -5,16 +5,19 @@ namespace :db do
     Redis.current.flushdb
 
     puts "Droping all tables..."
-    root   = File.expand_path('../../../app/models/', __FILE__)
-    models = Dir["#{root}/**"].each{|x| require x; }
-    tables = ActiveRecord::Base.connection.tables
+    # Requiring every possible model
+    [File.expand_path('../../../', __FILE__), Rails.root.to_s].uniq.each do |root|
+      Dir["#{root}/app/models/**"].each{|x| require x; }
+    end
 
-    ActiveRecord::Base.connection.drop_table "schema_migrations"
+    tables = ActiveRecord::Base.connection.tables
 
     ActiveRecord::Base.subclasses.map{|x| x.table_name}.each do |x|
       ActiveRecord::Base.connection.drop_table x if tables.include? x
       puts "#{x} droped;"
     end
+
+    ActiveRecord::Base.connection.drop_table "schema_migrations"
     puts
 
     puts "Running migrations..."
