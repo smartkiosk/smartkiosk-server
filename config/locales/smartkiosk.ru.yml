@@ -8,7 +8,7 @@ ru:
     full_list: Полный список
     main_currency: руб.
     admin:
-      title: Панель управления
+      title: SmartKiosk
       menu:
         manage: Управление
       actions:
