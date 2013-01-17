@@ -10,10 +10,17 @@ on :start do
   set :rails_env, 'production'
 end
 
-set :repository,  'git@github.com:roundlake/smartkiosk-server.git'
+set :repository,  'git@github.com:smartkiosk/smartkiosk-server.git'
 
 set :keep_releases, 1
 
+set :use_sudo, false
+set :user, "deployer"
+
+set :deploy_to, "/home/deployer/www/#{application}"
+
+after 'deploy:update_code', 'deploy:configure'
+before 'deploy:create_symlink', 'deploy:install'
 
 namespace :deploy do
   task :configure do
