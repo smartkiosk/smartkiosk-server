@@ -11,6 +11,13 @@ end
 
 module Smartkiosk
   module Server
+    VERSION = File.read(File.expand_path '../../VERSION', __FILE__).strip
+
+    def self.revision
+      file = File.expand_path '../../REVISION', __FILE__
+      File.exist?(file) ? File.read(file).strip : nil
+    end
+
     class Application < Rails::Application
       # Settings in config/environments/* take precedence over those specified here.
       # Application configuration should go into files in config/initializers

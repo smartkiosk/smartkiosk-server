@@ -2,7 +2,12 @@ require 'rails/engine'
 
 module Smartkiosk
   module Server
-    VERSION = '0.0.1'
+    VERSION = File.read(File.expand_path '../../../VERSION', __FILE__).strip
+
+    def self.revision
+      file = File.expand_path '../../../REVISION'
+      File.exist?(file) ? File.read(file).strip : nil
+    end
 
     class Engine < ::Rails::Engine
       initializer 'matrioshka', :before => :set_autoload_paths do |app|

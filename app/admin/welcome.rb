@@ -2,7 +2,7 @@ ActiveAdmin.register_page "Dashboard" do
   menu :label => I18n.t('active_admin.dashboard')
 
   content do
-    h2 I18n.t("smartkiosk.welcome.header", :user => current_user.full_name),
+    h3 I18n.t("smartkiosk.welcome.header", :user => current_user.full_name),
       :style => 'margin-bottom: 30px'
 
     table do
