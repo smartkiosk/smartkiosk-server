@@ -29,7 +29,11 @@ class Payment < ActiveRecord::Base
     end
 
     event :pay do
-      transitions :from => :queue, :to => [:paid, :error], :decide => :pay?
+      transitions :from => [:checked, :queue], :to => [:paid, :error], :decide => :pay?
+    end
+
+    event :pay_offline do
+      transitions :from => :new, :to => [:paid, :error], :decide => :pay_offline?
     end
 
     event :pay_manually do

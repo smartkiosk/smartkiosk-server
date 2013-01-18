@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.integer  "collection_id"
     t.integer  "revision_id"
     t.integer  "payment_type",                                        :default => 0,     :null => false
+    t.boolean  "offline",                                             :default => false, :null => false
     t.string   "account"
     t.text     "fields"
     t.text     "raw_fields"
