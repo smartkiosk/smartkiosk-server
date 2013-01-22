@@ -6,7 +6,7 @@ seed it and you are ready to go.
 ## License
 
 NOTE! This software is dual-licensed. It's free for personal use. You
-are also free to incorporate it's parts under GPL terms.
+are also free to incorporate its parts under GPL terms.
 
 **Commercial use under GPL license is prohibited.**
 
