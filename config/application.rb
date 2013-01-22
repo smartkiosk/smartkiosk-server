@@ -9,10 +9,10 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require_relative '../lib/smartkiosk/server/version'
+
 module Smartkiosk
   module Server
-    VERSION = File.read(File.expand_path '../../VERSION', __FILE__).strip
-
     def self.revision
       file = File.expand_path '../../REVISION', __FILE__
       File.exist?(file) ? File.read(file).strip : nil

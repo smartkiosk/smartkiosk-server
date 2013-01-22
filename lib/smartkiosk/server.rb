@@ -1,8 +1,9 @@
 require 'rails/engine'
 
+require_relative 'server/version'
+
 module Smartkiosk
   module Server
-    VERSION = File.read(File.expand_path '../../../VERSION', __FILE__).strip
 
     def self.revision
       file = File.expand_path '../../../REVISION'
