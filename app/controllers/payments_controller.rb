@@ -32,29 +32,34 @@ class PaymentsController < ApplicationController
     ).first
 
     if payment.blank?
-      payment = Payment.build! @terminal, provider, params[:payment]
-      payment.plog :info, :transport, "Created"
+      if payment = Payment.build!(@terminal, provider, params[:payment])
+        payment.plog :info, :transport, "Created"
 
-      payment.plog :info, :transport, "Checked" do
-        payment.check!
+        payment.plog :info, :transport, "Checked" do
+          payment.check!
+        end
       end
     else
       payment.plog :warn, :transport, "Existing payment found, checking skipped"
     end
 
-    render :json => {
-      :id               => payment.id,
-      :state            => payment.state,
-      :requires_print   => provider.requires_print,
-      :limits           => Limit.for(payment, false).as_json(
-                              :only => [:min, :max], :methods => [:weight]
-                           ),
-      :commissions      => Commission.for(payment, false).as_json(
-                              :only => [:min, :max, :percent_fee, :static_fee],
-                              :methods => [:weight]
-                           ),
-      :receipt_template => ProviderReceiptTemplate.for(payment).compile(payment)
-    }
+    if payment
+      render :json => {
+        :id               => payment.id,
+        :state            => payment.state,
+        :requires_print   => provider.requires_print,
+        :limits           => Limit.for(payment, false).as_json(
+                                :only => [:min, :max], :methods => [:weight]
+                             ),
+        :commissions      => Commission.for(payment, false).as_json(
+                                :only => [:min, :max, :percent_fee, :static_fee],
+                                :methods => [:weight]
+                             ),
+        :receipt_template => ProviderReceiptTemplate.for(payment).compile(payment)
+      }
+    else
+      render :nothing => true, :status => 406
+    end
   end
   
   def pay

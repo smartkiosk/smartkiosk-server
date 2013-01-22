@@ -222,6 +222,8 @@ class Payment < ActiveRecord::Base
     payment = new(attributes)
     provider_gateway = provider.provider_gateways.enabled.order(:priority).first
 
+    return false if provider_gateway.blank?
+
     payment.terminal = terminal
     payment.provider_gateway = provider_gateway
     payment.raw_fields = payment.fields
