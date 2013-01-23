@@ -9,7 +9,8 @@ class TerminalPingsController < ApplicationController
       remote_timestamp = providers[:updated_at].blank? ? nil : DateTime.parse(providers[:updated_at])
       local_timestamp  = [
         Provider.timestamp.value || DateTime.civil(0, 1, 1),
-        ProviderGroup.timestamp.value || DateTime.civil(0, 1, 1)
+        ProviderGroup.timestamp.value || DateTime.civil(0, 1, 1),
+        TerminalProfilePromotion.timestamp.value || DateTime.civil(0, 1, 1)
       ].max
 
       @terminal.ping!(TerminalPing.new ping_data)
@@ -18,9 +19,7 @@ class TerminalPingsController < ApplicationController
         :time => DateTime.now,
         :support_phone => @terminal.terminal_profile.support_phone,
         :orders => @terminal.terminal_orders.unsent.as_json(:only => [:id, :keyword, :args]),
-        :providers => {
-          :promotions => @terminal.promotions_dump
-        }
+        :providers => {}
       }
 
       unless providers[:ids].blank?
@@ -30,6 +29,7 @@ class TerminalPingsController < ApplicationController
       if remote_timestamp.blank? || local_timestamp > remote_timestamp
         response[:providers][:update] = @terminal.providers_dump remote_timestamp
         response[:providers][:groups] = @terminal.provider_groups_dump
+        response[:providers][:promotions] = @terminal.promotions_dump
         response[:providers][:updated_at] = local_timestamp.strftime('%Y-%m-%dT%H:%M:%S.%9N%z')
       end
 
