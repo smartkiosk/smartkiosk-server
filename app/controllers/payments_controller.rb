@@ -38,26 +38,26 @@ class PaymentsController < ApplicationController
         payment.plog :info, :transport, "Checked" do
           payment.check!
         end
+
+        render :json => {
+          :id               => payment.id,
+          :state            => payment.state,
+          :requires_print   => provider.requires_print,
+          :limits           => Limit.for(payment, false).as_json(
+                                  :only => [:min, :max], :methods => [:weight]
+                               ),
+          :commissions      => Commission.for(payment, false).as_json(
+                                  :only => [:min, :max, :percent_fee, :static_fee],
+                                  :methods => [:weight]
+                               ),
+          :receipt_template => ProviderReceiptTemplate.for(payment).compile(payment)
+        }
+      else
+        Payment.plog :info, :web, "Payment was not created"
+        render :nothing => true, :status => 406
       end
     else
-      payment.plog :warn, :transport, "Existing payment found, checking skipped"
-    end
-
-    if payment
-      render :json => {
-        :id               => payment.id,
-        :state            => payment.state,
-        :requires_print   => provider.requires_print,
-        :limits           => Limit.for(payment, false).as_json(
-                                :only => [:min, :max], :methods => [:weight]
-                             ),
-        :commissions      => Commission.for(payment, false).as_json(
-                                :only => [:min, :max, :percent_fee, :static_fee],
-                                :methods => [:weight]
-                             ),
-        :receipt_template => ProviderReceiptTemplate.for(payment).compile(payment)
-      }
-    else
+      payment.plog :warn, :transport, "Existing payment found, declining"
       render :nothing => true, :status => 406
     end
   end
