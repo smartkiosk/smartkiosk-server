@@ -34,7 +34,13 @@ table_for(terminal.pings, :class => 'index_table index', :i18n => TerminalPing) 
         if x.error(hardware).blank?
           status_tag I18n.t('formtastic.no'), :ok
         else
-          status_tag I18n.t("smartkiosk.hardware.#{hardware}.errors")[x.error(hardware)], :error
+          status_tag(
+            (
+              I18n.t("smartkiosk.hardware.#{hardware}.errors")[x.error(hardware)] ||
+              I18n.t('smartkiosk.unlocalized') + " (#{x.error(hardware)})"
+            ),
+            :error
+          )
         end
       end
     end

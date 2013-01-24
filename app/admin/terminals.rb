@@ -254,7 +254,8 @@ ActiveAdmin.register Terminal do
       Terminal::HARDWARE.each do |device|
         row :"#{device}_error" do |x|
           unless x.send("#{device}_error").blank?
-            I18n.t("smartkiosk.hardware.#{device}.errors")[x.send("#{device}_error")]
+            I18n.t("smartkiosk.hardware.#{device}.errors")[x.send("#{device}_error")] ||
+            I18n.t('smartkiosk.unlocalized') + " (#{x.send("#{device}_error")})"
           else
             span(I18n.t('active_admin.empty'), :class => 'empty')
           end
