@@ -28,27 +28,20 @@ table_for(terminal.pings, :class => 'index_table index', :i18n => TerminalPing) 
       end
     end
   end
+  Terminal::HARDWARE.each do |hardware|
+    t.column :"#{hardware}_error" do |x|
+      div :style => 'white-space: nowrap' do
+        if x.error(hardware).blank?
+          status_tag I18n.t('formtastic.no'), :ok
+        else
+          status_tag I18n.t("smartkiosk.hardware.#{hardware}.errors")[x.error(hardware)], :error
+        end
+      end
+    end
+  end
   t.column :cash_sum
   t.column :cash_count
-  t.column :cash_acceptor_error do |x|
-    div :style => 'white-space: nowrap' do
-      if x.cash_acceptor_error.blank?
-        status_tag I18n.t('formtastic.no'), :ok
-      else
-        status_tag I18n.t('smartkiosk.hardware.cash_acceptor.errors')[x.cash_acceptor_error], :error
-      end
-    end
-  end
   t.column :cash_acceptor_version
-  t.column :printer_error do |x|
-    div :style => 'white-space: nowrap' do
-      if x.printer_error.blank?
-        status_tag I18n.t('formtastic.no'), :ok
-      else
-        status_tag I18n.t('smartkiosk.hardware.printer.errors')[x.printer_error], :error
-      end
-    end
-  end
   t.column :printer_version
   t.column :modem_balance
   t.column :modem_signal_level

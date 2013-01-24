@@ -601,6 +601,7 @@ ru:
         modem_balance: Баланс SIM
         modem_signal_level: Уровень GSM
         modem_version: Версия модема
+        modem_error: Ошибка модема
         queues: Очереди
         banknotes: Купюры
       terminal_type:

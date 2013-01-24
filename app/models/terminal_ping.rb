@@ -41,14 +41,14 @@ class TerminalPing
       return v.nil? ? nil : v.to_i
     else
       return hardware.map do |x|
-        v = value('error', hardware.first)
+        v = value('error', x)
         v.nil? ? nil : v.to_i
       end
     end
   end
 
   def valid?(*args)
-    codes = error(:cash_acceptor, :printer).compact
+    codes = error(*Terminal::HARDWARE).compact
 
     self.condition = 
       if codes.blank?
