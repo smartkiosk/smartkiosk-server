@@ -7,7 +7,7 @@ class CreateProviders < ActiveRecord::Migration
       t.string        :keyword
       t.string        :juristic_name
       t.string        :inn
-      t.boolean       :requires_print, :null => false, :default => false
+      t.boolean       :requires_print, :null => false, :default => true
       t.integer       :foreign_id
       t.integer       :provider_gateways_count, :default => 0
       t.string        :icon
