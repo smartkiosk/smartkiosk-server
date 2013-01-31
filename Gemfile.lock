@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/smartkiosk/iso8583-mkb.git
-  revision: 6ef9f63934a687aae5edd1c5237caca6897d30b4
+  revision: dbeffaa276e763ddff20651a87e930e360f88640
   specs:
     iso8583-mkb (0.0.1)
       eventmachine
