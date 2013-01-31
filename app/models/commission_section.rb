@@ -20,7 +20,7 @@ class CommissionSection < ActiveRecord::Base
     )
   }
   scope :by_payment_type, lambda { |x|
-    where("payment_type IS NULL OR payment_type = ?", x)
+    x.nil? ? scoped : where("payment_type IS NULL OR payment_type = ?", x)
   }
 
   #
@@ -28,6 +28,8 @@ class CommissionSection < ActiveRecord::Base
   #
   validates :min, :presence => true
   validates :max, :presence => true
+  validates :percent_fee, :presence => true
+  validates :static_fee, :presence => true
 
   validate do
     return if min.blank? || max.blank?
@@ -43,7 +45,11 @@ class CommissionSection < ActiveRecord::Base
       errors[:base] << I18n.t('activerecord.errors.models.commission.payment_type_intersects')
     end
 
-    neighbors.select!{|x| x.agent_id == agent_id && x.terminal_id == terminal_id}
+    neighbors.select! do |x| 
+      x.agent_id == agent_id && 
+      x.terminal_id == terminal_id && 
+      x.payment_type == payment_type
+    end
 
     neighbors.select! do |x| 
       x.min.between?(min, max)   ||

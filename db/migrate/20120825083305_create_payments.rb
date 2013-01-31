@@ -11,7 +11,7 @@ class CreatePayments < ActiveRecord::Migration
       t.belongs_to      :user
       t.belongs_to      :collection
       t.belongs_to      :revision
-      t.integer         :payment_type, :null => false, :default => 0
+      t.integer         :payment_type
       t.boolean         :offline, :null => false, :default => false
       t.string          :account
       t.text            :fields

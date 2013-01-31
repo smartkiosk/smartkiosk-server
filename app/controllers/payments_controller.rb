@@ -47,7 +47,7 @@ class PaymentsController < ApplicationController
                                   :only => [:min, :max], :methods => [:weight]
                                ),
           :commissions      => Commission.for(payment, false).as_json(
-                                  :only => [:min, :max, :percent_fee, :static_fee],
+                                  :only => [:min, :max, :percent_fee, :static_fee, :payment_type],
                                   :methods => [:weight]
                                ),
           :receipt_template => ProviderReceiptTemplate.for(payment).compile(payment)

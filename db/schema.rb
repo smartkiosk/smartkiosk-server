@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.integer  "user_id"
     t.integer  "collection_id"
     t.integer  "revision_id"
-    t.integer  "payment_type",                                        :default => 0,     :null => false
+    t.integer  "payment_type"
     t.boolean  "offline",                                             :default => false, :null => false
     t.string   "account"
     t.text     "fields"
@@ -188,8 +188,6 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.datetime "paid_at"
     t.string   "card_number"
     t.string   "card_number_hash"
-    t.string   "card_track1", :limit => 76
-    t.string   "card_track2", :limit => 37
     t.datetime "created_at",                                                             :null => false
     t.datetime "updated_at",                                                             :null => false
   end
@@ -266,13 +264,13 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.string   "keyword"
     t.string   "juristic_name"
     t.string   "inn"
-    t.boolean  "requires_print",               :default => false, :null => false
+    t.boolean  "requires_print",               :default => true, :null => false
     t.integer  "foreign_id"
     t.integer  "provider_gateways_count",      :default => 0
     t.string   "icon"
     t.integer  "provider_receipt_template_id"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   add_index "providers", ["keyword"], :name => "index_providers_on_keyword", :unique => true
