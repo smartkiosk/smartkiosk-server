@@ -8,13 +8,14 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'sidekiq/testing'
 
   load "#{Rails.root}/db/schema.rb"
 end
 
 Spork.each_run do
   require 'blueprints'
-  
+
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| load f}
   Dir[Rails.root.join("app/models/**/*.rb")].each {|m| load m}
 

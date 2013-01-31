@@ -67,3 +67,5 @@ group :development do
   gem 'binding_of_caller', :platform => :ruby
   gem 'i18n_yaml_sorter'
 end
+
+gem 'iso8583-mkb', :git => 'git://github.com/smartkiosk/iso8583-mkb.git'

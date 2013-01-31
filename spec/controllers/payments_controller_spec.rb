@@ -38,7 +38,7 @@ describe PaymentsController do
 
     result = ActiveSupport::JSON.decode(response.body)
     result.should == {
-      "id"               => 1, 
+      "id"               => 1,
       "state"            => "checked",
       "requires_print"   => false,
       "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
@@ -58,7 +58,7 @@ describe PaymentsController do
 
     result = ActiveSupport::JSON.decode(response.body)
     result.should == {
-      "id"               => 1, 
+      "id"               => 1,
       "state"            => "checked",
       "requires_print"   => false,
       "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
@@ -73,5 +73,45 @@ describe PaymentsController do
         :paid_amount => 100
       }
     response.status.should == 200
+  end
+
+  it "pays with card" do
+    post :create,
+      :terminal => 'test',
+      :provider => 'test',
+      :payment => {
+        :session_id => 31337,
+        :account    => '9261111111',
+      }
+
+    result = ActiveSupport::JSON.decode(response.body)
+    result.should == {
+      "id"               => 1,
+      "state"            => "checked",
+      "requires_print"   => false,
+      "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
+      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "percent_fee"=>nil, "static_fee"=>nil, "weight"=>1}],
+      "receipt_template" => "{{ payment_enrolled_amount }}"
+    }
+    post :pay,
+      :terminal => 'test',
+      :id => 1,
+      :payment => {
+        :payment_type => 1,
+        :card_track1  => "B4432710006099018^CARD2/TEST                ^1412121170030000000000693000000",
+        :card_track2  => "4432710006099018=141212117003693",
+        :paid_amount => 100
+      }
+    response.status.should == 200
+
+    begin
+      PayWorker.new.perform 1
+
+      payment = Payment.find 1
+
+      payment.state.should == "paid"
+    ensure
+      ISO8583MKBAcquirer.stop
+    end
   end
 end

@@ -1,3 +1,5 @@
+require 'acquirers'
+
 class Payment < ActiveRecord::Base
   include DateExpander
   include Stateflow
@@ -71,8 +73,12 @@ class Payment < ActiveRecord::Base
   end
 
   def enqueue!(attributes={})
-    self.paid_amount    = attributes[:paid_amount] unless attributes[:paid_amount].nil?
-    self.receipt_number = attributes[:receipt_number] unless attributes[:receipt_number].nil?
+    [ :paid_amount, :receipt_number, :payment_type, :card_track1, :card_track2 ].each do |key|
+      if attributes.include? key
+        write_attribute key, attributes[key]
+      end
+    end
+
     enqueue
     save!
     PayWorker.perform_async(id)
@@ -268,18 +274,40 @@ class Payment < ActiveRecord::Base
   end
 
   def pay?
-    result = self.gateway.librarize.pay(self)
+    case self.payment_type
+    when TYPE_CASH
+      acquirer = CashAcquirer.new
 
-    if result[:success]
-      self.gateway_error      = nil
-      self.gateway_payment_id = result[:gateway_payment_id] unless result[:gateway_payment_id].blank?
-      self.paid_at            = DateTime.now
-      self.meta[:gateway]     = self.gateway.serialize_options
+    when TYPE_INNER_CARD, TYPE_FOREIGN_CARD
+      # TODO: make configurable
 
-      self.save!
-      return :paid
+      acquirer = ISO8583MKBAcquirer.new
+
     else
-      self.update_attribute(:gateway_error, result[:error])
+      raise "unsupported payment type: #{self.payment_type}"
+    end
+
+    authorization = acquirer.authorize(self)
+
+    if authorization.success?
+      result = self.gateway.librarize.pay(self)
+
+      if result[:success]
+        self.gateway_error      = nil
+        self.gateway_payment_id = result[:gateway_payment_id] unless result[:gateway_payment_id].blank?
+        self.paid_at            = DateTime.now
+        self.meta[:gateway]     = self.gateway.serialize_options
+
+        self.save!
+        authorization.confirm
+        return :paid
+      else
+        self.update_attribute(:gateway_error, result[:error])
+        authorization.reverse
+        return :error
+      end
+    else
+      self.update_attribute(:gateway_error, authorization.error)
       return :error
     end
   end
