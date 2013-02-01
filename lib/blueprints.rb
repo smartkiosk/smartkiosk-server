@@ -40,6 +40,7 @@ Terminal.blueprint do
 end
 
 Payment.blueprint do
+  payment_type          { [0,1,2].sample }
   session_id            { Random.new.rand(1...1000000) }
   terminal              { Terminal.all.sample }
   gateway               { Gateway.first }
