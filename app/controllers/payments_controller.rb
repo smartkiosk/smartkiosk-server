@@ -14,9 +14,6 @@ class PaymentsController < ApplicationController
   def create
     provider = Provider.find_by_keyword params[:provider]
 
-    # TODO: Update terminal part and remove the compatibility hack
-    params[:payment][:session_id] = params[:payment].delete(:foreign_id) if params[:payment][:session_id].blank?
-
     if provider.blank?
       Payment.plog :info, :web, "Provider #{params[:provider]} not found", 
         :session_id  => params[:payment][:session_id],

@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.datetime "paid_at"
     t.string   "card_number"
     t.string   "card_number_hash"
+    t.string   "card_track1"
+    t.string   "card_track2"
     t.datetime "created_at",                                                             :null => false
     t.datetime "updated_at",                                                             :null => false
   end

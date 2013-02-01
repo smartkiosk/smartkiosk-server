@@ -35,6 +35,8 @@ class CreatePayments < ActiveRecord::Migration
 
       t.string          :card_number
       t.string          :card_number_hash
+      t.string          :card_track1
+      t.string          :card_track2
 
       t.timestamps
     end

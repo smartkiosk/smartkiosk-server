@@ -32,17 +32,18 @@ describe PaymentsController do
       :terminal => 'test',
       :provider => 'test',
       :payment  => {
-        :session_id => 31337,
-        :account    => '9261111111'
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
       }
 
     result = ActiveSupport::JSON.decode(response.body)
     result.should == {
       "id"               => 1,
       "state"            => "checked",
-      "requires_print"   => false,
+      "requires_print"   => true,
       "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
-      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "percent_fee"=>nil, "static_fee"=>nil, "weight"=>1}],
+      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "payment_type"=>nil, "percent_fee"=>"0.0", "static_fee"=>"0.0", "weight"=>1}],
       "receipt_template" => "{{ payment_enrolled_amount }}"
     }
   end
@@ -52,17 +53,18 @@ describe PaymentsController do
       :terminal => 'test',
       :provider => 'test',
       :payment  => {
-        :session_id => 31337,
-        :account    => '9261111111'
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
       }
 
     result = ActiveSupport::JSON.decode(response.body)
     result.should == {
       "id"               => 1,
       "state"            => "checked",
-      "requires_print"   => false,
+      "requires_print"   => true,
       "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
-      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "percent_fee"=>nil, "static_fee"=>nil, "weight"=>1}],
+      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "payment_type"=>nil, "percent_fee"=>"0.0", "static_fee"=>"0.0", "weight"=>1}],
       "receipt_template" => "{{ payment_enrolled_amount }}"
     }
 
@@ -80,24 +82,24 @@ describe PaymentsController do
       :terminal => 'test',
       :provider => 'test',
       :payment => {
-        :session_id => 31337,
-        :account    => '9261111111',
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_INNER_CARD
       }
 
     result = ActiveSupport::JSON.decode(response.body)
     result.should == {
       "id"               => 1,
       "state"            => "checked",
-      "requires_print"   => false,
+      "requires_print"   => true,
       "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
-      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "percent_fee"=>nil, "static_fee"=>nil, "weight"=>1}],
+      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "payment_type"=>nil, "percent_fee"=>"0.0", "static_fee"=>"0.0", "weight"=>1}],
       "receipt_template" => "{{ payment_enrolled_amount }}"
     }
     post :pay,
       :terminal => 'test',
       :id => 1,
       :payment => {
-        :payment_type => 1,
         :card_track1  => "B4432710006099018^CARD2/TEST                ^1412121170030000000000693000000",
         :card_track2  => "4432710006099018=141212117003693",
         :paid_amount => 100

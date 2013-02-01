@@ -73,7 +73,7 @@ class Payment < ActiveRecord::Base
   end
 
   def enqueue!(attributes={})
-    [ :paid_amount, :receipt_number, :payment_type, :card_track1, :card_track2 ].each do |key|
+    [ :paid_amount, :receipt_number, :card_track1, :card_track2 ].each do |key|
       if attributes.include? key
         write_attribute key, attributes[key]
       end
@@ -110,6 +110,7 @@ class Payment < ActiveRecord::Base
   validates :enrolled_amount, :presence => true, :if => lambda{|x| x.source == SOURCE_MANUAL}
   validates :session_id, :uniqueness => {:scope => :terminal_id}, :unless => lambda{|x| x.terminal.blank?}
   validates :user, :presence => true, :if => lambda{|x| x.source == SOURCE_MANUAL}
+  validates :payment_type, :presence => true
 
   #
   # MODIFICATIONS
