@@ -47,6 +47,10 @@ ActiveAdmin.register Commission do
         csf.input :max
         csf.input :percent_fee
         csf.input :static_fee
+        unless csf.object.new_record?
+          csf.input :_destroy, :as => :boolean, :label => I18n.t('active_admin.delete')
+        end
+        csf.form_buffers.last
       end
     end
     f.actions
