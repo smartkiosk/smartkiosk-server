@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.integer  "foreign_id"
     t.integer  "provider_gateways_count",      :default => 0
     t.string   "icon"
+    t.string   "support_phone"
     t.integer  "provider_receipt_template_id"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false

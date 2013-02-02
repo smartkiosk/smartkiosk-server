@@ -58,6 +58,7 @@ ActiveAdmin.register Provider do
       row :provider_gateways_count
       row :juristic_name
       row :inn
+      row :support_phone
       row :updated_at
     end
 
@@ -136,6 +137,7 @@ ActiveAdmin.register Provider do
       f.input :icon, :hint => (f.template.image_tag(provider.icon).html_safe unless provider.icon.blank?)
       f.input :juristic_name
       f.input :inn
+      f.input :support_phone
       f.input :requires_print, :as => :select, :input_html => { :class => 'chosen' }
     end
     f.inputs do

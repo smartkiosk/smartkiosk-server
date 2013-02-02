@@ -11,6 +11,7 @@ class CreateProviders < ActiveRecord::Migration
       t.integer       :foreign_id
       t.integer       :provider_gateways_count, :default => 0
       t.string        :icon
+      t.string        :support_phone
 
       t.belongs_to    :provider_receipt_template
 

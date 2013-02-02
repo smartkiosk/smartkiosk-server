@@ -49,7 +49,8 @@ class ProviderReceiptTemplate < ActiveRecord::Base
       :title,
       :keyword,
       :juristic_name,
-      :inn
+      :inn,
+      :support_phone
     ]
   end
 

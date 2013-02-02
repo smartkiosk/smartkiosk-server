@@ -480,6 +480,7 @@ ru:
         updated_at: Дата изменения
         icon: Иконка
         priority: Приоритет
+        support_phone: Телефон поддержки
       provider_group:
         title: Название
         icon: Иконка
