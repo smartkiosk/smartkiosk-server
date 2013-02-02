@@ -140,6 +140,9 @@ ActiveAdmin.register Provider do
             :style => ('display:none' unless fpf.object.kind == 'select')
           },
           :hint => I18n.t('smartkiosk.admin.messages.provider_fields.values_hint')
+        unless fpf.object.new_record?
+          fpf.input :_destroy, :as => :boolean, :label => I18n.t('active_admin.delete')
+        end
         fpf.input :priority, :as => :hidden
       end
     end
