@@ -69,6 +69,40 @@ ActiveAdmin.register Provider do
       end
     end
 
+    panel I18n.t('activerecord.models.commission.other') do
+      provider.commissions.actual.each do |commission|
+        attributes_table_for commission do
+          row :start
+          row :finish
+        end
+        table_for(commission.commission_sections, :i18n => CommissionSection) do |t|
+          t.column :agent
+          t.column :terminal_profile
+          t.column :payment_type
+          t.column :min
+          t.column :max
+          t.column :percent_fee
+          t.column :static_fee
+        end
+      end
+    end
+
+    panel I18n.t('activerecord.models.limit.other') do
+      provider.limits.actual.each do |limit|
+        attributes_table_for limit do
+          row :start
+          row :finish
+        end
+        table_for(limit.limit_sections, :i18n => LimitSection) do |t|
+          t.column :agent
+          t.column :terminal_profile
+          t.column :payment_type
+          t.column :min
+          t.column :max
+        end
+      end
+    end
+
     panel I18n.t('activerecord.models.payment.other') do
       table_for(provider.payments.limit(20), :i18n => Payment) do |t|
         t.column :terminal do |p|
