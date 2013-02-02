@@ -1,0 +1,13 @@
+- type: cash
+  class: CashAcquirer
+- type: inner_card, foreign_card
+  class: CardsMkbAcquirer
+  dhi: 'tcp://195.191.76.150:4007'
+  processing_code: "00000000"
+  merchant_type: "4814"
+  acquirer_country: "643"
+  entry_mode: "9010"
+  condition_code: "00"
+  acquirer: "443222"
+  terminal_id: "49990001"
+  acceptor_id: "510000000000016"

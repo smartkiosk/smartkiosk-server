@@ -1,4 +1,4 @@
-class ISO8583MKBAcquirer
+class CardsMkbAcquirer
   class << self
     attr_reader :gateway
 
@@ -40,25 +40,14 @@ class ISO8583MKBAcquirer
       reversal = @auth.reverse
       # TODO: set reason code
 
-      ISO8583MKBAcquirer.gateway.execute reversal
+      CardsMkbAcquirer.gateway.execute reversal
       # TODO: possibly report failure
     end
   end
 
-  def initialize
-    # TODO: load from config file
-    @config = {
-      :dhi              => 'tcp://127.0.0.1:2222',
-      :processing_code  => "00000000",
-      :merchant_type    => "4814",
-      :acquirer_country => "643",
-      :entry_mode       => "9010",
-      :condition_code   => "00",
-      :acquirer         => "443222",
-      :terminal_id      => "49990001",
-      :acceptor_id      => "510000000000016"
-    }
-    ISO8583MKBAcquirer.ensure_running @config
+  def initialize(config)
+    @config = config.with_indifferent_access
+    CardsMkbAcquirer.ensure_running @config
   end
 
   def authorize(payment)
@@ -91,7 +80,7 @@ class ISO8583MKBAcquirer
     # TODO: build additional data
     auth.additional = "USRDT, <cm>#{payment.commission_amount}</cm>, <ses>#{payment.session_id}</ses>backend data"
 
-    ISO8583MKBAcquirer.gateway.execute auth
+    CardsMkbAcquirer.gateway.execute auth
 
     Authorization.new auth
   end

@@ -1,5 +1,3 @@
-require 'acquirers'
-
 class Payment < ActiveRecord::Base
   include DateExpander
   include Stateflow
@@ -154,6 +152,23 @@ class Payment < ActiveRecord::Base
   #
   # METHODS
   #
+  def self.acquirer(payment_type)
+    unless @acquiring_settings
+      @acquiring_settings = YAML::load File.read(Rails.root.join 'config/acquiring.yml')
+      @acquiring_settings.each do |x|
+        x['type'] = x['type'].split(',').map do |t|
+          Payment.const_get "TYPE_#{t.strip.upcase}"
+        end
+        x['class'] = x['class'].constantize
+      end
+    end
+
+    acquirer = @acquiring_settings.find{|x| x['type'].include?(payment_type)}
+    raise "unsupported payment type: #{payment_type}" unless acquirer
+
+    acquirer['class'].new(acquirer)
+  end
+
   def self.plogger
     return @plogger if @plogger
 
@@ -275,19 +290,7 @@ class Payment < ActiveRecord::Base
   end
 
   def pay?
-    case self.payment_type
-    when TYPE_CASH
-      acquirer = CashAcquirer.new
-
-    when TYPE_INNER_CARD, TYPE_FOREIGN_CARD
-      # TODO: make configurable
-
-      acquirer = ISO8583MKBAcquirer.new
-
-    else
-      raise "unsupported payment type: #{self.payment_type}"
-    end
-
+    acquirer      = Payment.acquirer(self.payment_type)
     authorization = acquirer.authorize(self)
 
     if authorization.success?

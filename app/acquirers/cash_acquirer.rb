@@ -1,4 +1,7 @@
 class CashAcquirer
+  def initialize(*args)
+  end
+  
   class Authorization
     def success?
       true

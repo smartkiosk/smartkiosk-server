@@ -75,6 +75,10 @@ describe PaymentsController do
         :paid_amount => 100
       }
     response.status.should == 200
+
+    PayWorker.new.perform 1
+    payment = Payment.find 1
+    payment.state.should == "paid"
   end
 
   xit "pays with card" do
@@ -113,7 +117,7 @@ describe PaymentsController do
 
       payment.state.should == "paid"
     ensure
-      ISO8583MKBAcquirer.stop
+      CardsMkbAcquirer.stop
     end
   end
 end
