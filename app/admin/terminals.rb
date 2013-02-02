@@ -204,7 +204,7 @@ ActiveAdmin.register Terminal do
   SIMPLE_ORDERS.each do |order|
     action_item :only => [:show], :if => proc{current_user.priveleged?(:terminals, order)} do
       link_to I18n.t("smartkiosk.admin.actions.terminals.#{order}"),
-        send("#{order}_admin_terminal_path", terminal, :method => :post)
+        send("#{order}_admin_terminal_path", terminal), :method => :post
     end
   end
 
