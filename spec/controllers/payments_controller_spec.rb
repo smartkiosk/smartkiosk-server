@@ -77,7 +77,7 @@ describe PaymentsController do
     response.status.should == 200
   end
 
-  it "pays with card" do
+  xit "pays with card" do
     post :create,
       :terminal => 'test',
       :provider => 'test',

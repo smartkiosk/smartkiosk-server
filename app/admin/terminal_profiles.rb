@@ -73,16 +73,37 @@ ActiveAdmin.register TerminalProfile do
 
   member_action :sort, :title => I18n.t('smartkiosk.admin.actions.terminal_profiles.sort')
 
+  #
+  # SHOW
+  #
   action_item :only => [:show, :edit] do
     link_to I18n.t('smartkiosk.admin.actions.terminal_profiles.sort'),
       sort_admin_terminal_profile_path(terminal_profile)
   end
 
-  form do
+  show do
+    attributes_table do
+      row :title
+      row :support_phone
+      row :logo do
+        image_tag(terminal_profile.logo) unless terminal_profile.logo.blank?
+      end
+      row :created_at
+      row :updated_at
+    end
+
+    active_admin_comments
+  end
+
+  #
+  # FORM
+  #
+  form :html => { :enctype => "multipart/form-data" } do
     active_admin_form_for [:admin, terminal_profile] do |f|
       f.inputs do
         f.input :title
         f.input :support_phone
+        f.input :logo, :hint => (f.template.image_tag(terminal_profile.logo).html_safe unless terminal_profile.logo.blank?)
       end
 
       f.inputs do

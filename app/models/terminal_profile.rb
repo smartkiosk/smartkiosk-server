@@ -9,6 +9,8 @@ class TerminalProfile < ActiveRecord::Base
   has_many :terminal_profile_providers, :dependent => :destroy, :order => :priority
   has_many :terminal_profile_provider_groups, :dependent => :destroy, :order => :priority
 
+  mount_uploader :logo, FileUploader
+
   accepts_nested_attributes_for :terminal_profile_promotions, :allow_destroy => true
   accepts_nested_attributes_for :terminal_profile_providers
   accepts_nested_attributes_for :terminal_profile_provider_groups

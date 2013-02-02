@@ -5,6 +5,7 @@ class CreateTerminalProfiles < ActiveRecord::Migration
       t.string        :title
       t.string        :support_phone
       t.string        :keyword
+      t.string        :logo
 
       t.timestamps
     end

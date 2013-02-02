@@ -240,6 +240,7 @@ ru:
         support_phone: Телефон поддержки
         created_at: Дата добавления
         updated_at: Дата изменения
+        logo: Логотип
       terminal_build:
         version: Версия
         source: Источник (ZIP)

@@ -17,8 +17,12 @@ class TerminalPingsController < ApplicationController
 
       response = {
         :time => DateTime.now,
-        :support_phone => @terminal.terminal_profile.support_phone,
-        :orders => @terminal.terminal_orders.unsent.as_json(:only => [:id, :keyword, :args]),
+        :profile => {
+          :support_phone => @terminal.terminal_profile.support_phone,
+          :logo          => @terminal.terminal_profile.logo.url,
+          :modified_at   => @terminal.terminal_profile.updated_at
+        },
+        :orders => @terminal.terminal_orders.unsent.as_json(:only => [:id, :keyword, :args, :created_at]),
         :providers => {}
       }
 

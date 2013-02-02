@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
     provider = Provider.find_by_keyword params[:provider]
 
     render :json => provider.limits.actual.
-                      by_terminal_profile(@terminal.terminal_profile).
+                      by_terminal_profile_and_agent_ids(@terminal.terminal_profile_id, @terminal.agent_id).
                       by_payment_type(params[:payment_type]).
                       as_json(:only => [:min, :max], :methods => [:weight])
   end

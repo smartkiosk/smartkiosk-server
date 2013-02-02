@@ -7,7 +7,7 @@ class LimitSection < ActiveRecord::Base
   belongs_to :agent
   belongs_to :terminal_profile
 
-  scope :by_terminal_profile, lambda { |x|
+  scope :by_terminal_profile_and_agent_ids, lambda { |p, a|
     conditions = [
       '(terminal_profile_id IS NULL AND agent_id IS NULL)',
       '(agent_id = ? AND terminal_profile_id IS NULL)',
@@ -15,8 +15,8 @@ class LimitSection < ActiveRecord::Base
     ]
     where(
       conditions.join(' OR '),
-      x.agent_id,
-      x.id
+      a,
+      p
     )
   }
   scope :by_payment_type, lambda { |x|
