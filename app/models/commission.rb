@@ -60,7 +60,7 @@ class Commission < ActiveRecord::Base
     return [] if commission.blank?
 
     rates = commission.commission_sections.
-      by_terminal(payment.terminal).
+      by_terminal_profile(payment.terminal.terminal_profile).
       by_payment_type(payment.payment_type)
 
     rates.select!{|x| 

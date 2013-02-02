@@ -80,14 +80,14 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
   create_table "commission_sections", :force => true do |t|
     t.integer  "commission_id"
     t.integer  "agent_id"
-    t.integer  "terminal_id"
+    t.integer  "terminal_profile_id"
     t.integer  "payment_type"
-    t.decimal  "min",           :precision => 38, :scale => 2
-    t.decimal  "max",           :precision => 38, :scale => 2
-    t.decimal  "percent_fee",   :precision => 38, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "static_fee",    :precision => 38, :scale => 2, :default => 0.0, :null => false
-    t.datetime "created_at",                                                    :null => false
-    t.datetime "updated_at",                                                    :null => false
+    t.decimal  "min",                 :precision => 38, :scale => 2
+    t.decimal  "max",                 :precision => 38, :scale => 2
+    t.decimal  "percent_fee",         :precision => 38, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "static_fee",          :precision => 38, :scale => 2, :default => 0.0, :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
   end
 
   create_table "commissions", :force => true do |t|
@@ -138,12 +138,12 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
   create_table "limit_sections", :force => true do |t|
     t.integer  "limit_id"
     t.integer  "agent_id"
-    t.integer  "terminal_id"
+    t.integer  "terminal_profile_id"
     t.integer  "payment_type"
-    t.decimal  "min",          :precision => 38, :scale => 2
-    t.decimal  "max",          :precision => 38, :scale => 2
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.decimal  "min",                 :precision => 38, :scale => 2
+    t.decimal  "max",                 :precision => 38, :scale => 2
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "limits", :force => true do |t|

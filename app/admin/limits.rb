@@ -41,7 +41,7 @@ ActiveAdmin.register Limit do
     panel I18n.t('activerecord.models.limit_section.other') do
       table_for(limit.limit_sections, :i18n => LimitSection) do |t|
         t.column :agent
-        t.column :terminal
+        t.column :terminal_profile
         t.column :payment_type
         t.column :min
         t.column :max
@@ -66,7 +66,7 @@ ActiveAdmin.register Limit do
       f.has_many :limit_sections do |lsf|
         lsf.semantic_errors
         lsf.input :agent, :collection => Agent.rmap, :input_html => { :class => 'chosen' }
-        lsf.input :terminal, :collection => Terminal.rmap, :input_html => { :class => 'chosen' }
+        lsf.input :terminal_profile, :collection => TerminalProfile.rmap, :input_html => { :class => 'chosen' }
         lsf.input :payment_type, :as => :select, :input_html => { :class => 'chosen' }, 
           :collection => I18n.t('smartkiosk.payment_types').invert
         lsf.input :min

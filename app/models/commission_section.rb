@@ -5,13 +5,13 @@ class CommissionSection < ActiveRecord::Base
   #
   belongs_to :commission, :inverse_of => :commission_sections
   belongs_to :agent
-  belongs_to :terminal
+  belongs_to :terminal_profile
 
-  scope :by_terminal, lambda { |x|
+  scope :by_terminal_profile, lambda { |x|
     conditions = [
-      '(terminal_id IS NULL AND agent_id IS NULL)',
-      '(agent_id = ? AND terminal_id IS NULL)',
-      'terminal_id = ?'
+      '(terminal_profile_id IS NULL AND agent_id IS NULL)',
+      '(agent_id = ? AND terminal_profile_id IS NULL)',
+      'terminal_profile_id = ?'
     ]
     where(
       conditions.join(' OR '),
@@ -47,7 +47,7 @@ class CommissionSection < ActiveRecord::Base
 
     neighbors.select! do |x| 
       x.agent_id == agent_id && 
-      x.terminal_id == terminal_id && 
+      x.terminal_profile_id == terminal_profile_id && 
       x.payment_type == payment_type
     end
 
@@ -64,7 +64,7 @@ class CommissionSection < ActiveRecord::Base
   end
 
   def weight
-    return 3 unless terminal_id.blank?
+    return 3 unless terminal_profile_id.blank?
     return 2 unless agent_id.blank?
     return 1
   end

@@ -370,6 +370,7 @@ ru:
       commission_section:
         terminal: Терминал
         terminal_id: Терминал
+        terminal_profile: Профиль терминалов
         agent: Агент
         agent_id: Агент
         max: До
@@ -395,6 +396,7 @@ ru:
         updated_at: Дата изменения
       limit_section:
         terminal: Терминал
+        terminal_profile: Профиль терминалов
         terminal_id: Терминал
         agent: Агент
         agent_id: Агент

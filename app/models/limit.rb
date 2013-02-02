@@ -60,7 +60,7 @@ class Limit < ActiveRecord::Base
     return [] if limit.blank?
 
     rates = limit.limit_sections.
-      by_terminal(payment.terminal).
+      by_terminal_profile(payment.terminal.terminal_profile).
       by_payment_type(payment.payment_type)
 
     rates.select!{|x| 

@@ -3,7 +3,7 @@ class CreateCommissionSections < ActiveRecord::Migration
     create_table :commission_sections do |t|
       t.belongs_to    :commission
       t.belongs_to    :agent
-      t.belongs_to    :terminal
+      t.belongs_to    :terminal_profile
       t.integer       :payment_type
 
       t.decimal       :min, :precision => 38, :scale => 2

@@ -42,7 +42,7 @@ ActiveAdmin.register Commission do
     panel I18n.t('activerecord.models.commission_section.other') do
       table_for(commission.commission_sections, :i18n => CommissionSection) do |t|
         t.column :agent
-        t.column :terminal
+        t.column :terminal_profile
         t.column :payment_type
         t.column :min
         t.column :max
@@ -69,7 +69,7 @@ ActiveAdmin.register Commission do
       f.has_many :commission_sections do |csf|
         csf.semantic_errors
         csf.input :agent, :collection => Agent.rmap, :input_html => { :class => 'chosen' }
-        csf.input :terminal, :collection => Terminal.rmap, :input_html => { :class => 'chosen' }
+        csf.input :terminal_profile, :collection => TerminalProfile.rmap, :input_html => { :class => 'chosen' }
         csf.input :payment_type, :as => :select, :input_html => { :class => 'chosen' }, 
           :collection => I18n.t('smartkiosk.payment_types').invert
         csf.input :min

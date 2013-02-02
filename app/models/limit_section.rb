@@ -5,13 +5,13 @@ class LimitSection < ActiveRecord::Base
   #
   belongs_to :limit, :inverse_of => :limit_sections
   belongs_to :agent
-  belongs_to :terminal
+  belongs_to :terminal_profile
 
-  scope :by_terminal, lambda { |x|
+  scope :by_terminal_profile, lambda { |x|
     conditions = [
-      '(terminal_id IS NULL AND agent_id IS NULL)',
-      '(agent_id = ? AND terminal_id IS NULL)',
-      'terminal_id = ?'
+      '(terminal_profile_id IS NULL AND agent_id IS NULL)',
+      '(agent_id = ? AND terminal_profile_id IS NULL)',
+      'terminal_profile_id = ?'
     ]
     where(
       conditions.join(' OR '),
@@ -43,7 +43,7 @@ class LimitSection < ActiveRecord::Base
       errors[:base] << I18n.t('activerecord.errors.models.limit.payment_type_intersects')
     end
 
-    neighbors.select!{|x| x.agent_id == agent_id && x.terminal_id == terminal_id}
+    neighbors.select!{|x| x.agent_id == agent_id && x.terminal_profile_id == terminal_profile_id}
 
     if neighbors.count > 0
       errors[:base] << I18n.t('activerecord.errors.models.limit.conditions_intersect')
@@ -51,7 +51,7 @@ class LimitSection < ActiveRecord::Base
   end
 
   def weight
-    return 3 unless terminal_id.blank?
+    return 3 unless terminal_profile_id.blank?
     return 2 unless agent_id.blank?
     return 1
   end

@@ -1,4 +1,9 @@
 class TerminalProfile < ActiveRecord::Base
+  include Redis::Objects::RMap
+
+  has_rmap({:id => lambda{|x| x.to_s}}, :keyword)
+  has_paper_trail
+
   has_many :terminals, :conditions => "terminal_profile_id IS NOT NULL"
   has_many :terminal_profile_promotions, :dependent => :destroy, :order => :priority
   has_many :terminal_profile_providers, :dependent => :destroy, :order => :priority
