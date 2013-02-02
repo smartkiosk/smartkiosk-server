@@ -493,6 +493,7 @@ ru:
         title: Название
         kind: Тип
         mask: Маска
+        regexp: Проверка
         priority: Приоритет
         values: Значения
         created_at: Дата добавления

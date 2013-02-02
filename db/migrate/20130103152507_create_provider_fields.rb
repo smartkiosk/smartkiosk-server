@@ -7,6 +7,7 @@ class CreateProviderFields < ActiveRecord::Migration
       t.string        :title
       t.string        :kind
       t.string        :mask
+      t.string        :regexp
       t.text          :values
       t.integer       :priority
 

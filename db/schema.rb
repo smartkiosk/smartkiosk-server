@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.string   "title"
     t.string   "kind"
     t.string   "mask"
+    t.string   "regexp"
     t.text     "values"
     t.integer  "priority"
     t.datetime "created_at",  :null => false
