@@ -8,6 +8,8 @@ ActiveAdmin.register Limit do
   filter :id
   filter :provider_profile, :as => 'multiple_select', :input_html => { :class => 'chosen' },
     :collection => proc { ProviderProfile.rmap }
+  filter :provider_profile_providers_id, :as => 'multiple_select', :input_html => { :class => 'chosen' }, 
+    :collection => proc { Provider.rmap }
   filter :start
   filter :finish
   filter :created_at

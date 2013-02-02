@@ -363,6 +363,7 @@ ru:
         finish: Дата конца
         range: Временная граница
         created_at: Дата добавления
+        provider_profile_providers_id: Получатель
         provider_profile: Профиль получателей
         provider_profile_id: Профиль получателей
         updated_at: Дата изменения
@@ -388,6 +389,7 @@ ru:
         start: Дата начала
         finish: Дата конца
         created_at: Дата добавления
+        provider_profile_providers_id: Получатель
         provider_profile: Профиль получателей
         provider_profile_id: Профиль получателей
         updated_at: Дата изменения
@@ -452,6 +454,7 @@ ru:
         receipt_number: Номер чека
       provider_profile:
         title: Название
+        providers_id: Получатель
         created_at: Дата добавления
         updated_at: Дата изменения
       terminal_profile_provider_group:
