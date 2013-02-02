@@ -88,14 +88,16 @@ ActiveAdmin.register ReportTemplate do
       div(:class => 'attributes_table') do
         table do
           report_template.report_builder.conditions.each do |condition, values|
-            th do
-              localize_report_condition_title(report_template.report_builder, condition)
-            end
-            td do
-              unless report_template.conditions[condition].blank?
-                localize_report_condition_value(report_template.report_builder, condition, report_template.conditions[condition])
-              else
-                span(I18n.t('active_admin.empty'), :class => 'empty')
+            tr do
+              th do
+                localize_report_condition_title(report_template.report_builder, condition)
+              end
+              td do
+                unless report_template.conditions[condition].blank?
+                  localize_report_condition_value(report_template.report_builder, condition, report_template.conditions[condition])
+                else
+                  span(I18n.t('active_admin.empty'), :class => 'empty')
+                end
               end
             end
           end

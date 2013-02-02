@@ -182,7 +182,8 @@ class PaymentsReport < ReportBuilder::Base
   def conditions
     {
       'payment.state' => proc { I18n.t('smartkiosk.payment_states') },
-      'payment.payment_type' => proc { I18n.t('smartkiosk.payment_types') }
+      'payment.payment_type' => proc { I18n.t('smartkiosk.payment_types') },
+      'payment.provider_id' => proc { Provider.rmap.invert }
     }
   end
 end

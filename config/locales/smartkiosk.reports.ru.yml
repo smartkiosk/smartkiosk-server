@@ -26,6 +26,8 @@ ru:
                 title: Состояние
               payment_type:
                 title: Тип
+              provider_id:
+                title: Получатели
         terminals:
           calculations:
             quantity: Количество
