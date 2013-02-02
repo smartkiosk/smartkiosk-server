@@ -26,6 +26,33 @@ ActiveAdmin.register Commission do
   end
 
   #
+  # SHOW
+  #
+  show do
+    attributes_table do
+      row :provider_profile
+      row :start
+      row :finish
+      row :created_at
+      row :updated_at
+    end
+
+    panel I18n.t('activerecord.models.commission_section.other') do
+      table_for(commission.commission_sections, :i18n => CommissionSection) do |t|
+        t.column :agent
+        t.column :terminal
+        t.column :payment_type
+        t.column :min
+        t.column :max
+        t.column :percent_fee
+        t.column :static_fee
+      end
+    end
+
+    active_admin_comments
+  end
+
+  #
   # FORM
   #
   form do |f|
