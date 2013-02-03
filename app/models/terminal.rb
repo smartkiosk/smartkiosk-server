@@ -43,7 +43,7 @@ class Terminal < ActiveRecord::Base
     overload  = Hash[*terminal_profile.terminal_profile_providers.map{|x| [x.provider_id, x]}.flatten]
 
     providers.map do |x|
-      icon = overload[x.id].icon
+      icon = overload[x.id].icon rescue nil
 
       if icon.blank?
         icon = x.icon.try(:url)
@@ -72,7 +72,7 @@ class Terminal < ActiveRecord::Base
     overload = Hash[*terminal_profile.terminal_profile_provider_groups.map{|x| [x.provider_group_id, x]}.flatten]
 
     ProviderGroup.all.map do |x|
-      icon = overload[x.id].icon
+      icon = overload[x.id].icon rescue nil
 
       if icon.blank?
         icon = x.icon.try(:url)
