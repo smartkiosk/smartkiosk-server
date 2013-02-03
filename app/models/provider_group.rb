@@ -15,7 +15,7 @@ class ProviderGroup < ActiveRecord::Base
 
   belongs_to :provider_group
   has_many :provider_groups, :order => :title
-  has_many :providers, :order => :priority
+  has_many :providers
   has_many :terminal_profile_provider_groups, :dependent => :destroy
 
   accepts_nested_attributes_for :providers

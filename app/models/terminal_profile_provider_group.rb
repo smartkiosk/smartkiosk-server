@@ -12,8 +12,4 @@ class TerminalProfileProviderGroup < ActiveRecord::Base
   validates :terminal_profile, :presence => true
 
   delegate :title, :to => :terminal_profile
-
-  def terminal_profile_providers
-    terminal_profile.terminal_profile_providers(provider_group_id)
-  end
 end

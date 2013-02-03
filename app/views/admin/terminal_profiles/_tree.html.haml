@@ -1,5 +1,5 @@
 - if entry.is_a?(TerminalProfileProviderGroup)
-  %li.input{:style => 'padding-right: 0px; padding-left: 0px; cursor: move', :'data-id' => entry.provider_group.id, :'data-parent' => entry.provider_group.provider_group_id}
+  %li.input{:style => 'padding-right: 0px; padding-left: 0px; cursor: move', :'data-id' => entry.provider_group_id, :'data-parent' => entry.provider_group.provider_group_id}
     %div{:style => 'padding-left: 10px; padding-bottom: 5px; border-bottom: 1px dashed gray'}
       &#8645;
       = image_tag(entry.icon.url(:thumb), :style => 'vertical-align: middle') unless entry.icon.blank?
@@ -13,9 +13,8 @@
         %input{:type => 'hidden', :name => "terminal_profile_provider_groups[][provider_group_id]", :value => entry.provider_group_id}
         %input{:type => 'hidden', :name => "terminal_profile_provider_groups[][priority]", :value => entry.priority}
     %ol{:style => 'padding-left:30px'}
-      - subs  = @terminal_profile.terminal_profile_provider_groups
-      - subs  = subs.select{|x| x.provider_group.provider_group == entry.provider_group}
-      - subs += entry.terminal_profile_providers
+      - subs  = @terminal_profile.terminal_profile_provider_groups.select{|x| x.provider_group.provider_group_id == entry.provider_group_id}
+      - subs += @terminal_profile.terminal_profile_providers.select{|x| x.provider.provider_group_id == entry.provider_group_id}
 
       - subs.sort_by{|x| x.priority}.each_with_index do |x|
         = render 'tree', :entry => x, :level => level+1

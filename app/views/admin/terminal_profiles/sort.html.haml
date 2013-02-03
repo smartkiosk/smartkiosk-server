@@ -15,7 +15,7 @@
 
 = semantic_form_for [:admin, @terminal_profile], :html => { :multipart => true } do |f|
   = f.inputs :class => 'sortable', :style => 'padding: 0px; margin: 0px' do
-    - @terminal_profile.terminal_profile_provider_groups.select{|x| x.provider_group.provider_group.blank?}.each_with_index do |g, i|
+    - @terminal_profile.terminal_profile_provider_groups.select{|x| x.provider_group.provider_group_id.blank?}.each_with_index do |g, i|
       = render 'tree', :entry => g, :level => 0
 
   = f.actions

@@ -15,37 +15,16 @@ class TerminalProfile < ActiveRecord::Base
   accepts_nested_attributes_for :terminal_profile_providers
   accepts_nested_attributes_for :terminal_profile_provider_groups
 
-  def terminal_profile_provider_groups(parent=false)
-    data = TerminalProfileProviderGroup.where(:terminal_profile_id => id).
-      includes(:provider_group => :provider_group).order(:priority)
+  def actualize_links!
+    group_ids = [-1] + terminal_profile_provider_groups.map{|x| x.provider_group_id}
+    prov_ids  = [-1] + terminal_profile_providers.map{|x| x.provider_id}
 
-    data  = data.where(:provider_groups => {:provider_group_id => parent}) unless parent === false
-    pgids = data.map{|x| x.provider_group_id}
-
-    ProviderGroup.all.each do |pg|
-      unless pgids.include?(pg.id)
-        data << TerminalProfileProviderGroup.new(:provider_group_id => pg.id, :terminal_profile_id => id)
-      end
+    ProviderGroup.where(ProviderGroup.arel_table[:id].not_in group_ids).each do |pg|
+      terminal_profile_provider_groups << TerminalProfileProviderGroup.new(:provider_group_id => pg.id, :terminal_profile_id => id)
     end
 
-    data
-  end
-
-  def terminal_profile_providers(category=nil)
-    category = category.id if !category.blank? && category.respond_to?(:id)
-    search   = category.nil? ? {} : {:provider_group_id => category}
-
-    data = TerminalProfileProvider.includes(:provider).
-      where(:terminal_profile_id => id, :providers => search).
-      order("terminal_profile_providers.priority")
-    pids = data.map{|x| x.provider_id}
-
-    Provider.where(search).all.each do |p|
-      unless pids.include?(p.id)
-        data << TerminalProfileProvider.new(:provider_id => p.id, :terminal_profile_id => id)
-      end
+    Provider.where(Provider.arel_table[:id].not_in prov_ids).each do |p|
+      terminal_profile_providers << TerminalProfileProvider.new(:provider_id => p.id, :terminal_profile_id => id)
     end
-
-    data
   end
 end

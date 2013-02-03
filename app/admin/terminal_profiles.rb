@@ -71,7 +71,16 @@ ActiveAdmin.register TerminalProfile do
     end
   end
 
-  member_action :sort, :title => I18n.t('smartkiosk.admin.actions.terminal_profiles.sort')
+  member_action :sort, :title => I18n.t('smartkiosk.admin.actions.terminal_profiles.sort') do
+    @terminal_profile = TerminalProfile
+      .includes(
+        {:terminal_profile_providers => :provider},
+        {:terminal_profile_provider_groups => :provider_group}
+      )
+      .find(params[:id])
+
+    @terminal_profile.actualize_links!
+  end
 
   #
   # SHOW
