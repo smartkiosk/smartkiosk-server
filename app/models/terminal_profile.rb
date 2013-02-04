@@ -1,7 +1,7 @@
 class TerminalProfile < ActiveRecord::Base
   include Redis::Objects::RMap
 
-  has_rmap({:id => lambda{|x| x.to_s}}, :keyword)
+  has_rmap({:id => lambda{|x| x.to_s}}, :title)
   has_paper_trail
 
   value :cached_providers
@@ -18,6 +18,8 @@ class TerminalProfile < ActiveRecord::Base
   accepts_nested_attributes_for :terminal_profile_promotions, :allow_destroy => true
   accepts_nested_attributes_for :terminal_profile_providers
   accepts_nested_attributes_for :terminal_profile_provider_groups
+
+  validates :title, :presence => true, :uniqueness => true
 
   def actualize_links!
     ProviderGroup.where(ProviderGroup.arel_table[:id].not_in TerminalProfileProviderGroup.arel_table.project(:provider_group_id)).each do |pg|

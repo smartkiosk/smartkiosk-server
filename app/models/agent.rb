@@ -19,6 +19,6 @@ class Agent < ActiveRecord::Base
   #
   # VALIDATIONS
   #
-  validates :title, :presence => true
+  validates :title, :presence => true, :uniqueness => true
 
 end
