@@ -8,4 +8,12 @@ class TerminalProfileProvider < ActiveRecord::Base
   validates :provider_id, :uniqueness => {:scope => :terminal_profile_id}
   validates :provider, :presence => true
   validates :terminal_profile, :presence => true
+
+  after_save do
+    self.terminal_profile.invalidate_cached_providers!
+  end
+
+  after_destroy do
+    self.terminal_profile.invalidate_cached_providers!
+  end
 end

@@ -12,4 +12,12 @@ class TerminalProfileProviderGroup < ActiveRecord::Base
   validates :terminal_profile, :presence => true
 
   delegate :title, :to => :terminal_profile
+
+  after_save do
+    self.terminal_profile.invalidate_cached_providers!
+  end
+
+  after_destroy do
+    self.terminal_profile.invalidate_cached_providers!
+  end
 end

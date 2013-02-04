@@ -7,8 +7,8 @@ Rails.application.class.routes.draw do
 
   devise_for :users, ActiveAdmin::Devise.config
 
-  constraints lambda { |request| 
-    request.env["warden"].authenticate? and request.env['warden'].user.root? 
+  constraints lambda { |request|
+    request.env["warden"].authenticate? and request.env['warden'].user.root?
   } do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -20,7 +20,13 @@ Rails.application.class.routes.draw do
     :log_to => Rails.root.join('log/webdav.log').to_s
   ) => '/builds/'
 
-  resources :terminal_pings
+  resources :terminal_pings do
+    collection do
+      get :providers
+    end
+  end
+
+
   resources :collections
   resources :system_receipt_templates
 

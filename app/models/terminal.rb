@@ -35,61 +35,6 @@ class Terminal < ActiveRecord::Base
   #
   # METHODS
   #
-  def providers_dump(after=nil)
-    providers = Provider.includes(:provider_fields).after(after)
-
-    return [] if providers.blank?
-
-    overload  = Hash[*terminal_profile.terminal_profile_providers.map{|x| [x.provider_id, x]}.flatten]
-
-    providers.map do |x|
-      icon = overload[x.id].icon rescue nil
-
-      if icon.blank?
-        icon = x.icon.try(:url)
-      else
-        icon = icon.url
-      end
-
-      {
-        :id             => x.id,
-        :title          => x.title,
-        :keyword        => x.keyword,
-        :icon           => icon,
-        :priority       => overload[x.id].try(:priority),
-        :fields         => x.fields_dump,
-        :group_id       => x.provider_group_id,
-        :requires_print => x.requires_print
-      }
-    end
-  end
-
-  def promotions_dump
-    terminal_profile.terminal_profile_promotions.map{|x| x.provider_id}
-  end
-
-  def provider_groups_dump
-    overload = Hash[*terminal_profile.terminal_profile_provider_groups.map{|x| [x.provider_group_id, x]}.flatten]
-
-    ProviderGroup.all.map do |x|
-      icon = overload[x.id].icon rescue nil
-
-      if icon.blank?
-        icon = x.icon.try(:url)
-      else
-        icon = icon.url
-      end
-
-      {
-        :id        => x.id,
-        :title     => x.title,
-        :icon      => icon,
-        :priority  => overload[x.id].try(:priority),
-        :parent_id => x.provider_group_id
-      }
-    end
-  end
-
   def title
     keyword
   end

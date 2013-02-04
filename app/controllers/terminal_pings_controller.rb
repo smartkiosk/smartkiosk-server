@@ -3,43 +3,54 @@ class TerminalPingsController < ApplicationController
 
   def create
     begin
-      ping_data = params[:terminal_ping]
-      providers = ping_data[:providers]
+      profile = @terminal.terminal_profile
 
-      remote_timestamp = providers[:updated_at].blank? ? nil : DateTime.parse(providers[:updated_at])
-      local_timestamp  = [
-        Provider.timestamp.value || DateTime.civil(0, 1, 1),
-        ProviderGroup.timestamp.value || DateTime.civil(0, 1, 1),
-        TerminalProfilePromotion.timestamp.value || DateTime.civil(0, 1, 1)
-      ].max
+      ping_data = params[:terminal_ping]
+      remote_timestamp = ping_data[:providers_updated_at].blank? ? nil : DateTime.parse(ping_data[:providers_updated_at])
+      local_timestamp = nil
+      profile.cached_providers_lock.lock { local_timestamp = profile.actual_timestamp }
 
       @terminal.ping!(TerminalPing.new ping_data)
 
       response = {
         :time => DateTime.now,
         :profile => {
-          :support_phone => @terminal.terminal_profile.support_phone,
-          :logo          => @terminal.terminal_profile.logo.url,
-          :modified_at   => @terminal.terminal_profile.updated_at
+          :support_phone => profile.support_phone,
+          :logo          => profile.logo.url,
+          :modified_at   => profile.updated_at
         },
         :orders => @terminal.terminal_orders.unsent.as_json(:only => [:id, :keyword, :args, :created_at]),
-        :providers => {}
+        :update_providers => remote_timestamp.blank? || local_timestamp.to_i > remote_timestamp.to_i # to drop microseconds
       }
-
-      unless providers[:ids].blank?
-        response[:providers][:remove] = providers[:ids].map{|x| x.to_i} - Provider.select(:id).map(&:id)
-      end
-
-      if remote_timestamp.blank? || local_timestamp > remote_timestamp
-        response[:providers][:update] = @terminal.providers_dump remote_timestamp
-        response[:providers][:groups] = @terminal.provider_groups_dump
-        response[:providers][:promotions] = @terminal.promotions_dump
-        response[:providers][:updated_at] = local_timestamp.strftime('%Y-%m-%dT%H:%M:%S.%9N%z')
-      end
 
       render :json => response
     rescue ActiveRecord::RecordInvalid
       render :text => nil, :status => 400
     end
+  end
+
+  def providers
+    profile = @terminal.terminal_profile
+
+    providers = nil
+    profile.cached_providers_lock.lock do
+      providers = profile.cached_providers.value
+
+      if providers.nil?
+        ActiveRecord::Base.transaction do
+          providers = {
+            :providers  => profile.providers_dump,
+            :groups     => profile.provider_groups_dump,
+            :promotions => profile.promotions_dump,
+            :updated_at => profile.actual_timestamp
+          }
+        end
+
+        providers = ActiveSupport::Gzip.compress(ActiveSupport::JSON.encode(providers))
+        profile.cached_providers.value = providers
+      end
+    end
+
+    send_data providers, :type => 'application/gzip', :disposition => 'inline'
   end
 end

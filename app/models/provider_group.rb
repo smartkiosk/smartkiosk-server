@@ -3,14 +3,12 @@ class ProviderGroup < ActiveRecord::Base
 
   mount_uploader :icon, IconUploader
 
-  value :timestamp, :global => true, :marshal => true
-
   after_save do
-    self.class.timestamp = updated_at
+    TerminalProfile.invalidate_all_cached_providers!
   end
 
   after_destroy do
-    self.class.timestamp = DateTime.now
+    TerminalProfile.invalidate_all_cached_providers!
   end
 
   belongs_to :provider_group

@@ -1,19 +1,17 @@
 class Provider < ActiveRecord::Base
   include Redis::Objects::RMap
 
-  value :timestamp, :global => true, :marshal => true
-
   has_rmap({:id => lambda{|x| x.to_s}}, :title)
   has_paper_trail
 
   mount_uploader :icon, IconUploader
 
   after_save do
-    self.class.timestamp = updated_at
+    TerminalProfile.invalidate_all_cached_providers!
   end
 
   after_destroy do
-    self.class.timestamp = DateTime.now
+    TerminalProfile.invalidate_all_cached_providers!
   end
 
   #
@@ -37,8 +35,8 @@ class Provider < ActiveRecord::Base
   scope :gateway_ids_eq, lambda{|x| includes(:gateways).where(:gateways => {:id => x})}
   search_method :gateway_ids_eq
 
-  scope :after, lambda{|x| 
-    x.blank? ? scoped 
+  scope :after, lambda{|x|
+    x.blank? ? scoped
              : where(arel_table[:updated_at].gt x)
   }
 
