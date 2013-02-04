@@ -24,7 +24,7 @@ gem 'redis-objects', :require => 'redis/objects'
 gem 'redis-objects-rmap'
 gem 'active_attr'
 
-gem 'payzilla', :git => 'git@github.com:smartkiosk/payzilla.git'
+gem 'payzilla', '0.0.2'
 
 gem 'haml'
 gem 'coffee-filter'

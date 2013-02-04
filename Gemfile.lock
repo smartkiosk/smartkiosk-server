@@ -7,21 +7,6 @@ GIT
       iso8583
 
 GIT
-  remote: git@github.com:smartkiosk/payzilla.git
-  revision: df21479aeac3c1c92cb9a09e160cdcfa4d152502
-  specs:
-    payzilla (0.0.1)
-      crack
-      cyberplat_pki
-      gpgme-ffi
-      gyoku
-      json
-      rake
-      rest-client
-      savon
-      webmoney (= 0.0.15.pre)
-
-GIT
   remote: https://github.com/guard/guard-spork.git
   revision: dbaa8531850347474d5a7ee626a9a2a64f7e653c
   specs:
@@ -157,6 +142,7 @@ GEM
     digest-crc (0.3.0)
     erubis (2.7.0)
     eventmachine (1.0.0)
+    eventmachine (1.0.0-java)
     execjs (1.4.0)
       multi_json (~> 1.0)
     facter (1.6.17)
@@ -183,7 +169,7 @@ GEM
     highline (1.6.15)
     hike (1.2.1)
     htmlentities (4.3.1)
-    httpi (2.0.0)
+    httpi (2.0.2)
       rack
     i18n (0.6.1)
     i18n_yaml_sorter (0.2.0)
@@ -238,6 +224,16 @@ GEM
     paper_trail (2.7.0)
       activerecord (~> 3.0)
       railties (~> 3.0)
+    payzilla (0.0.2)
+      crack
+      cyberplat_pki
+      gpgme-ffi
+      gyoku
+      json
+      rake
+      rest-client
+      savon
+      webmoney (= 0.0.15.pre)
     pg (0.14.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -319,13 +315,13 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    savon (2.0.2)
+    savon (2.1.0)
       akami (~> 1.2.0)
       builder (>= 2.1.2)
       gyoku (~> 1.0.0)
-      httpi (~> 2.0.0)
+      httpi (~> 2.0.2)
       nokogiri (>= 1.4.0)
-      nori (~> 2.0.0)
+      nori (~> 2.0.3)
       wasabi (~> 3.0.0)
     sidekiq (2.6.4)
       celluloid (~> 0.12.0)
@@ -415,7 +411,7 @@ DEPENDENCIES
   meta_search (>= 1.1.0)
   money
   paper_trail
-  payzilla!
+  payzilla (= 0.0.2)
   pg
   pry
   rails (= 3.2.11)
