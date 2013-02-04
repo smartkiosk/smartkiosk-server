@@ -27,7 +27,7 @@ class TerminalPingsController < ApplicationController
       }
 
       unless providers[:ids].blank?
-        response[:providers][:remove] = providers[:ids].map{|x| x.to_s} - Provider.rmap.values
+        response[:providers][:remove] = providers[:ids].map{|x| x.to_i} - Provider.select(:id).map(&:id)
       end
 
       if remote_timestamp.blank? || local_timestamp > remote_timestamp
