@@ -6,4 +6,6 @@ class ProviderProfile < ActiveRecord::Base
   has_many :providers
   has_many :limits
   has_many :commissions
+
+  validates :title, :presence => true, :uniqueness => true
 end
