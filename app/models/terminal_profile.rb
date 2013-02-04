@@ -16,14 +16,11 @@ class TerminalProfile < ActiveRecord::Base
   accepts_nested_attributes_for :terminal_profile_provider_groups
 
   def actualize_links!
-    group_ids = [-1] + terminal_profile_provider_groups.map{|x| x.provider_group_id}
-    prov_ids  = [-1] + terminal_profile_providers.map{|x| x.provider_id}
-
-    ProviderGroup.where(ProviderGroup.arel_table[:id].not_in group_ids).each do |pg|
+    ProviderGroup.where(ProviderGroup.arel_table[:id].not_in TerminalProfileProviderGroup.arel_table.project(:provider_group_id)).each do |pg|
       terminal_profile_provider_groups << TerminalProfileProviderGroup.new(:provider_group_id => pg.id, :terminal_profile_id => id)
     end
 
-    Provider.where(Provider.arel_table[:id].not_in prov_ids).each do |p|
+    Provider.where(Provider.arel_table[:id].not_in TerminalProfileProvider.arel_table.project(:provider_id)).each do |p|
       terminal_profile_providers << TerminalProfileProvider.new(:provider_id => p.id, :terminal_profile_id => id)
     end
   end

@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/smartkiosk/iso8583-mkb.git
-  revision: dbeffaa276e763ddff20651a87e930e360f88640
-  specs:
-    iso8583-mkb (0.0.1)
-      eventmachine
-      iso8583
-
-GIT
   remote: https://github.com/guard/guard-spork.git
   revision: dbaa8531850347474d5a7ee626a9a2a64f7e653c
   specs:
@@ -177,6 +169,9 @@ GEM
       has_scope (~> 0.5.0)
       responders (~> 0.6)
     iso8583 (0.1.4)
+    iso8583-mkb (0.0.1)
+      eventmachine
+      iso8583
     jdbc-postgres (9.2.1002)
     jdbc-sqlite3 (3.7.2)
     journey (1.0.4)
@@ -402,7 +397,7 @@ DEPENDENCIES
   guard-spork!
   haml
   i18n_yaml_sorter
-  iso8583-mkb!
+  iso8583-mkb (= 0.0.1)
   jquery-rails
   jruby-openssl
   liquid

@@ -68,4 +68,4 @@ group :development do
   gem 'i18n_yaml_sorter'
 end
 
-gem 'iso8583-mkb', :git => 'git://github.com/smartkiosk/iso8583-mkb.git'
+gem 'iso8583-mkb', '0.0.1'
