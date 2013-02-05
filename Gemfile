@@ -24,7 +24,7 @@ gem 'redis-objects', :require => 'redis/objects'
 gem 'redis-objects-rmap'
 gem 'active_attr'
 
-gem 'payzilla', '0.0.2'
+gem 'payzilla', '0.0.4'
 
 gem 'haml'
 gem 'coffee-filter'
