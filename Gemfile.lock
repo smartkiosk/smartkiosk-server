@@ -219,7 +219,7 @@ GEM
     paper_trail (2.7.0)
       activerecord (~> 3.0)
       railties (~> 3.0)
-    payzilla (0.0.2)
+    payzilla (0.0.4)
       crack
       cyberplat_pki
       gpgme-ffi
@@ -406,7 +406,7 @@ DEPENDENCIES
   meta_search (>= 1.1.0)
   money
   paper_trail
-  payzilla (= 0.0.2)
+  payzilla (= 0.0.4)
   pg
   pry
   rails (= 3.2.11)
