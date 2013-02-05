@@ -232,6 +232,8 @@ ActiveAdmin.register Payment do
         f.input :human_fields, :as => :text, :hint => "foo=bar<br/>bar=baz".html_safe
         f.input :enrolled_amount, :required => true
         f.input :commission_amount, :required => true
+        f.input :payment_type, :as => :select, :collection => I18n.t('smartkiosk.payment_types').invert,
+          :input_html => { :class => 'chosen' }
       end
 
       f.form_buffers.last
