@@ -64,7 +64,7 @@ ActiveAdmin.register Terminal do
 
     if build.gems_ready
       Terminal.where(:id => params[:id].split(',')).each do |t|
-        t.order! :upgrade, build.id, build.version, build.path, build.url, URI.join(root_url, "/gems")
+        t.order! :upgrade, build.id, build.version, build.path, build.url, URI.join(root_url, "/gems").to_s
       end
 
       redirect_to :action => :index

@@ -50,22 +50,26 @@ class GemStasher
     end
 
     builds.each do |build|
-      gemfile = Bundler::Definition.build File.join(build, "Gemfile"),
-                                      File.join(build, "Gemfile.lock"), {}
+      begin
+        gemfile = Bundler::Definition.build File.join(build, "Gemfile"),
+                                        File.join(build, "Gemfile.lock"), {}
 
-      gemfile.sources.each do |source|
-        next unless source.kind_of? Bundler::Source::Rubygems
+        gemfile.sources.each do |source|
+          next unless source.kind_of? Bundler::Source::Rubygems
 
-        source.remotes.each { |remote| sources.add remote }
-      end
+          source.remotes.each { |remote| sources.add remote }
+        end
 
-      gemfile.resolve.each do |spec|
+        gemfile.resolve.each do |spec|
 
-        required_gems.add Bundler::LazySpecification.new(
-          spec.name,
-          spec.version,
-          spec.platform
-        )
+          required_gems.add Bundler::LazySpecification.new(
+            spec.name,
+            spec.version,
+            spec.platform
+          )
+        end
+      rescue => e
+        @logger.warn "unable to process #{build}: #{e}"
       end
     end
 

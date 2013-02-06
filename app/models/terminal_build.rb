@@ -1,6 +1,11 @@
 require 'digest/md5'
 
 class TerminalBuild < ActiveRecord::Base
+  include Redis::Objects
+
+  lock :stash_worker, :global => true, :timeout => 0.1
+  counter :stash_counter, :global => true
+
   mount_uploader :source, ZipUploader
 
   validates :source, :presence => true
@@ -24,14 +29,12 @@ class TerminalBuild < ActiveRecord::Base
     end
 
     self.update_attributes :hashes => build_hashes
-
-    GemStashUpdateWorker.perform_async
+    update_stash
   end
 
   after_destroy do
     FileUtils.rm_rf path
-
-    GemStashUpdateWorker.perform_async
+    update_stash
   end
 
   def path
@@ -62,5 +65,13 @@ class TerminalBuild < ActiveRecord::Base
     end
 
     hashes
+  end
+
+  protected
+
+  def update_stash
+    TerminalBuild.stash_counter.incr
+
+    GemStashUpdateWorker.perform_async
   end
 end
