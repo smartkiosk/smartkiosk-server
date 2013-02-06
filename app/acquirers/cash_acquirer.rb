@@ -8,7 +8,7 @@ class CashAcquirer
     end
 
     def id
-      0
+      "0"
     end
 
     def authorize
