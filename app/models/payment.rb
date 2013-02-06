@@ -291,28 +291,38 @@ class Payment < ActiveRecord::Base
 
   def pay?
     acquirer      = Payment.acquirer(self.payment_type)
-    authorization = acquirer.authorize(self)
+    acquirer.transaction(self) do |transaction|
+      self.update_attribute(:acquirer_transaction, transaction.id)
 
-    if authorization.success?
-      result = self.gateway.librarize.pay(self)
+      if transaction.authorize
+        result = self.gateway.librarize.pay(self)
 
-      if result[:success]
-        self.gateway_error      = nil
-        self.gateway_payment_id = result[:gateway_payment_id] unless result[:gateway_payment_id].blank?
-        self.paid_at            = DateTime.now
-        self.meta[:gateway]     = self.gateway.serialize_options
+        if result[:success]
+          self.gateway_error      = nil
+          self.gateway_payment_id = result[:gateway_payment_id] unless result[:gateway_payment_id].blank?
+          self.paid_at            = DateTime.now
+          self.meta[:gateway]     = self.gateway.serialize_options
 
-        self.save!
-        authorization.confirm
-        return :paid
+          self.save!
+          if !transaction.confirm
+            self.plog :error, :acquirer, "unable to confirm transaction: #{transaction.error}"
+
+            # TODO: reverse on gateway if possible
+          end
+
+          return :paid
+        else
+          self.update_attribute(:gateway_error, result[:error])
+          if !transaction.reverse
+            self.plog :error, :acquirer, "unable to reverse transaction: #{transaction.error}"
+          end
+
+          return :error
+        end
       else
-        self.update_attribute(:gateway_error, result[:error])
-        authorization.reverse
+        self.update_attribute(:acquirer_error, transaction.error)
         return :error
       end
-    else
-      self.update_attribute(:acquirer_error, authorization.error)
-      return :error
     end
   end
 

@@ -25,6 +25,7 @@ class CreatePayments < ActiveRecord::Migration
       t.string          :state, :null => false, :default => 'new'
       t.string          :acquirer_error
       t.integer         :gateway_error
+      t.integer         :acquirer_transaction
       t.string          :gateway_provider_id
       t.string          :gateway_payment_id
       t.datetime        :hour

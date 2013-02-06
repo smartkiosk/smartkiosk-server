@@ -177,7 +177,9 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.decimal  "enrolled_amount",      :precision => 38, :scale => 2
     t.decimal  "rebate_amount",        :precision => 38, :scale => 2
     t.string   "state",                                               :default => "new", :null => false
+    t.string   "acquirer_error"
     t.integer  "gateway_error"
+    t.integer  "acquirer_transaction"
     t.string   "gateway_provider_id"
     t.string   "gateway_payment_id"
     t.datetime "hour"

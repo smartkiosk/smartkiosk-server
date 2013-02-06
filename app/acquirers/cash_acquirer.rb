@@ -1,22 +1,34 @@
 class CashAcquirer
   def initialize(*args)
   end
-  
-  class Authorization
-    def success?
+
+  class Transaction
+    def initialize(payment)
+      @payment = payment
+    end
+
+    def id
+      0
+    end
+
+    def authorize
+      true
+    end
+
+    def reverse
       true
     end
 
     def confirm
-
+      true
     end
 
-    def reverse
-
+    def error
+      nil
     end
   end
 
-  def authorize(payment)
-    Authorization.new
+  def transaction(payment, &block)
+    yield Transaction.new(payment)
   end
 end
