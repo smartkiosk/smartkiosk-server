@@ -311,7 +311,7 @@ class Payment < ActiveRecord::Base
         return :error
       end
     else
-      self.update_attribute(:gateway_error, authorization.error)
+      self.update_attribute(:acquirer_error, authorization.error)
       return :error
     end
   end

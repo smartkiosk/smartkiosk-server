@@ -23,6 +23,7 @@ class CreatePayments < ActiveRecord::Migration
       t.decimal         :enrolled_amount, :precision => 38, :scale => 2
       t.decimal         :rebate_amount, :precision => 38, :scale => 2
       t.string          :state, :null => false, :default => 'new'
+      t.string          :acquirer_error
       t.integer         :gateway_error
       t.string          :gateway_provider_id
       t.string          :gateway_payment_id
