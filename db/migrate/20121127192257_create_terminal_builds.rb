@@ -4,6 +4,7 @@ class CreateTerminalBuilds < ActiveRecord::Migration
       t.string      :version
       t.string      :source
       t.text        :hashes
+      t.boolean     :gems_ready, :default => false
       t.timestamps
     end
   end

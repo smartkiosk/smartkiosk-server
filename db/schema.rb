@@ -370,8 +370,9 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.string   "version"
     t.string   "source"
     t.text     "hashes"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "gems_ready", :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "terminal_orders", :force => true do |t|

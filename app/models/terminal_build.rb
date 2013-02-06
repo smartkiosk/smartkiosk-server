@@ -24,10 +24,14 @@ class TerminalBuild < ActiveRecord::Base
     end
 
     self.update_attributes :hashes => build_hashes
+
+    GemStashUpdateWorker.perform_async
   end
 
   after_destroy do
     FileUtils.rm_rf path
+
+    GemStashUpdateWorker.perform_async
   end
 
   def path

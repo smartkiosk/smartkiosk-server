@@ -69,3 +69,5 @@ group :development do
 end
 
 gem 'iso8583-mkb', '0.0.2'
+
+gem 'bundler', '~> 1.2.3'

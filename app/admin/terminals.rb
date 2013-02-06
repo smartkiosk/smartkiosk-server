@@ -2,8 +2,8 @@ ActiveAdmin.register Terminal do
 
   SIMPLE_ORDERS = Terminal::ORDERS.select{|x| x != 'upgrade'} unless defined?(SIMPLE_ORDERS)
 
-  menu :parent   => I18n.t('activerecord.models.terminal.other'), 
-       :label    => I18n.t('smartkiosk.admin.menu.manage'), 
+  menu :parent   => I18n.t('activerecord.models.terminal.other'),
+       :label    => I18n.t('smartkiosk.admin.menu.manage'),
        :priority => 1,
        :if       => proc { can? :index, Terminal }
 
@@ -62,11 +62,16 @@ ActiveAdmin.register Terminal do
   member_action :upgrade, :method => :post do
     build = TerminalBuild.find(params[:build_id])
 
-    Terminal.where(:id => params[:id].split(',')).each do |t|
-      t.order! :upgrade, build.id, build.version, build.path, build.url
+    if build.gems_ready
+      Terminal.where(:id => params[:id].split(',')).each do |t|
+        t.order! :upgrade, build.id, build.version, build.path, build.url, URI.join(root_url, "/gems")
+      end
+
+      redirect_to :action => :index
+    else
+      redirect_to :back, :flash => { :error => I18n.t('smartkiosk.admin.terminal_build.gems_not_ready_error') }
     end
 
-    redirect_to :action => :index
   end
 
   SIMPLE_ORDERS.each do |order|
@@ -80,7 +85,7 @@ ActiveAdmin.register Terminal do
   # INDEX
   #
   batch_action(
-    I18n.t('smartkiosk.admin.actions.terminals.upgrade'), 
+    I18n.t('smartkiosk.admin.actions.terminals.upgrade'),
     :if => proc{current_user.priveleged?(:terminals, :upgrade)}
   ) do |selection|
     redirect_to upgrade_build_admin_terminal_path(Terminal.find(selection).map(&:id).join(','))

@@ -385,6 +385,7 @@ DEPENDENCIES
   axlsx
   better_errors
   binding_of_caller
+  bundler (~> 1.2.3)
   capistrano
   carrierwave
   clockwork

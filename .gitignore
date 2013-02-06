@@ -19,6 +19,7 @@
 /public/uploads
 /public/builds
 /public/assets
+/public/gems
 
 # Ignore the default SQLite database.
 /db/*.sqlite3*

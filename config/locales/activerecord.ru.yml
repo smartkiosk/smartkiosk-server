@@ -14,7 +14,7 @@ ru:
               not_a_hash: содержат неправильный формат
         rebate:
           attributes:
-            start: 
+            start:
               too_large: должна быть меньше даты окончания
           conditions_intersect: Условия выборки пересекаются
           requires_commission_intersects: Нельзя указать разные типы связи с комиссией в рамках одного шлюза
@@ -25,7 +25,7 @@ ru:
               too_large: должно быть меньше До
         commission:
           attributes:
-            start: 
+            start:
               too_large: должна быть меньше даты окончания
           conditions_intersect: Условия выборки пересекаются
           payment_type_intersects: Нельзя указать разные типы связи типа платежа в рамках одного провайдера
@@ -35,7 +35,7 @@ ru:
               too_large: должно быть меньше До
         limit:
           attributes:
-            start: 
+            start:
               too_large: должна быть меньше даты окончания
           conditions_intersect: Условия выборки пересекаются
           payment_type_intersects: Нельзя указать разные типы связи типа платежа в рамках одного провайдера
@@ -178,7 +178,7 @@ ru:
         many: Сверок
         one: Сверка
         other: Сверки
-      terminal: 
+      terminal:
         few: Терминала
         many: Терминалов
         one: Терминал
@@ -244,6 +244,7 @@ ru:
       terminal_build:
         version: Версия
         source: Источник (ZIP)
+        gems_ready: Готова к деплою
         created_at: Дата создания
         updated_at: Дата обновления
       provider_receipt_template:

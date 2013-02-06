@@ -1,6 +1,6 @@
 ru:
   smartkiosk:
-    welcome: 
+    welcome:
       header: Вы авторизованы как %{user}
       roles: Доступные роли
       properties: Свойства аккаунта
@@ -78,6 +78,10 @@ ru:
           upgrade: Обновление терминалов
           all_pings: Полная история связи
           pings: История связи
+      terminal_build:
+        gems_ready: Готова к деплою
+        gems_not_ready: Подготавливается
+        gems_not_ready_error: Сборка еще подготавливается
     role_priveleges:
       basic:
         create: Создание
