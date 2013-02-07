@@ -1,3 +1,5 @@
+require "gem_stasher"
+
 class GemStashUpdateWorker
   include Sidekiq::Worker
 
