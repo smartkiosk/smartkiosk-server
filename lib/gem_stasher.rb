@@ -149,9 +149,9 @@ class GemStasher
   def fetch_file(uri, io)
     Net::HTTP.start(uri.host,
                     uri.port,
-                    :use_ssl => uri.scheme == 'https'
+                    :use_ssl => uri.scheme == 'https',
+                    :verify_mode => OpenSSL::SSL::VERIFY_NONE
                    ) do |http|
-      http.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http.request_get(uri.path) do |response|
         case response
         when Net::HTTPSuccess
