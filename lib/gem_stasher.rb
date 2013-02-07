@@ -1,7 +1,6 @@
 require "bundler"
 require "rubygems/user_interaction"
 require "rubygems/package"
-require "rubygems/indexer"
 require "net/http"
 require "set"
 require "fileutils"
@@ -133,9 +132,12 @@ class GemStasher
   end
 
   def update_index
-    @logger.info "Updating gem index"
-    indexer = Gem::Indexer.new @gempath
-    indexer.generate_index
+    @logger.info "Updating gem index at #{@gempath}"
+    # unfortunately, it's not possible to use Gem::Index without breaking
+    # host application bundler.
+    Bundler.with_clean_env do
+      system "gem", "generate_index", "--directory", @gempath.to_s, "--quiet"
+    end
   end
 
   private
@@ -166,4 +168,3 @@ class GemStasher
 end
 
 Bundler.settings[:frozen] = true
-Gem::DefaultUserInteraction.ui = Gem::SilentUI.new
