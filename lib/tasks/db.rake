@@ -12,7 +12,7 @@ namespace :db do
     puts "Droping all tables..."
     puts "-"*10
 
-    ActiveRecord::Base.connection.drop_table "schema_migrations"
+    ActiveRecord::Base.connection.drop_table "schema_migrations" rescue nil
 
     root   = File.expand_path('../../../app/models/', __FILE__)
     models = Dir["#{root}/**"].each{|x| require x; }
