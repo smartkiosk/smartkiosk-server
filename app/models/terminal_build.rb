@@ -35,8 +35,8 @@ class TerminalBuild < ActiveRecord::Base
     FileUtils.rm_rf path
   end
 
-  after_commit :update_stash, :on => :create
-  after_commit :update_stash, :on => :destroy
+  after_commit :commit_create, :on => :create
+  after_commit :commit_destroy, :on => :destroy
 
   def path
     Rails.root.join("public/builds/#{id}").to_s
@@ -75,4 +75,8 @@ class TerminalBuild < ActiveRecord::Base
 
     GemStashUpdateWorker.perform_async
   end
+
+  alias :commit_create :update_stash
+  alias :commit_destroy :update_stash
+
 end
