@@ -29,13 +29,14 @@ class TerminalBuild < ActiveRecord::Base
     end
 
     self.update_attributes :hashes => build_hashes
-    update_stash
   end
 
   after_destroy do
     FileUtils.rm_rf path
-    update_stash
   end
+
+  after_commit :update_stash, :on => :create
+  after_commit :update_stash, :on => :destroy
 
   def path
     Rails.root.join("public/builds/#{id}").to_s
