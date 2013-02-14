@@ -20,7 +20,7 @@ set :user, "deployer"
 set :deploy_to, "/home/deployer/www/#{application}"
 
 after 'deploy:update_code', 'deploy:configure'
-before 'deploy:create_symlink', 'deploy:install'
+before 'deploy:create_symlink', 'deploy:install' if ENV['DEPLOY_DB']
 
 namespace :deploy do
   task :configure do

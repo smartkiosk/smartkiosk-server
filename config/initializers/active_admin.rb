@@ -8,6 +8,7 @@ require 'active_admin/inputs/filter_date_range_input_fix'
 require 'paper_trail/version_fix'
 require 'formtastic/inputs/selectable_check_boxes'
 require 'dav4rack/build_resource'
+require 'kaminari/array_extension_fix'
 
 ActiveAdmin.setup do |config|
   # TODO: Remove this as soon as AA fixed
