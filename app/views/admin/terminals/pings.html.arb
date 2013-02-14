@@ -1,5 +1,5 @@
 paginated_collection(Kaminari.paginate_array(terminal.pings).page(params[:page]).per(15), download_links: false) do
-  table_for(terminal.pings, :class => 'index_table index', :i18n => TerminalPing) do |t|
+  table_for(collection, :class => 'index_table index', :i18n => TerminalPing) do |t|
     t.column :created_at
     t.column :condition do |x|
       status_tag I18n.t("smartkiosk.terminal_conditions.#{x.condition}"), x.condition.to_sym

@@ -44,6 +44,11 @@ ru:
             min:
               too_large: должно быть меньше До
     models:
+      terminal_ping:
+        few: Пинга
+        many: Пингов
+        one: Пинг
+        other: Пинги
       terminal_profile_promotion:
         few: Быстрые иконки
         many: Быстрых иконок
