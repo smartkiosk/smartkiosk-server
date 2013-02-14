@@ -22,7 +22,7 @@ module Smartkiosk
 
         # ActiveAdmin
         ActiveAdmin.setup do |config|
-          config.load_paths << Smartkiosk::Server::Engine.root.join('app/admin')
+          config.load_paths << Smartkiosk::Server::Engine.root.join('app/admin').to_s
         end
 
         # TODO: Remove this as soon as AA fixed
