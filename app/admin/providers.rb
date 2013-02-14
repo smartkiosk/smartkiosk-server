@@ -7,7 +7,7 @@ ActiveAdmin.register Provider do
 
   controller do
     def scoped_collection
-      Provider.includes(:provider_profile)
+      Provider.includes(:provider_profile, :gateways)
     end
   end
 
@@ -34,10 +34,16 @@ ActiveAdmin.register Provider do
     column :icon do |x|
       image_tag(x.icon.url(:thumb)) unless x.icon.blank?
     end
-    column :provider_profile
+    column :title, :sortable => :title do |x|
+      link_to x.title, [:admin, x]
+    end
     column :keyword
-    column :title
-    column :provider_gateways_count
+    column :provider_profile
+    column :provider_gateways_count, :sortable => :provider_gateways_count do |x|
+      x.gateways.map do |g|
+        link_to g.title, [:admin, g]
+      end.join(', ').html_safe
+    end
     column :updated_at
     default_actions
   end
