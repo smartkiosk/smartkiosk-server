@@ -137,7 +137,13 @@ ActiveAdmin.register Gateway do
         t.column :provider
         t.column :created_at
       end
-      button(link_to I18n.t('smartkiosk.full_list'), admin_payments_path(:q => {:gateway_id_eq => gateway.id}))
+
+      div(:class => 'more') do
+        text_node link_to(
+          I18n.t('smartkiosk.full_list'),
+          admin_payments_path(:q => {:gateway_id_eq => gateway.id})
+        )
+      end
     end
 
     active_admin_comments

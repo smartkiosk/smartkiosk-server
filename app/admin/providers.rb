@@ -115,10 +115,13 @@ ActiveAdmin.register Provider do
         t.column :provider
         t.column :created_at
       end
-      button(
-        link_to I18n.t('smartkiosk.full_list'),
-        admin_payments_path(:q => {:provider_id_eq => provider.id})
-      )
+
+      div(:class => 'more') do
+        text_node link_to(
+          link_to I18n.t('smartkiosk.full_list'),
+          admin_payments_path(:q => {:provider_id_eq => provider.id})
+        )
+      end
     end
 
     active_admin_comments

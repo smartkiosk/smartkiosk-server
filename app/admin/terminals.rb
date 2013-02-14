@@ -340,10 +340,13 @@ ActiveAdmin.register Terminal do
         t.column :modem_balance
         t.column :modem_signal_level
       end
-      button(
-        link_to I18n.t('smartkiosk.admin.panels.terminals.all_pings'),
-        pings_admin_terminal_path(terminal.id)
-      )
+
+      div(:class => 'more') do
+        text_node link_to(
+          I18n.t('smartkiosk.admin.panels.terminals.all_pings'),
+          pings_admin_terminal_path(terminal.id)
+        )
+      end
     end
 
     panel I18n.t('activerecord.models.collection.other') do
@@ -353,10 +356,13 @@ ActiveAdmin.register Terminal do
         t.column :approved_payments_sum
         t.column :collected_at
       end
-      button(
-        link_to I18n.t('smartkiosk.full_list'),
-        admin_collections_path(:q => {:terminal_id_eq => terminal.id})
-      )
+
+      div(:class => 'more') do
+        text_node link_to(
+         link_to I18n.t('smartkiosk.full_list'),
+          admin_collections_path(:q => {:terminal_id_eq => terminal.id})
+        )
+      end
     end
 
     active_admin_comments
