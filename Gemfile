@@ -9,7 +9,10 @@ gem 'rails', '3.2.11'
 gem 'sinatra', :require => nil
 gem 'jruby-openssl', :platform => :jruby
 
-gem 'activeadmin'
+# The revision contains important fix required to avoid double bootstrap with matrioshka
+# TODO: upgrade to 0.5.2 on release
+gem 'activeadmin', '0.5.1', :git => 'git://github.com/gregbell/active_admin.git', :ref => '4e291e385bdcaa9fee2c37d5a344975101d6f15f'
+
 gem 'activeadmin-cancan'
 gem 'meta_search', '>= 1.1.0'
 gem 'russian', '~> 0.6.0'
