@@ -21,9 +21,9 @@ module Smartkiosk
         end
 
         # ActiveAdmin
-        ActiveAdmin.setup do |config|
-          config.load_paths << Smartkiosk::Server::Engine.root.join('app/admin').to_s
-        end
+        aa_load_path = Smartkiosk::Server::Engine.root.join('app/admin').to_s
+        ActiveAdmin.application.load_paths << aa_load_path
+        config.eager_load_paths.reject!{|x| x == aa_load_path}
 
         # TODO: Remove this as soon as AA fixed
         config.after_initialize do
