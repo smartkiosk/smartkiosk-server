@@ -7,15 +7,13 @@ ActiveAdmin.register TerminalBuild do
   index do
     selectable_column
     column :id
-    column :version do |tb|
-      div tb.version
-
+    column :version
+    column :gems_ready do |tb|
       if tb.gems_ready
         status_tag(I18n.t('smartkiosk.admin.terminal_build.gems_ready'), :ok)
       else
         status_tag(I18n.t('smartkiosk.admin.terminal_build.gems_not_ready'), :error)
       end
-
     end
     column :source do |tb|
       link_to File.basename(tb.source.path), tb.source.url
