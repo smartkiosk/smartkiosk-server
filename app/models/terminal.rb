@@ -3,7 +3,7 @@ require_dependency 'terminal_ping'
 class Terminal < ActiveRecord::Base
   include Redis::Objects::RMap
 
-  HARDWARE = %w(cash_acceptor modem printer)
+  HARDWARE = %w(cash_acceptor modem printer card_reader watchdog)
   ORDERS   = %w(reload reboot disable enable upgrade)
 
   has_rmap({:id => lambda{|x| x.to_s}}, :keyword)

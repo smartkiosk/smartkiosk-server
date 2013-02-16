@@ -25,6 +25,9 @@ class TerminalPing
   # :error => '', :version => '', :signal_level => 4, :balance => 54.5
   attribute :modem, :default => {}
 
+  attribute :card_reader, :default => {}
+  attribute :watchdog, :default => {}
+
   # :payments => 5, :orders => 4
   attribute :queues, :default => {}
 
@@ -72,6 +75,30 @@ class TerminalPing
 
   def cash_count
     banknotes.values.map{|x| x.to_i}.sum
+  end
+
+  def card_reader_error
+    error(:card_reader)
+  end
+
+  def card_reader_version
+    value 'version', :card_reader
+  end
+
+  def card_reader_model
+    value 'model', :card_reader
+  end
+
+  def watchdog_error
+    error(:watchdog)
+  end
+
+  def watchdog_version
+    value 'version', :watchdog
+  end
+
+  def watchdog_model
+    value 'model', :watchdog
   end
 
   def cash_acceptor_error

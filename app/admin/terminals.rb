@@ -270,13 +270,15 @@ ActiveAdmin.register Terminal do
 
     unless terminal.pings.last.blank?
       panel I18n.t('smartkiosk.admin.panels.terminals.hardware') do
-        attributes_table_for terminal.pings.last do
+        attributes_table_for terminal.pings.first do
           row :cash_acceptor_model
           row :cash_acceptor_version
           row :modem_model
           row :modem_version
           row :printer_model
           row :printer_version
+          row :card_reader_model
+          row :watchdog_model
         end
       end
     end

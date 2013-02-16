@@ -1,6 +1,16 @@
 ru:
   smartkiosk:
     hardware:
+      watchdog:
+        abbr: W
+        title: Сторожевик
+        errors:
+          1: "Не отвечает"
+      card_reader:
+        abbr: R
+        title: Картоприемник
+        errors:
+          1: "Не отвечает"
       cash_acceptor:
         abbr: C
         title: Купюроприемник

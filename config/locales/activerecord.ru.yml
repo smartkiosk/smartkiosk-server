@@ -596,6 +596,12 @@ ru:
         updated_at: Дата изменения
         version: Версия ПО
         has_adv_monitor: Рекламный монитор
+        card_reader_error: Ошибка картоприемника
+        card_reader_model: Модель картоприемника
+        card_reader_version: Версия картоприемника
+        watchdog_error: Ошибка сторожевика
+        watchdog_model: Модель сторожевика
+        watchdog_version: Версия сторожевика
       terminal_ping:
         terminal: Терминал
         condition: Состояние
@@ -616,6 +622,12 @@ ru:
         modem_signal_level: Уровень GSM
         modem_version: Версия модема
         modem_error: Ошибка модема
+        card_reader_error: Ошибка картоприемника
+        card_reader_model: Модель картоприемника
+        card_reader_version: Версия картоприемника
+        watchdog_error: Ошибка сторожевика
+        watchdog_model: Модель сторожевика
+        watchdog_version: Версия сторожевика
         queues: Очереди
         banknotes: Купюры
       terminal_type:
