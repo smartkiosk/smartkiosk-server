@@ -75,5 +75,5 @@ ProviderField.blueprint do
   title                 { Faker::HipsterIpsum.word }
   kind                  { ['phone', 'string', 'date', 'select'].sample }
   values                { Faker::HipsterIpsum.words(3).join(',') }
-  mask                  { ['1-x-2', '1-1', nil].sample }
+  mask                  { ['^1-x-^2', '^1-^1', nil].sample }
 end
