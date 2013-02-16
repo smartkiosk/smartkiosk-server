@@ -71,7 +71,7 @@ class Payment < ActiveRecord::Base
   end
 
   def enqueue!(attributes={})
-    [ :paid_amount, :receipt_number, :card_track1, :card_track2 ].each do |key|
+    [ :paid_amount, :receipt_number, :card_track1, :card_track2, :meta ].each do |key|
       if attributes.include? key
         write_attribute key, attributes[key]
       end
