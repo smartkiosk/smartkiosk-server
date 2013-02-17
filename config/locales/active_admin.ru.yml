@@ -16,6 +16,8 @@ ru:
       selection_toggle_explanation: "(Отметить всё / Снять выделение)"
       succesfully_destroyed:
         one: "Успешно удалено: 1 %{model}"
+        few: "Успешно удалено: %{count} %{plural_model}"
+        many: "Успешно удалено: %{count} %{plural_model}"
         other: "Успешно удалено: %{count} %{plural_model}"
     blank_slate:
       content: "%{resource_name} не найдены."
