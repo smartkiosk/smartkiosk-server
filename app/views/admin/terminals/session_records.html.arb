@@ -1,0 +1,10 @@
+paginated_collection(terminal.session_records.page(params[:page]).per(15), download_links: false) do
+  table_for(collection, :class => 'index_table index', :i18n => SessionRecord) do |t|
+    t.column :started_at do |x|
+      Time.at(x.started_at).strftime("%d.%m.%Y %H:%M:%S")
+    end
+    t.column :upstream
+    t.column :downstream
+    t.column :time
+  end
+end

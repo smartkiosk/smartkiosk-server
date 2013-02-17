@@ -20,7 +20,8 @@ class TerminalPingsController < ApplicationController
           :modified_at   => profile.updated_at
         },
         :orders => @terminal.terminal_orders.unsent.as_json(:only => [:id, :keyword, :args, :created_at]),
-        :update_providers => remote_timestamp.blank? || local_timestamp.to_i > remote_timestamp.to_i # to drop microseconds
+        :update_providers => remote_timestamp.blank? || local_timestamp.to_i > remote_timestamp.to_i, # to drop microseconds
+        :last_session_started_at => @terminal.last_session_started_at
       }
 
       render :json => response

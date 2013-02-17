@@ -78,6 +78,8 @@ ru:
           upgrade: Обновление терминалов
           all_pings: Полная история связи
           pings: История связи
+          all_session_records: Все сессии
+          session_records: Сессии
       terminal_build:
         gems_ready: Готова к деплою
         gems_not_ready: Подготавливается

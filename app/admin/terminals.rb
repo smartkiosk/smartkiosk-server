@@ -49,6 +49,11 @@ ActiveAdmin.register Terminal do
     end
   end
 
+  member_action(:session_records,
+    :method => :get,
+    :title  =>  I18n.t('smartkiosk.admin.panels.terminals.all_session_records')
+  )
+
   member_action(:upgrade_build,
     :method => :get,
     :title => I18n.t('smartkiosk.admin.panels.terminals.upgrade')
@@ -347,6 +352,24 @@ ActiveAdmin.register Terminal do
         text_node link_to(
           I18n.t('smartkiosk.admin.panels.terminals.all_pings'),
           pings_admin_terminal_path(terminal.id)
+        )
+      end
+    end
+
+    panel I18n.t('smartkiosk.admin.panels.terminals.session_records') do
+      table_for(terminal.session_records[0..20], :i18n => SessionRecord) do |t|
+        t.column :started_at do |x|
+          Time.at(x.started_at).strftime("%d.%m.%Y %H:%M:%S")
+        end
+        t.column :upstream
+        t.column :downstream
+        t.column :time
+      end
+
+      div(:class => 'more') do
+        text_node link_to(
+          I18n.t('smartkiosk.admin.panels.terminals.all_session_records'),
+          session_records_admin_terminal_path(terminal.id)
         )
       end
     end

@@ -661,3 +661,8 @@ ru:
         item_id: ID сущности
         event: Действие
         user: Пользователь
+      session_record:
+        started_at: Время начала
+        upstream: Передано байт
+        downstream: Принято байт
+        time: Время соединения, секунд

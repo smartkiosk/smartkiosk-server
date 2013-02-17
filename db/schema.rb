@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108091644) do
+ActiveRecord::Schema.define(:version => 20130217113740) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -350,6 +350,20 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "session_records", :force => true do |t|
+    t.integer  "terminal_id"
+    t.string   "message_id"
+    t.integer  "started_at"
+    t.integer  "upstream"
+    t.integer  "downstream"
+    t.integer  "time"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "session_records", ["created_at"], :name => "index_session_records_on_created_at"
+  add_index "session_records", ["terminal_id", "message_id"], :name => "index_session_records_on_terminal_id_and_message_id", :unique => true
+
   create_table "system_receipt_templates", :force => true do |t|
     t.string   "keyword"
     t.text     "template"
@@ -444,6 +458,9 @@ ActiveRecord::Schema.define(:version => 20130108091644) do
     t.integer  "incomplete_orders_count", :default => 0,         :null => false
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
+    t.integer  "card_reader_error"
+    t.integer  "watchdog_error"
+    t.integer  "last_session_started_at", :default => 0,         :null => false
   end
 
   add_index "terminals", ["agent_id"], :name => "index_terminals_on_agent_id"

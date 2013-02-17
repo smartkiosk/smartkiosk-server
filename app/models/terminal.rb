@@ -17,6 +17,7 @@ class Terminal < ActiveRecord::Base
   has_many :collections, :order => 'id DESC'
   has_many :payments, :order => 'id DESC'
   has_many :terminal_orders, :order => 'id DESC'
+  has_many :session_records, :order => 'created_at DESC'
 
   list :pings, :marshal => true, :maxlength => 480
 
