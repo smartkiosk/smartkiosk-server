@@ -1,7 +1,7 @@
 ActiveAdmin.register SystemReceiptTemplate do
   config.batch_actions = false
   
-  actions :index, :show, :edit
+  actions :index, :show, :edit, :update
 
   menu :parent   => I18n.t('activerecord.models.terminal.other'),
        :priority => 30,
