@@ -14,6 +14,7 @@ class TerminalPingsController < ApplicationController
 
       response = {
         :time => DateTime.now,
+        :address => @terminal.address,
         :profile => {
           :support_phone => profile.support_phone,
           :logo          => profile.logo.url,
