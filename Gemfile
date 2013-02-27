@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'matrioshka'
 
@@ -67,10 +67,9 @@ end
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platform => :ruby
   gem 'i18n_yaml_sorter'
 end
 
 gem 'iso8583-mkb', '0.0.2'
 
-gem 'bundler', '~> 1.2.3'
+gem 'bundler', '~> 1.3'
