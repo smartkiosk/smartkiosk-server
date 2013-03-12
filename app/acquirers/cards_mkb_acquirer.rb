@@ -63,6 +63,11 @@ class CardsMkbAcquirer
       auth.pan = auth.track2.slice(0, delimiter)
       auth.expiry = auth.track2.slice(delimiter + 1, 4)
 
+      unless @payment.pin_block.value.blank?
+        auth.security_control = '2001010100000000'
+        auth.pin_block = @payment.pin_block.value
+      end
+
       terminal = "OOOMKB TERM#{@payment.terminal.keyword}"
       city = "Moscow"
       country = "RU"

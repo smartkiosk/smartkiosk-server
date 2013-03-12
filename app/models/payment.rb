@@ -1,6 +1,7 @@
 class Payment < ActiveRecord::Base
   include DateExpander
   include Stateflow
+  include Redis::Objects
 
   SOURCE_INNER  = 0
   SOURCE_MANUAL = 1
@@ -13,6 +14,8 @@ class Payment < ActiveRecord::Base
   TYPE_MBANK        = 4
   TYPE_PURSE        = 5
   TYPE_ACCOUNT      = 6
+
+  value :pin_block
 
   #
   # STATEFLOW
