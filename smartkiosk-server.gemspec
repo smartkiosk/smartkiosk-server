@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'rails', '= 3.2.11'
+  gem.add_dependency 'rails', '= 3.2.12'
   gem.add_dependency 'matrioshka', '>= 0.1.1'
 
   gem.post_install_message = "Please run `rake smartkiosk_server:link` to finish the installation."
