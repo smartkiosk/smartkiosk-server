@@ -5,7 +5,7 @@ gem 'matrioshka'
 gem 'trinidad', :require => nil, :platform => :jruby
 gem 'thin', :require => nil, :platform => :ruby
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem 'sinatra', :require => nil
 gem 'jruby-openssl', :platform => :jruby
 
