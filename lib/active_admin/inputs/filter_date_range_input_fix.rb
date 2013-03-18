@@ -12,12 +12,12 @@ module ActiveAdmin
         end
       end
 
-      def input_html_options(input_name = gt_input_name, extra_class = '')
+      def input_html_options(input_name=gt_input_name, extra_class='')
         current_value = @object.send(input_name)
         { :size => 12,
           :class => "datepicker #{extra_class}",
           :max => 10,
-          :value => current_value.respond_to?(:strftime) ? current_value.strftime("%Y-%m-%d") : "" }
+          :value => current_value.respond_to?(:strftime) ? current_value.strftime("%d.%m.%Y") : "" }
       end
     end
   end
