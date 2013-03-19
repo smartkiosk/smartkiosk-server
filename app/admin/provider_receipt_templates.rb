@@ -13,7 +13,8 @@ ActiveAdmin.register ProviderReceiptTemplate do
   #
   # INDEX
   #
-  filter :providers_id, :as => 'multiple_select', :input_html => { :class => 'chosen' }
+  filter :providers_id, :as => 'multiple_select', :input_html => { :class => 'chosen' },
+    :collection => proc { Provider.rmap }
   filter :created_at
   filter :updated_at
 
