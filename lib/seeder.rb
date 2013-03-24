@@ -57,7 +57,7 @@ class Seeder
   end
 
   def seed_terminal_profiles
-    TerminalProfile.make!
+    TerminalProfile.create! :keyword => 'default', :title => 'Основные'
   end
 
   def seed_test_providers

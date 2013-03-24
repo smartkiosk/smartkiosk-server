@@ -118,6 +118,8 @@ ActiveAdmin.register Terminal do
   filter :state, :as => 'multiple_select',
     :collection => proc { I18n.t('smartkiosk.terminal_states').invert },
     :input_html => { :class => 'chosen' }
+  filter :terminal_profile, :as => 'multiple_select', :input_html => { :class => 'chosen' },
+    :collection => proc { TerminalProfile.rmap }
   filter :keyword
   filter :address
   filter :ip
@@ -220,6 +222,7 @@ ActiveAdmin.register Terminal do
 
   show do |terminal|
     attributes_table do
+      row :terminal_profile
       row :agent
       row :keyword
       row :description
@@ -290,7 +293,6 @@ ActiveAdmin.register Terminal do
 
     panel I18n.t('smartkiosk.admin.panels.terminals.juridical') do
       attributes_table_for terminal do
-        row :terminal_profile
         row :sector
         row :contact_name
         row :contact_phone
