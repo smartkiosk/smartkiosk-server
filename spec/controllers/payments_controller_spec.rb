@@ -48,6 +48,53 @@ describe PaymentsController do
     }
   end
 
+  it "declines empty provider" do
+    post :create,
+      :terminal => 'test',
+      :payment  => {
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
+      }
+
+    response.code.should == "404"
+  end
+
+  it "declines absent provider" do
+    post :create,
+      :terminal => 'test',
+      :provider => 'idontexist',
+      :payment  => {
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
+      }
+
+    response.code.should == "404"
+  end
+
+  it "declines duplicating session id" do
+    post :create,
+      :terminal => 'test',
+      :provider => 'test',
+      :payment  => {
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
+      }
+
+    post :create,
+      :terminal => 'test',
+      :provider => 'test',
+      :payment  => {
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
+      }
+
+    response.code.should == "406"
+  end
+
   it "pays" do
     post :create,
       :terminal => 'test',

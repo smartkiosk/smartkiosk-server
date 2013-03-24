@@ -74,15 +74,17 @@ class Payment < ActiveRecord::Base
   end
 
   def enqueue!(attributes={})
-    [ :paid_amount, :receipt_number, :card_track1, :card_track2, :meta ].each do |key|
-      if attributes.include? key
-        write_attribute key, attributes[key]
+    plog :info, :model, "Sent to queue" do
+      [ :paid_amount, :receipt_number, :card_track1, :card_track2, :meta ].each do |key|
+        if attributes.include? key
+          write_attribute key, attributes[key]
+        end
       end
-    end
 
-    enqueue
-    save!
-    PayWorker.perform_async(id)
+      enqueue
+      save!
+      PayWorker.perform_async(id)
+    end
   end
 
   #
@@ -186,7 +188,7 @@ class Payment < ActiveRecord::Base
         severity,
         datetime.iso8601(12),
         data[:progname],
-        data[:payment_id],
+        "##{data[:payment_id]}",
         data[:payment_state],
         data[:session_id],
         data[:terminal_id],
@@ -245,17 +247,31 @@ class Payment < ActiveRecord::Base
 
   def self.build!(terminal, provider, attributes)
     payment = new(attributes)
+
+    if provider.blank?
+      payment.plog :warn, :model, "Provider not found"
+      return false
+    end
+    
     provider_gateway = provider.provider_gateways.enabled.order(:priority).first
 
-    return false if provider_gateway.blank?
+    if provider_gateway.blank?
+      payment.plog :info, :model, "Provider has no gateways attached"
+      return false
+    end
 
     payment.terminal = terminal
     payment.provider_gateway = provider_gateway
     payment.raw_fields = payment.fields
     payment.fields = provider_gateway.map(payment.account, payment.fields)
 
-    payment.save!
-    payment
+    if payment.save
+      payment.plog :info, :model, "Payment created"
+      payment
+    else
+      payment.plog :warn, :model, "Payment was invalidated: #{payment.errors.full_messages.join(', ')}"
+      false
+    end
   end
 
   def provider_gateway=(pg)
@@ -282,11 +298,13 @@ class Payment < ActiveRecord::Base
     result = self.gateway.librarize.check(self)
 
     if result[:success]
+      plog :info, :model, "Checked"
       self.gateway_error      = nil
       self.gateway_payment_id = result[:gateway_payment_id] unless result[:gateway_payment_id].blank?
       self.save!
       return :checked
     else
+      plog :info, :model, "Declined: #{result[:error]}"
       self.update_attribute(:gateway_error, result[:error])
       return :declined
     end
@@ -308,7 +326,7 @@ class Payment < ActiveRecord::Base
 
           self.save!
           if !transaction.confirm
-            self.plog :error, :acquirer, "unable to confirm transaction: #{transaction.error}"
+            self.plog :error, :model, "unable to confirm transaction: #{transaction.error}"
 
             # TODO: reverse on gateway if possible
           end
@@ -317,7 +335,7 @@ class Payment < ActiveRecord::Base
         else
           self.update_attribute(:gateway_error, result[:error])
           if !transaction.reverse
-            self.plog :error, :acquirer, "unable to reverse transaction: #{transaction.error}"
+            self.plog :error, :model, "unable to reverse transaction: #{transaction.error}"
           end
 
           return :error
