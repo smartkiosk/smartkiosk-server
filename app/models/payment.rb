@@ -121,6 +121,10 @@ class Payment < ActiveRecord::Base
   before_validation do
     self.meta  = {} unless self.meta.is_a?(Hash)
     self.agent = self.terminal.agent unless self.terminal.blank?
+
+    if [ TYPE_CASH, TYPE_IBANK, TYPE_MBANK, TYPE_PURSE, TYPE_ACCOUNT ].include?(self.payment_type)
+      self.externally_paid = true
+    end
   end
 
   before_save do
@@ -157,21 +161,25 @@ class Payment < ActiveRecord::Base
   #
   # METHODS
   #
-  def self.acquirer(payment_type)
-    unless @acquiring_settings
-      @acquiring_settings = YAML::load File.read(Rails.root.join 'config/acquiring.yml')
-      @acquiring_settings.each do |x|
-        x['type'] = x['type'].split(',').map do |t|
-          Payment.const_get "TYPE_#{t.strip.upcase}"
+  def self.acquirer(payment)
+    unless payment.externally_paid
+      unless @acquiring_settings
+        @acquiring_settings = YAML::load File.read(Rails.root.join 'config/acquiring.yml')
+        @acquiring_settings.each do |x|
+          x['type'] = x['type'].split(',').map do |t|
+            Payment.const_get "TYPE_#{t.strip.upcase}"
+          end
+          x['class'] = x['class'].constantize
         end
-        x['class'] = x['class'].constantize
       end
+
+      acquirer = @acquiring_settings.find{|x| x['type'].include?(payment.payment_type)}
+      raise "unsupported payment type: #{payment.payment_type}" unless acquirer
+
+      acquirer['class'].new(acquirer)
+    else
+      EmptyAcquirer.new
     end
-
-    acquirer = @acquiring_settings.find{|x| x['type'].include?(payment_type)}
-    raise "unsupported payment type: #{payment_type}" unless acquirer
-
-    acquirer['class'].new(acquirer)
   end
 
   def self.plogger
@@ -311,7 +319,7 @@ class Payment < ActiveRecord::Base
   end
 
   def pay?
-    acquirer      = Payment.acquirer(self.payment_type)
+    acquirer = Payment.acquirer(self)
     acquirer.transaction(self) do |transaction|
       self.update_attribute(:acquirer_transaction, transaction.id)
 

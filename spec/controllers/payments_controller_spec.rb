@@ -126,6 +126,7 @@ describe PaymentsController do
     PayWorker.new.perform 1
     payment = Payment.find 1
     payment.state.should == "paid"
+    payment.externally_paid.should == true
   end
 
   xit "pays with card" do
@@ -163,6 +164,7 @@ describe PaymentsController do
       payment = Payment.find 1
 
       payment.state.should == "paid"
+      payment.externally_paid.should == false
     ensure
       CardsMkbAcquirer.stop
     end
