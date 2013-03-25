@@ -47,7 +47,7 @@ describe TerminalPingsController do
   it "delivers correct data" do
     get :providers, :terminal => 'test'
 
-    body = ActiveSupport::JSON.decode ActiveSupport::Gzip.decompress(response.body)
+    body = ActiveSupport::JSON.decode response.body
     DateTime.parse(body["updated_at"]).to_i.should == @terminal.terminal_profile.actual_timestamp.to_i
   end
 
@@ -74,7 +74,7 @@ describe TerminalPingsController do
 
     get :providers, :terminal => 'test'
 
-    body = ActiveSupport::JSON.decode ActiveSupport::Gzip.decompress(response.body)
+    body = ActiveSupport::JSON.decode response.body
     new_stamp = DateTime.parse(body["updated_at"])
     new_stamp.should > initial_stamp
     new_stamp.to_i.should == @terminal.terminal_profile.actual_timestamp.to_i

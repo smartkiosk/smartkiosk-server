@@ -48,11 +48,11 @@ class TerminalPingsController < ApplicationController
           }
         end
 
-        providers = ActiveSupport::Gzip.compress(ActiveSupport::JSON.encode(providers))
+        providers = ActiveSupport::JSON.encode(providers)
         profile.cached_providers.value = providers
       end
     end
 
-    send_data providers, :type => 'application/gzip', :disposition => 'inline'
+    send_data providers, :type => 'application/json', :disposition => 'inline'
   end
 end
