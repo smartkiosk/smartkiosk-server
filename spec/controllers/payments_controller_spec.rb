@@ -57,7 +57,7 @@ describe PaymentsController do
         :payment_type => Payment::TYPE_CASH
       }
 
-    response.code.should == "404"
+    response.code.should == "406"
   end
 
   it "declines absent provider" do
@@ -70,7 +70,7 @@ describe PaymentsController do
         :payment_type => Payment::TYPE_CASH
       }
 
-    response.code.should == "404"
+    response.code.should == "406"
   end
 
   it "declines duplicating session id" do

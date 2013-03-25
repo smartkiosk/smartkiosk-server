@@ -20,7 +20,7 @@ class PaymentsController < ApplicationController
       render :json => {
         :id               => payment.id,
         :state            => payment.state,
-        :requires_print   => provider.requires_print,
+        :requires_print   => payment.provider.requires_print,
         :limits           => Limit.for(payment, false).as_json(
                                 :only => [:min, :max], :methods => [:weight]
                              ),
