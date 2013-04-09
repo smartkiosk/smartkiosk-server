@@ -24,6 +24,9 @@ ru:
               state: Состояние
               payment_type: Тип
               provider_id: Получатели
+              agent_id: Агенты
+              terminal_id: Терминалы
+              gateway_id: Шлюзы
         terminals:
           calculations:
             quantity: Количество

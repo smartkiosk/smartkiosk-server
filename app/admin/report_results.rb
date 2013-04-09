@@ -17,7 +17,7 @@ ActiveAdmin.register ReportResult do
 
         result.each do |r|
           row = []
-          fields.each{|f| row << r[f]}
+          fields.each{|f| row << report_result.human_field_value(f, r[f])}
           ws.add_row row
         end
       end
@@ -56,7 +56,7 @@ ActiveAdmin.register ReportResult do
         result.each do |row|
           tr do
             fields.each do |field|
-              td row[field]
+              td report_result.human_field_value(field, row[field])
             end
           end
         end

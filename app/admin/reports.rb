@@ -120,7 +120,7 @@ ActiveAdmin.register Report do
             result.data.each do |row|
               tr do
                 fields.each do |field|
-                  td row[field]
+                  td result.human_field_value(field, row[field])
                 end
               end
             end

@@ -1,6 +1,8 @@
 class Gateway < ActiveRecord::Base
+  include Redis::Objects::RMap
 
   has_paper_trail
+  has_rmap({:id => lambda{|x| x.to_s}}, :title)
 
   #
   # RELATIONS

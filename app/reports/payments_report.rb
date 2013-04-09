@@ -170,6 +170,12 @@ class PaymentsReport < ReportBuilder::Base
     }
   end
 
+  def field_localizations
+    {
+      'payment.state' => proc{|x| I18n.t("smartkiosk.payment_states.#{x}")}
+    }
+  end
+
   def calculations
     {
       :quantity   => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "quantity"') },
@@ -183,7 +189,10 @@ class PaymentsReport < ReportBuilder::Base
     {
       'payment.state' => proc { I18n.t('smartkiosk.payment_states') },
       'payment.payment_type' => proc { I18n.t('smartkiosk.payment_types') },
-      'payment.provider_id' => proc { Provider.rmap.invert }
+      'payment.provider_id' => proc { Provider.rmap.invert },
+      'payment.agent_id' => proc { Agent.rmap.invert },
+      'payment.terminal_id' => proc { Terminal.rmap.invert },
+      'payment.gateway_id' => proc { Gateway.rmap.invert }
     }
   end
 end

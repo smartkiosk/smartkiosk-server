@@ -17,4 +17,12 @@ class ReportResult < ActiveRecord::Base
       report_template.human_calculation_name field
     end
   end
+
+  def human_field_value(field, value)
+    if field.starts_with?('_')
+      report_template.report_builder.human_field_value(report.decode_field(field), value)
+    else
+      value
+    end
+  end
 end

@@ -95,6 +95,15 @@ module ReportBuilder
       title.join(': ')
     end
 
+    def human_field_value(field, value)
+      return value unless respond_to?(:field_localizations)
+
+      @localizations ||= field_localizations
+      return value unless @localizations[field]
+
+      @localizations[field].call(value)
+    end
+
     def human_calculation_name(field)
       I18n.t "smartkiosk.reports.data.#{keyword}.calculations.#{field}"
     end
