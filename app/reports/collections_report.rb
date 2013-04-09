@@ -138,9 +138,9 @@ class CollectionsReport < ReportBuilder::Base
 
   def calculations
     {
-      :cash_sum              => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(collections.cash_sum) AS "calculations.cash_sum"') },
-      :approved_payments_sum => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(collections.approved_payments_sum) AS "calculations.approved_payments_sum"') },
-      :payments_sum          => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(collections.payments_sum) AS "calculations.payments_sum"') }
+      :cash_sum              => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(collections.cash_sum) AS "cash_sum"') },
+      :approved_payments_sum => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(collections.approved_payments_sum) AS "approved_payments_sum"') },
+      :payments_sum          => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(collections.payments_sum) AS "payments_sum"') }
     }.with_indifferent_access
   end
 

@@ -111,7 +111,7 @@ class TerminalsReport < ReportBuilder::Base
 
   def calculations
     {
-      :quantity => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "calculations.quantity"') }
+      :quantity => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "quantity"') }
     }.with_indifferent_access
   end
 

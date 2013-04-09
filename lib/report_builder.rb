@@ -46,7 +46,7 @@ module ReportBuilder
         'postgresql' => 'MIN'
       }[ActiveRecord::Base.configurations[Rails.env]['adapter']]
 
-      fields = template.fields.select{|x| !x.blank?}.each do |field|
+      fields = template.fields.each_with_index do |field, i|
         projection = arelize(field)
 
         if !aggregate.blank? && !template.groupping.blank?
@@ -55,7 +55,7 @@ module ReportBuilder
           )
         end
 
-        projection = projection.as("\"#{field}\"")
+        projection = projection.as("\"_#{i}\"")
         query = query.project(projection)
       end
 

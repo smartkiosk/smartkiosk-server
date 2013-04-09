@@ -23,6 +23,10 @@ class ReportTemplate < ActiveRecord::Base
   serialize :calculations
   serialize :conditions
 
+  before_save do
+    fields.select!{|x| !x.blank?}
+  end
+
   #
   # METHODS
   #

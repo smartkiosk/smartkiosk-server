@@ -13,7 +13,7 @@ ActiveAdmin.register ReportResult do
     package = Axlsx::Package.new do |p|
       p.workbook.add_worksheet(:name => "Report") do |ws|
         bold = ws.styles.add_style :b => true, :alignment=> {:horizontal => :center}
-        ws.add_row fields.map{|x| view_context.localize_report_fields(x)[0]}, :style => bold
+        ws.add_row fields.map{|x| report_result.human_column_name(x)}, :style => bold
 
         result.each do |r|
           row = []
@@ -50,7 +50,7 @@ ActiveAdmin.register ReportResult do
       table do
         tr do
           fields.each do |field|
-            th localize_report_fields(field)[0]
+            th report_result.human_column_name(field)
           end
         end
         result.each do |row|

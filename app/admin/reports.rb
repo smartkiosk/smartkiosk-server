@@ -109,24 +109,15 @@ ActiveAdmin.register Report do
       result = report.report_results.first
 
       panel "#{I18n.t 'smartkiosk.admin.panels.reports.last_result'} (#{result.rows})" do
-        result = result.data
-        unless result.blank?
-          fields = result.first.keys
+        unless result.data.blank?
+          fields = result.data.first.keys
           table do
             tr do
               fields.each do |field|
-                data = field.split('.')
-
-                if data.first == 'calculations'
-                  field = I18n.t "smartkiosk.reports.data.#{report.report_template.kind}.calculations.#{data.last}"
-                else
-                  field = localize_report_fields(field)[0]
-                end
-
-                th field
+                th result.human_column_name(field)
               end
             end
-            result.each do |row|
+            result.data.each do |row|
               tr do
                 fields.each do |field|
                   td row[field]

@@ -69,7 +69,7 @@ class AgentsReport < ReportBuilder::Base
 
   def calculations
     {
-      :quantity => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "calculations.quantity"').where(tables[:agent][:agent_id].not_eq nil) }
+      :quantity => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "quantity"').where(tables[:agent][:agent_id].not_eq nil) }
     }.with_indifferent_access
   end
 

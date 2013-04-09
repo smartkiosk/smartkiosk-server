@@ -172,10 +172,10 @@ class PaymentsReport < ReportBuilder::Base
 
   def calculations
     {
-      :quantity   => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "calculations.quantity"') },
-      :enrolled   => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(enrolled_amount) AS "calculations.enrolled"') },
-      :paid       => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(paid_amount) AS "calculations.paid"') },
-      :commission => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(commission_amount) AS "calculations.commission"') }
+      :quantity   => lambda{|q, t| t.groupping.blank? ? q : q.project('COUNT(*) AS "quantity"') },
+      :enrolled   => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(enrolled_amount) AS "enrolled"') },
+      :paid       => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(paid_amount) AS "paid"') },
+      :commission => lambda{|q, t| t.groupping.blank? ? q : q.project('SUM(commission_amount) AS "commission"') }
     }.with_indifferent_access
   end
 

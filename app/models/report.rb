@@ -68,4 +68,9 @@ class Report < ActiveRecord::Base
       return :error
     end
   end
+
+  def decode_field(field)
+    raise "Incorrect field '#{field}' given" unless field.starts_with?('_')
+    report_template.fields[field[1..-1].to_i]
+  end
 end
