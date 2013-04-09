@@ -18,7 +18,6 @@ class ReportTemplate < ActiveRecord::Base
   #
   # MODIFCIATIONS
   #
-  serialize :groupping
   serialize :fields
   serialize :calculations
   serialize :conditions
@@ -56,5 +55,37 @@ class ReportTemplate < ActiveRecord::Base
     else
       self.conditions[name]
     end
+  end
+
+  def human_field_name(field)
+    report_builder.human_field_name field
+  end
+
+  def human_calculation_name(field)
+    report_builder.human_calculation_name field
+  end
+
+  def human_condition_name(field)
+    report_builder.human_condition_name field
+  end
+
+  def human_groupping_name
+    return nil if groupping.blank?
+    human_field_name groupping
+  end
+
+  def human_sorting_name
+    return nil if sorting.blank?
+    human_field_name sorting
+  end
+
+  def human_condition_values(condition)
+    return nil if conditions[condition].blank?
+
+    values = conditions[condition].map do |v|
+      report_builder.human_condition_values(condition)[v]
+    end
+
+    values.join(', ')
   end
 end

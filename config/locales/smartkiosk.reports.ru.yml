@@ -7,8 +7,7 @@ ru:
             quantity: Количество
           conditions:
             agent:
-              agent_id:
-                title: Агент
+              agent_id: Агент
         collections:
           calculations:
             approved_payments_sum: Сумма проведенных платежей
@@ -22,19 +21,15 @@ ru:
             quantity: Количество
           conditions:
             payment:
-              state:
-                title: Состояние
-              payment_type:
-                title: Тип
-              provider_id:
-                title: Получатели
+              state: Состояние
+              payment_type: Тип
+              provider_id: Получатели
         terminals:
           calculations:
             quantity: Количество
           conditions:
             terminal:
-              condition:
-                title: Состояние
+              condition: Состояние
       kinds:
         # preprocessing: Предпроцессинг
         agents: Агенты

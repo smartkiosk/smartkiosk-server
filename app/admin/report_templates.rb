@@ -63,17 +63,17 @@ ActiveAdmin.register ReportTemplate do
         status_boolean(self, x.open?)
       end
       row :groupping do
-        localize_report_fields(report_template.groupping)[0] unless report_template.groupping.blank?
+        report_template.human_groupping_name
       end
       row :fields do
         unless report_template.fields.blank?
           report_template.fields.select{|x| !x.blank?}.map do |x|
-            localize_report_fields(x)[0]
+            report_template.human_field_name x
           end.join ', '
         end
       end
       row :sorting do
-        localize_report_fields(report_template.sorting)[0] unless report_template.sorting.blank?
+        report_template.human_sorting_name
       end
       row :sort_desc do |x|
         status_boolean(self, x.sort_desc?)
@@ -90,14 +90,10 @@ ActiveAdmin.register ReportTemplate do
           report_template.report_builder.conditions.each do |condition, values|
             tr do
               th do
-                localize_report_condition_title(report_template.report_builder, condition)
+                report_template.human_condition_name condition
               end
               td do
-                unless report_template.conditions[condition].blank?
-                  localize_report_condition_value(report_template.report_builder, condition, report_template.conditions[condition])
-                else
-                  span(I18n.t('active_admin.empty'), :class => 'empty')
-                end
+                report_template.human_condition_values(condition) || span(I18n.t('active_admin.empty'), :class => 'empty')
               end
             end
           end
@@ -140,7 +136,7 @@ ActiveAdmin.register ReportTemplate do
     if f.object.report_builder
       f.inputs I18n.t('smartkiosk.admin.panels.report_templates.form.select') do
         f.input :groupping, :as => :select,
-          :collection => localize_report_fields(f.object.report_builder.groupping),
+          :collection => f.object.report_builder.human_groupping_names,
           :input_html => { 
             :class => 'chosen',
             :onchange => "reportChangeGroupping($(this).val())"
@@ -148,7 +144,7 @@ ActiveAdmin.register ReportTemplate do
 
         ([''] + f.object.report_builder.groupping).each do |g|
           f.input :fields, :as => :selectable_check_boxes,
-            :collection => localize_report_fields(f.object.report_builder.fields[g]), 
+            :collection => f.object.report_builder.human_groupping_field_names(g), 
             :wrapper_html => {
               :class => "groupping groupping-#{g.gsub '.', '-'}",
               :style => ('display: none' unless f.object.groupping == g)
@@ -156,11 +152,11 @@ ActiveAdmin.register ReportTemplate do
         end
 
         f.input :calculations, :as => :selectable_check_boxes,
-          :collection => localize_report_calculations(f.object.report_builder)
+          :collection => f.object.report_builder.human_calculation_names
 
         ([''] + f.object.report_builder.groupping).each do |g|
           f.input :sorting, :as => :select,
-            :collection => localize_report_fields(f.object.report_builder.fields[g]),
+            :collection => f.object.report_builder.human_groupping_field_names(g),
             :input_html => {
               :id => "report_template_sorting_#{g.gsub '.', '-'}",
               :style => 'min-width: 50%',
@@ -181,8 +177,8 @@ ActiveAdmin.register ReportTemplate do
       f.inputs I18n.t('smartkiosk.admin.panels.report_templates.form.conditions') do
         f.object.report_builder.conditions.each do |condition, values|
           f.input "condition_#{condition}", :as => :select, 
-            :label => localize_report_condition_title(f.object.report_builder, condition),
-            :collection => localize_report_conditions(f.object.report_builder, condition),
+            :label => f.object.report_builder.human_condition_name(condition),
+            :collection => f.object.report_builder.human_condition_values(condition).invert,
             :input_html => { 
               :class => 'chosen', 
               :multiple => true,

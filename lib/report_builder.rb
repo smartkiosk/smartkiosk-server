@@ -84,5 +84,39 @@ module ReportBuilder
 
       query.to_sql
     end
+
+    def human_field_name(field)
+      model, name = field.split '.'
+      title       = []
+
+      title << I18n.t("activerecord.models.#{model}", :count => 1)
+      title << I18n.t("activerecord.attributes.#{model}.#{name}")
+
+      title.join(': ')
+    end
+
+    def human_calculation_name(field)
+      I18n.t "smartkiosk.reports.data.#{keyword}.calculations.#{field}"
+    end
+
+    def human_condition_name(field)
+      I18n.t "smartkiosk.reports.data.#{keyword}.conditions.#{field}"
+    end
+
+    def human_groupping_names
+      groupping.map{|x| [human_field_name(x), x]}
+    end
+
+    def human_groupping_field_names(groupping)
+      fields[groupping].map{|x| [human_field_name(x), x]}
+    end
+
+    def human_calculation_names
+      calculations.keys.map{|x| [human_calculation_name(x), x]}
+    end
+
+    def human_condition_values(condition)
+      conditions[condition].call().with_indifferent_access
+    end
   end
 end
