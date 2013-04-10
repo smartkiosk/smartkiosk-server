@@ -36,18 +36,20 @@ class PaymentsController < ApplicationController
   end
 
   def offline
+    params[:payment].merge! :offline => true
+
     payment = Payment.build!(@terminal, Provider.find_by_keyword(params[:provider]), params[:payment])
     payment.check!
     payment.enqueue! if payment.checked?
 
-    render :json => payment.as_json
+    render_payment payment
   end
   
   def pay
     payment = @terminal.payments.find(params[:id])
     payment.pay!(params[:payment])
 
-    render :json => payment.as_json
+    render_payment payment
   end
 
   def enqueue
@@ -60,6 +62,23 @@ class PaymentsController < ApplicationController
   def show
     payment = @terminal.payments.find(params[:id])
 
-    render :json => payment.as_json
+    render_payment payment
   end
+
+private
+
+  def render_payment(payment)
+    render :json => payment.as_json(:only => [
+      :id,
+      :state,
+      :gateway_payment_id,
+      :acquirer_error,
+      :gateway_error,
+      :commission_amount,
+      :enrolled_amount,
+      :rebate_amount,
+      :created_at
+    ])
+  end
+
 end
