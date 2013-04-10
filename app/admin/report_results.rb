@@ -8,7 +8,7 @@ ActiveAdmin.register ReportResult do
 
     report   = report_result.report
     result   = report_result.data
-    fields   = result.first.keys
+    fields   = result.first.try(:keys) || []
 
     package = Axlsx::Package.new do |p|
       p.workbook.add_worksheet(:name => "Report") do |ws|
