@@ -43,7 +43,8 @@ module ReportBuilder
       query = context(report.start, report.finish)
 
       aggregate = {
-        'postgresql' => 'MIN'
+        'postgresql' => 'MIN',
+        'oracle_enhanced' => 'MIN'
       }[ActiveRecord::Base.configurations[Rails.env]['adapter']]
 
       fields = template.fields.each_with_index do |field, i|
