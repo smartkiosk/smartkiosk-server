@@ -179,6 +179,7 @@ ActiveAdmin.register Provider do
             :style => ('display:none' unless fpf.object.kind == 'string')
           },
           :hint => I18n.t('smartkiosk.admin.messages.provider_fields.mask_hint')
+        fpf.input :groupping
         fpf.input :regexp
         fpf.input :values, :as => :string,
           :wrapper_html => {

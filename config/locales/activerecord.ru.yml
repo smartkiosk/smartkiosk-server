@@ -499,6 +499,7 @@ ru:
         title: Название
         kind: Тип
         mask: Маска
+        groupping: Группировка
         regexp: Проверка
         priority: Приоритет
         values: Значения

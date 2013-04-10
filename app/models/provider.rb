@@ -52,6 +52,6 @@ class Provider < ActiveRecord::Base
   # METHODS
   #
   def fields_dump
-    provider_fields.as_json(:only => [:keyword, :title, :kind, :mask, :values, :priority])
+    provider_fields.as_json(:only => [:keyword, :title, :kind, :mask, :values, :priority, :regexp, :groupping])
   end
 end
