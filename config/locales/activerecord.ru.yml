@@ -562,6 +562,7 @@ ru:
         foreign_id: Внешний ID
         terminal_orders: Команды
         address: Адрес
+        address_details: Детали расположения
         agent: Агент
         agent_id: Агент
         agent_title: Название агента

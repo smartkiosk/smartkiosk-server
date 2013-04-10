@@ -73,17 +73,28 @@ class Payment < ActiveRecord::Base
     )
   end
 
+  def assign_payment_attributes(attributes)
+    [ :paid_amount, :receipt_number, :card_track1, :card_track2, :meta ].each do |key|
+      if attributes.include? key
+        write_attribute key, attributes[key]
+      end
+    end
+  end
+
   def enqueue!(attributes={})
     plog :info, :model, "Sent to queue" do
-      [ :paid_amount, :receipt_number, :card_track1, :card_track2, :meta ].each do |key|
-        if attributes.include? key
-          write_attribute key, attributes[key]
-        end
-      end
-
+      assign_payment_attributes attributes
       enqueue
       save!
       PayWorker.perform_async(id)
+    end
+  end
+
+  def pay!(attributes={})
+    plog :info, :model, "Paid" do
+      assign_payment_attributes attributes
+      pay
+      save!
     end
   end
 

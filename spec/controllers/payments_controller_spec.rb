@@ -95,6 +95,40 @@ describe PaymentsController do
     response.code.should == "406"
   end
 
+  it "enqueues" do
+    post :create,
+      :terminal => 'test',
+      :provider => 'test',
+      :payment  => {
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH
+      }
+
+    result = ActiveSupport::JSON.decode(response.body)
+    result.should == {
+      "id"               => 1,
+      "state"            => "checked",
+      "requires_print"   => true,
+      "limits"           => [{"max"=>"9999.0", "min"=>"0.0", "weight"=>1}],
+      "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "payment_type"=>nil, "percent_fee"=>"0.0", "static_fee"=>"0.0", "weight"=>1}],
+      "receipt_template" => "{{ payment_enrolled_amount }}"
+    }
+
+    post :enqueue,
+      :terminal => 'test',
+      :id => 1,
+      :payment => {
+        :paid_amount => 100
+      }
+    response.status.should == 200
+
+    PayWorker.new.perform 1
+    payment = Payment.find 1
+    payment.state.should == "paid"
+    payment.externally_paid.should == true
+  end
+
   it "pays" do
     post :create,
       :terminal => 'test',
@@ -123,10 +157,26 @@ describe PaymentsController do
       }
     response.status.should == 200
 
-    PayWorker.new.perform 1
     payment = Payment.find 1
     payment.state.should == "paid"
     payment.externally_paid.should == true
+  end
+
+  it "pays offline" do
+    post :offline,
+      :terminal => 'test',
+      :provider => 'test',
+      :payment  => {
+        :session_id   => 31337,
+        :account      => '9261111111',
+        :payment_type => Payment::TYPE_CASH,
+        :paid_amount  => 100
+      }
+
+    response.status.should == 200
+    result = ActiveSupport::JSON.decode(response.body)
+    result['id'].should == 1
+    result['state'].should == 'queue'
   end
 
   xit "pays with card" do
@@ -148,7 +198,7 @@ describe PaymentsController do
       "commissions"      => [{"max"=>"9999.0", "min"=>"0.0", "payment_type"=>nil, "percent_fee"=>"0.0", "static_fee"=>"0.0", "weight"=>1}],
       "receipt_template" => "{{ payment_enrolled_amount }}"
     }
-    post :pay,
+    post :enqueue,
       :terminal => 'test',
       :id => 1,
       :payment => {

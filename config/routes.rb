@@ -46,9 +46,11 @@ Rails.application.class.routes.draw do
   resources :payments do
     collection do
       get :limits
+      post :offline
     end
     member do
       post :pay
+      post :enqueue
     end
   end
 

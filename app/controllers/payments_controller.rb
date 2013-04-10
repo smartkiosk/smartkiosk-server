@@ -34,11 +34,32 @@ class PaymentsController < ApplicationController
       render :text => nil, :status => 406
     end
   end
+
+  def offline
+    payment = Payment.build!(@terminal, Provider.find_by_keyword(params[:provider]), params[:payment])
+    payment.check!
+    payment.enqueue! if payment.checked?
+
+    render :json => payment.as_json
+  end
   
   def pay
+    payment = @terminal.payments.find(params[:id])
+    payment.pay!(params[:payment])
+
+    render :json => payment.as_json
+  end
+
+  def enqueue
     payment = @terminal.payments.find(params[:id])
     payment.enqueue!(params[:payment]) unless payment.queue?
 
     render :text => nil, :status => 200
+  end
+
+  def show
+    payment = @terminal.payments.find(params[:id])
+
+    render :json => payment.as_json
   end
 end

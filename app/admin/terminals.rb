@@ -305,8 +305,9 @@ ActiveAdmin.register Terminal do
         row :rent_finish_date
         row :collection_zone
         row :check_phone_number
-        row :address do |t|
-          div t.address
+        row :address
+        row :address_details do |t|
+          div t.address_details
           unless t.address.blank?
             div(:class => 'terminal_map', :id => 'map')
             script(:type => 'text/javascript') do
@@ -420,6 +421,7 @@ ActiveAdmin.register Terminal do
       f.input :collection_zone
       f.input :check_phone_number
       f.input :address
+      f.input :address_details
     end
     f.actions
   end

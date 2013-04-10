@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410085714) do
+ActiveRecord::Schema.define(:version => 20130410142059) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -463,6 +463,7 @@ ActiveRecord::Schema.define(:version => 20130410085714) do
     t.integer  "card_reader_error"
     t.integer  "watchdog_error"
     t.integer  "last_session_started_at", :default => 0,         :null => false
+    t.text     "address_details"
   end
 
   add_index "terminals", ["agent_id"], :name => "index_terminals_on_agent_id"
