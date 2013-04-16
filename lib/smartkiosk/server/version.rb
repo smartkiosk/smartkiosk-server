@@ -1,5 +1,5 @@
 module Smartkiosk
   module Server
-    VERSION = '0.12.1'
+    VERSION = '0.13'
   end
 end

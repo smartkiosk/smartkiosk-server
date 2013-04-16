@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'matrioshka'
+gem 'joosy', :git => 'git://github.com/joosy/joosy.git'
 
 gem 'trinidad', :require => nil, :platform => :jruby
 gem 'thin', :require => nil, :platform => :ruby
@@ -61,6 +62,7 @@ gem 'database_cleaner'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end

@@ -1,7 +1,7 @@
 class Role < ActiveRecord::Base
   def self.entries
     @entries ||= %w(
-      users versions reports report_templates 
+      monitoring users versions reports report_templates 
       payments providers commissions limits
       provider_receipt_templates terminals
       agents collections terminal_profiles system_receipt_templates
@@ -11,7 +11,8 @@ class Role < ActiveRecord::Base
 
   def self.actions
     @actions ||= {
-      'terminals' => %w(reload reboot disable enable upgrade)
+      'terminals' => %w(read create edit destroy reload reboot disable enable upgrade),
+      'monitoring' => %w(keyword)
     }
   end
 
@@ -22,20 +23,28 @@ class Role < ActiveRecord::Base
     entries.each do |x|
       @result[x] = {}
 
-      %w(read create edit destroy).each do |a|
-        @result[x][a] = I18n.t("smartkiosk.role_priveleges.basic.#{a}")
+      if actions[x].blank?
+        %w(read create edit destroy).each do |a|
+          @result[x][a] = I18n.t("smartkiosk.role_priveleges.basic.#{a}")
+        end
+      else
+        actions[x].each do |a|
+          @result[x][a] = I18n.t("smartkiosk.role_priveleges.#{x}.#{a}")
+        end
       end
-
-      actions[x].each do |a|
-        @result[x][a] = I18n.t("smartkiosk.role_priveleges.#{x}.#{a}")
-      end unless actions[x].blank?
     end
 
     @result
   end
 
   def title
-    I18n.t "activerecord.models.#{keyword.singularize}.other"
+    roles = I18n.t("smartkiosk.roles").with_indifferent_access
+
+    if roles.include?(keyword)
+      roles[keyword]
+    else
+      I18n.t "activerecord.models.#{keyword.singularize}.other"
+    end
   end
 
   def actions

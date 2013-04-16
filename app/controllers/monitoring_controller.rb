@@ -1,10 +1,12 @@
-class WelcomeController < ApplicationController
+class MonitoringController < ApplicationController
+  helper 'joosy/sprockets'
+
   before_filter do
     redirect_to '/admin/' if !current_user
   end
 
   def index
-    render :text => 'welcome!'
+    render nothing: true, layout: 'monitoring'
   end
 
   def terminals

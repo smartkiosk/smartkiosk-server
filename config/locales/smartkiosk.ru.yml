@@ -84,6 +84,8 @@ ru:
         gems_ready: Готова к деплою
         gems_not_ready: Подготавливается
         gems_not_ready_error: Сборка еще подготавливается
+    roles:
+      monitoring: Мониторинг
     role_priveleges:
       basic:
         create: Создание
@@ -96,6 +98,8 @@ ru:
         enable: Разблокировка
         disable: Блокировка
         upgrade: Обновление
+      monitoring:
+        keyword: Поле "Ключ"
     debug_levels:
       '0': 'DEBUG'
       '1': 'INFO'

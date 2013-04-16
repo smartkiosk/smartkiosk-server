@@ -17,10 +17,10 @@
 @import "chosen.jquery";
 @import "qtip.jquery";
 
-@import "provider_receipt_templates";
-@import "terminals";
-@import "provider_groups";
-@import "fonts";
+@import "active_admin/provider_receipt_templates";
+@import "active_admin/terminals";
+@import "active_admin/provider_groups";
+@import "active_admin/fonts";
 
 body.active_admin {
   font-family: 'PT_Sans-Web', Arial, sans-serif;
