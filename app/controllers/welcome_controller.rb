@@ -4,10 +4,5 @@ class WelcomeController < ApplicationController
   end
 
   def index
-    render :text => 'welcome!'
-  end
-
-  def terminals
-    render :json => Terminal.all
   end
 end

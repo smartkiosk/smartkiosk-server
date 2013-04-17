@@ -4,19 +4,15 @@ Joosy.namespace 'Welcome', ->
     @layout ApplicationLayout
     @view   'index'
 
-    @afterLoad ->
-      @startHeartbeat()
-      @content.css
-        'padding-top': "#{$(window).height() / 2 - 160}px"
-
     elements:
-      content: '#content'
-      joosy:   '.joosy'
+      'headers': '#listing th'
 
-    events:
-      'mouseover $joosy': -> clearInterval @heartbeat
-      'mouseout $joosy': 'startHeartbeat'
+    @fetch (done) ->
+      @data.agents    = window.terminals.map((x) -> x['agent_title']).unique()
+      @data.terminals = Object.extended()
 
-    startHeartbeat: ->
-      @heartbeat = @setInterval 1500, =>
-        @joosy.animate({opacity: 0.8}, 300).animate({opacity: 1}, 300)
+      window.terminals.each (t) => @data.terminals[t.id] = t
+      done()
+
+    @afterLoad ->
+      $('select').chosen()

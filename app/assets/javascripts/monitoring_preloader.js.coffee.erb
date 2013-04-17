@@ -7,6 +7,8 @@ bootstrap = ->
     debug: false
 
 window.onload = ->
+  I18n.locale = window.joosy.locale
+
   Preloader.load window.joosy.libraries,
     complete: bootstrap
     start: -> document.getElementById('preloader').style.display = 'block'

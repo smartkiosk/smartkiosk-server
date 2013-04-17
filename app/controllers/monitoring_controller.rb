@@ -6,10 +6,6 @@ class MonitoringController < ApplicationController
   end
 
   def index
-    render nothing: true, layout: 'monitoring'
-  end
-
-  def terminals
-    render :json => Terminal.all
+    render nothing: true, layout: 'application'
   end
 end

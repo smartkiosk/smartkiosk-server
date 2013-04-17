@@ -4,8 +4,6 @@ Rails.application.class.routes.draw do
   ActiveAdmin.routes(self)
 
   get '/'  => 'monitoring#index'
-  post '/' => 'monitoring#terminals'
-  get '/t' => 'monitoring#terminals'
 
   devise_for :users, ActiveAdmin::Devise.config
 

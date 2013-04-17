@@ -1,1 +1,70 @@
-123
+.container-fluid
+  .navbar
+    .navbar-inner
+      .brand= Date.create().format(undefined, 'ru')
+      %ul.nav.pull-right
+        %li
+          %a{href: '/admin/terminals'} Управление терминалами
+
+  .well.well-small
+    .row
+      .span2
+        %input.span2{type: 'text', placeholder: 'Ключ'}
+      .span4
+        %select.span4{:'data-placeholder' => 'Ошибка', multiple: true, allow_single_deselect: true}
+      .span2
+        %select.span2{:'data-placeholder' => 'Агент', allow_single_deselect: true}
+      .span2
+        %select.span2{:'data-placeholder' => 'Профиль', allow_single_deselect: true}
+      .span2
+        %input.span2{type: 'text', placeholder: 'Адрес'}
+
+  #listing
+    %table.table.table-hover.table-bordered.table-condensed
+      %tr
+        %th
+          .resizer
+          %i
+          %span Ключ
+        %th
+          .resizer
+          %i
+          %span Адрес
+        %th
+          .resizer
+          %span Агент
+        %th
+          .resizer
+          %i
+          %span Принтер
+        %th
+          .resizer
+          %i
+          %span Купюроприемник
+        %th
+          .resizer
+          %i
+          %span Модем
+        %th
+          .resizer
+          %i
+          %span Картоприемник
+        %th
+          .resizer
+          %i
+          %span Сторожевик
+        %th
+          .resizer
+          %i
+          %span Инкассация
+        %th
+          .resizer
+          %i
+          %span Связь
+        %th
+          .resizer
+          %i
+          %span Проблемы
+      - @terminals.each (id, t) =>
+        %tr{id: "terminal-#{id}"}
+          != @render '_row', terminal: t

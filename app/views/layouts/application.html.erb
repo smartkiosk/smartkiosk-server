@@ -1,1 +1,29 @@
-<%= yield %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>monitoring</title>
+
+    <script type="text/javascript">
+      window.joosy = {
+        libraries: <%= extract_sources_and_sizes_from_include_tag('monitoring') %>,
+        environment: '<%= Rails.env.to_s %>',
+        locale: '<%= I18n.locale %>'
+      };
+
+      window.terminals = <%= raw Terminal.scoped.to_json(methods: ['agent_title']) %>;
+    </script>
+
+    <%= stylesheet_link_tag 'monitoring' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <%= javascript_include_tag 'monitoring_preloader' %>
+    <div id="application">
+      <div id="preloader">
+        Loading application...
+        <span id="percents">0%</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+%td
+  = @terminal['keyword']
+%td
+  = @terminal['address']
+%td
+  = @terminal['agent_title']
+%td
+  != @hardwareError 'printer', @terminal
+%td
+  != @hardwareError 'cash_acceptor', @terminal
+%td
+  != @hardwareError 'modem', @terminal
+%td
+  != @hardwareError 'card_reader', @terminal
+%td
+  != @hardwareError 'watchdog', @terminal
+%td
+  %small
+    = Date.create(@terminal['collected_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
+%td
+  %small
+    = Date.create(@terminal['notified_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
+%td
+  %small
+    = Date.create(@terminal['issues_started_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')

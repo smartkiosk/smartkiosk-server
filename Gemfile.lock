@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/fnando/i18n-js.git
+  revision: eeec14066b50f72876aa789c9b1f226172452798
+  specs:
+    i18n-js (2.1.2)
+      i18n
+
+GIT
   remote: git://github.com/gregbell/active_admin.git
   revision: 4e291e385bdcaa9fee2c37d5a344975101d6f15f
   ref: 4e291e385bdcaa9fee2c37d5a344975101d6f15f
@@ -416,6 +423,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork!
   haml
+  i18n-js!
   i18n_yaml_sorter
   iso8583-mkb (= 0.0.3)
   joosy!

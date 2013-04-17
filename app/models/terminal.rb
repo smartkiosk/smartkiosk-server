@@ -25,6 +25,8 @@ class Terminal < ActiveRecord::Base
   scope :warning, where(:condition => 'warning')
   scope :error,   where(:condition => 'error')
 
+  delegate :title, :to => :agent, :prefix => true
+
   #
   # VALIDATIONS
   #

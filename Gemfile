@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'matrioshka'
 gem 'joosy', :git => 'git://github.com/joosy/joosy.git'
+gem 'i18n-js', :git => 'git://github.com/fnando/i18n-js.git'
 
 gem 'trinidad', :require => nil, :platform => :jruby
 gem 'thin', :require => nil, :platform => :ruby

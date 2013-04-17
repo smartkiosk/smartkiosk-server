@@ -142,7 +142,7 @@ Copyright (c) 2011 by Harvest
       } else if (this.is_multiple) {
         this.default_text = this.options.placeholder_text_multiple || this.options.placeholder_text || "Select Some Options";
       } else {
-        this.default_text = this.options.placeholder_text_single || this.options.placeholder_text || "Выберите";
+        this.default_text = this.options.placeholder_text_single || this.options.placeholder_text || "Select";
       }
       return this.results_none_found = this.form_field.getAttribute("data-no_results_text") || this.options.no_results_text || "No results match";
     };
