@@ -1,15 +1,16 @@
-<%= require_joosy_preloader_for 'monitoring', preloader: 'caching', force: false %>
+<%= require_joosy_preloader_for 'monitoring', preloader: 'inline', force: false %>
 
 bootstrap = ->
   $('#preloader').remove()
+
+  $.cookie.json = true
+  I18n.locale = window.joosy.locale
+
   Joosy.Application.initialize 'monitoring','#application',
     environment: window.joosy.environment
     debug: false
 
 window.onload = ->
-  $.cookie.json = true
-  I18n.locale = window.joosy.locale
-
   Preloader.load window.joosy.libraries,
     complete: bootstrap
     start: -> document.getElementById('preloader').style.display = 'block'

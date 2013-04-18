@@ -1,6 +1,7 @@
 #= require hamlcoffee
-#= require joosy
+#= require jquery
 #= require jquery-ui
+#= require joosy
 #= require bootstrap
 #= require chosen.jquery 
 #= require cookie.jquery
