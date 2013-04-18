@@ -1,5 +1,8 @@
 ru:
   smartkiosk:
+    monitoring:
+      manage: Управление терминалами
+      filter: Фильтровать
     welcome:
       header: Вы авторизованы как %{user}
       roles: Доступные роли

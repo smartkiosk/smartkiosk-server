@@ -7,6 +7,7 @@ bootstrap = ->
     debug: false
 
 window.onload = ->
+  $.cookie.json = true
   I18n.locale = window.joosy.locale
 
   Preloader.load window.joosy.libraries,

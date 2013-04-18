@@ -583,6 +583,7 @@ ru:
         keyword: Ключ
         title: Название
         manager: Менеджер
+        error: Ошибка
         modem_error: Ошибка модема
         notified_at: Время связи
         printer_error: Ошибка принтера

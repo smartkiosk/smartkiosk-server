@@ -1,70 +1,30 @@
 .container-fluid
   .navbar
     .navbar-inner
-      .brand= Date.create().format(undefined, 'ru')
+      .brand= Date.create().format(undefined, I18n.locale)
       %ul.nav.pull-right
         %li
-          %a{href: '/admin/terminals'} Управление терминалами
+          %a{href: '/admin/terminals'}= I18n.t 'smartkiosk.monitoring.manage'
 
   .well.well-small
     .row
       .span2
-        %input.span2{type: 'text', placeholder: 'Ключ'}
+        %input#keyword.span2{type: 'text', placeholder: I18n.t('activerecord.attributes.terminal.keyword')}
       .span4
-        %select.span4{:'data-placeholder' => 'Ошибка', multiple: true, allow_single_deselect: true}
+        %select#error.span4{:'data-placeholder' => I18n.t('activerecord.attributes.terminal.error'), multiple: true}
       .span2
-        %select.span2{:'data-placeholder' => 'Агент', allow_single_deselect: true}
+        %select#agent.span2{:'data-placeholder' => I18n.t('activerecord.attributes.terminal.agent')}
+          %option
+          - @agents.each (a) ->
+            %option{value: a}= a
       .span2
-        %select.span2{:'data-placeholder' => 'Профиль', allow_single_deselect: true}
+        %select#terminal_profile.span2{:'data-placeholder' => I18n.t('activerecord.attributes.terminal.terminal_profile')}
+          %option
+          - @profiles.each (p) ->
+            %option{value: p}= p
       .span2
-        %input.span2{type: 'text', placeholder: 'Адрес'}
+        %input#address.span2{type: 'text', placeholder: I18n.t('activerecord.attributes.terminal.address')}
+      .span2
+        %a#filter.btn.btn-info= I18n.t('smartkiosk.monitoring.filter')
 
   #listing
-    %table.table.table-hover.table-bordered.table-condensed
-      %tr
-        %th
-          .resizer
-          %i
-          %span Ключ
-        %th
-          .resizer
-          %i
-          %span Адрес
-        %th
-          .resizer
-          %span Агент
-        %th
-          .resizer
-          %i
-          %span Принтер
-        %th
-          .resizer
-          %i
-          %span Купюроприемник
-        %th
-          .resizer
-          %i
-          %span Модем
-        %th
-          .resizer
-          %i
-          %span Картоприемник
-        %th
-          .resizer
-          %i
-          %span Сторожевик
-        %th
-          .resizer
-          %i
-          %span Инкассация
-        %th
-          .resizer
-          %i
-          %span Связь
-        %th
-          .resizer
-          %i
-          %span Проблемы
-      - @terminals.each (id, t) =>
-        %tr{id: "terminal-#{id}"}
-          != @render '_row', terminal: t

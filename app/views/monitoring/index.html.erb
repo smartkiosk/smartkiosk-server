@@ -10,7 +10,7 @@
         locale: '<%= I18n.locale %>'
       };
 
-      window.terminals = <%= raw Terminal.scoped.to_json(methods: ['agent_title']) %>;
+      window.terminals = <%= raw @terminals %>;
     </script>
 
     <%= stylesheet_link_tag 'monitoring' %>

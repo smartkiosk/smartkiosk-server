@@ -15,6 +15,7 @@ body {
 .well {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  margin-bottom: 15px;
 }
 
 select, input {
@@ -22,36 +23,7 @@ select, input {
 }
 
 #listing {
-  border-right: 1px dashed gray;
   width: 100%;
-  overflow-x: scroll;
-
-  th {
-    cursor: pointer;
-    background-color: #EEE;
-    white-space: nowrap;
-    padding-right: 0px;
-    cursor: move;
-
-    span {
-      cursor: pointer;
-      border-bottom: 1px dashed black;
-    }
-
-    .resizer {
-      width: 4px;
-      background-color: black;
-      height: 20px;
-      float: right;
-      margin-left: 8px;
-      visibility: hidden;
-      cursor: col-resize;
-    }
-
-    &:hover {
-      .resizer {
-        visibility: visible;
-      }
-    }
-  }
+  border-radius: 5px;
+  border: 1px solid #CCC;
 }

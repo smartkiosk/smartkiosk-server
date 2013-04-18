@@ -51,7 +51,7 @@ class Seeder
   end
 
   def seed_test_terminals
-    100.times do |i|
+    3000.times do |i|
       @terminals << Terminal.make!(:agent => @agent)
     end
   end

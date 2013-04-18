@@ -1,0 +1,3 @@
+- @ts.each (t) =>
+  %tr{id: "terminal-#{t.id}"}
+    != @render '_row', terminal: t

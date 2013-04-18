@@ -1,7 +1,17 @@
 #= require hamlcoffee
 #= require joosy
+#= require jquery-ui
 #= require bootstrap
 #= require chosen.jquery 
+#= require cookie.jquery
+#= require event-drag.jquery
+#= require slick.core
+#= require slick.grid
+#= require slick.cellselectionmodel
+#= require slick.cellrangedecorator
+#= require slick.cellrangeselector
+#= require copypaste
+#= require sheetclip
 #= require i18n
 #= require i18n/translations
 #

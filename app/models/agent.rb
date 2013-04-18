@@ -21,4 +21,10 @@ class Agent < ActiveRecord::Base
   #
   validates :title, :presence => true, :uniqueness => true
 
+  def self.as_hash(fields)
+    connection.select_all(select(fields).arel).each do |attrs|
+      yield(attrs) if block_given?
+    end
+  end
+
 end

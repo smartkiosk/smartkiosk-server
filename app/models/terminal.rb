@@ -38,6 +38,12 @@ class Terminal < ActiveRecord::Base
   #
   # METHODS
   #
+  def self.as_hash(fields)
+    connection.select_all(select(fields).arel).each do |attrs|
+      yield(attrs) if block_given?
+    end
+  end
+
   def title
     keyword
   end

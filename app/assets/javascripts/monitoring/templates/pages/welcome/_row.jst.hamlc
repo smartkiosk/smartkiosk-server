@@ -16,10 +16,13 @@
   != @hardwareError 'watchdog', @terminal
 %td
   %small
-    = Date.create(@terminal['collected_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
+    - if @terminal['collected_at']
+      = Date.create(@terminal['collected_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
 %td
   %small
-    = Date.create(@terminal['notified_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
+    - if @terminal['notified_at']
+      = Date.create(@terminal['notified_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
 %td
   %small
-    = Date.create(@terminal['issues_started_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')
+    - if @terminal['issues_started_at']
+      = Date.create(@terminal['issues_started_at']).format('{dd}.{MM}.{yyyy} {hh}:{mm}:{ss}')

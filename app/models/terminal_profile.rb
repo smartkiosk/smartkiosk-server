@@ -21,6 +21,12 @@ class TerminalProfile < ActiveRecord::Base
 
   validates :title, :presence => true, :uniqueness => true
 
+  def self.as_hash(fields)
+    connection.select_all(select(fields).arel).each do |attrs|
+      yield(attrs) if block_given?
+    end
+  end
+
   def actualize_links!
     ProviderGroup.where(ProviderGroup.arel_table[:id].not_in TerminalProfileProviderGroup.arel_table.project(:provider_group_id)).each do |pg|
       terminal_profile_provider_groups << TerminalProfileProviderGroup.new(:provider_group_id => pg.id, :terminal_profile_id => id)

@@ -1,7 +1,6 @@
 Joosy.helpers 'Application', ->
 
-  @hardwareError = (device, terminal) ->
-    code = terminal["#{device}_error"]
+  @hardwareError = (device, code) ->
     return "" unless code?
 
     errors  = I18n.t("smartkiosk.hardware.#{device}.errors")
