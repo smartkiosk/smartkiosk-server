@@ -12,7 +12,7 @@ class Role < ActiveRecord::Base
   def self.actions
     @actions ||= {
       'terminals' => %w(read create edit destroy reload reboot disable enable upgrade),
-      'monitoring' => %w(keyword)
+      'monitoring' => %w(keyword address printer-error cash-acceptor-error modem-error watchdog-error collected-at notified-at issues-started-at agent-id terminal-profile-id)
     }
   end
 
@@ -52,6 +52,6 @@ class Role < ActiveRecord::Base
   end
 
   def modelize
-    keyword.singularize.camelize.constantize
+    keyword.singularize.camelize.constantize rescue nil
   end
 end

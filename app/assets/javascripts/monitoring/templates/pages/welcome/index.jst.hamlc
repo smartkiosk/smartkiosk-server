@@ -1,7 +1,10 @@
 .container-fluid
   .navbar
     .navbar-inner
-      .brand= Date.create().format(undefined, I18n.locale)
+      .brand
+        SmartKiosk Monitor
+        %small
+          = Date.create().format(undefined, I18n.locale)
       %ul.nav.pull-right
         %li
           %a{href: '/admin/terminals'}= I18n.t 'smartkiosk.monitoring.manage'
@@ -12,6 +15,10 @@
         %input#keyword.span2{type: 'text', placeholder: I18n.t('activerecord.attributes.terminal.keyword')}
       .span4
         %select#error.span4{:'data-placeholder' => I18n.t('activerecord.attributes.terminal.error'), multiple: true}
+          - @hardware.each (h) ->
+            %optgroup{label: I18n.t("smartkiosk.hardware.#{h}.title")}
+              - Object.each I18n.t("smartkiosk.hardware.#{h}.errors"), (code, title) ->
+                %option{value: "#{h}-#{code}"}= "#{I18n.t("smartkiosk.hardware.#{h}.abbr")}: #{title}"
       .span2
         %select#agent.span2{:'data-placeholder' => I18n.t('activerecord.attributes.terminal.agent')}
           %option

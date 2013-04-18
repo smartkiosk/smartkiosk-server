@@ -8,10 +8,12 @@ class Ability
       user.user_roles.each do |ur|
         model = ur.role.modelize 
 
-        can :read, model if ur.priveleged?(:read)
-        can [:new, :create], model if ur.priveleged?(:create)
-        can [:edit, :update], model if ur.priveleged?(:edit)
-        can :destroy, model if ur.priveleged?(:destroy)
+        if model
+          can :read, model if ur.priveleged?(:read)
+          can [:new, :create], model if ur.priveleged?(:create)
+          can [:edit, :update], model if ur.priveleged?(:edit)
+          can :destroy, model if ur.priveleged?(:destroy)
+        end
       end
 
       Terminal::ORDERS.each do |order|

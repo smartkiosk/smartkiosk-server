@@ -4,6 +4,14 @@ Joosy.namespace 'Welcome', ->
     @layout ApplicationLayout
     @view   'index'
 
+    hardware: [
+      'printer',
+      'cash_acceptor',
+      'modem',
+      'card_reader',
+      'watchdog'
+    ]
+
     defaultColumns: [
       'keyword',
       'terminal_profile_title',
@@ -34,14 +42,17 @@ Joosy.namespace 'Welcome', ->
     @fetch (done) ->
       @data.agents   = []
       @data.profiles = []
+      @data.hardware = @hardware
+
+      @allowedFields = Object.keys(window.terminals.first())
 
       @terminals = window.terminals.clone()
       @index     = Object.extended()
 
       window.terminals.each (t) =>
         @index[t.id] = t
-        @data.agents.push t['agent_title']
-        @data.profiles.push t['terminal_profile_title']
+        @data.agents.push t['agent_title'] if t['agent_title']
+        @data.profiles.push t['terminal_profile_title'] if t['terminal_profile_title']
 
       @data.agents = @data.agents.unique()
       @data.profiles = @data.profiles.unique()
@@ -49,6 +60,9 @@ Joosy.namespace 'Welcome', ->
       @widths  = $.cookie('widths')  || {}
       @sorter  = $.cookie('sorter')  || ['keyword', true]
       @columns = $.cookie('columns') || @defaultColumns
+
+      @columns.add @defaultColumns.subtract(@columns)
+      @columns = @columns.intersect(@defaultColumns).intersect(@allowedFields)
 
       done()
 
@@ -96,19 +110,14 @@ Joosy.namespace 'Welcome', ->
           width: @widths[x] || 150
         }
 
-      columns[@columns.indexOf('terminal_profile_title')].name = I18n.t("activerecord.attributes.terminal.terminal_profile")
-      columns[@columns.indexOf('agent_title')].name = I18n.t("activerecord.attributes.terminal.agent")
+      columns[@columns.indexOf('terminal_profile_title')]?.name = I18n.t("activerecord.attributes.terminal.terminal_profile")
+      columns[@columns.indexOf('agent_title')]?.name = I18n.t("activerecord.attributes.terminal.agent")
 
-      [
-        'printer',
-        'cash_acceptor',
-        'modem',
-        'card_reader',
-        'watchdog'
-      ].each (device) =>
+      @hardware.each (device) =>
         offset = @columns.indexOf("#{device}_error")
-        columns[offset].name = I18n.t("smartkiosk.hardware.#{device}.title")
-        columns[offset].formatter = (r, c, v) -> Joosy.Helpers.Application.hardwareError(device, v)
+        if columns[offset]
+          columns[offset].name = I18n.t("smartkiosk.hardware.#{device}.title")
+          columns[offset].formatter = (r, c, v) -> Joosy.Helpers.Application.hardwareError(device, v)
 
       @grid = new Slick.Grid @listing, @terminals, columns,
         enableCellNavigation: true
@@ -137,15 +146,23 @@ Joosy.namespace 'Welcome', ->
 
     filter: ->
       keyword         = @keyword.val()
-      error           = @error.val()
+      errors          = Object.extended()
       agent           = @agent.val()
       terminalProfile = @terminalProfile.val()
       address         = @address.val()
 
-      console.log [keyword, error, agent, terminalProfile, address]
+      @error.val()?.each (e) =>
+        e = e.split('-')
+        errors[e[0]] ||= []
+        errors[e[0]].push e[1].toNumber()
 
-      @terminals = window.terminals.filter (x) ->
+      @terminals = window.terminals.filter (x) =>
+        hardware = !@hardware.map( (h) =>
+          !errors[h]? || errors[h].some(x["#{h}_error"])
+        ).some(false)
+
         return (
+          hardware &&
           (keyword.length == 0 || x['keyword'].startsWith(keyword, 0, false)) &&
           (agent.length == 0 || x['agent_title'] == agent) &&
           (terminalProfile.length == 0 || x['terminal_profile_title'] == terminalProfile) &&

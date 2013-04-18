@@ -1,6 +1,7 @@
 ru:
   smartkiosk:
     monitoring:
+      title: Мониторинг
       manage: Управление терминалами
       filter: Фильтровать
     welcome:
@@ -102,7 +103,17 @@ ru:
         disable: Блокировка
         upgrade: Обновление
       monitoring:
-        keyword: Поле "Ключ"
+        keyword: Ключ
+        address: Адрес
+        "printer-error": Ошибка принтера
+        "cash-acceptor-error": Ошибка купюроприемника
+        "modem-error": Ошибка модема
+        "watchdog-error": Ошибка сторожевика
+        "collected-at": Дата инкассации
+        "notified-at": Дата связи
+        "issues-started-at": Дата начала проблем
+        "agent-id": Агент
+        "terminal-profile-id": Профиль
     debug_levels:
       '0': 'DEBUG'
       '1': 'INFO'

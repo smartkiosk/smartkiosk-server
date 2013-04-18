@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.class.routes.draw do
   ActiveAdmin.routes(self)
 
-  get '/'  => 'monitoring#index'
+  root :to => 'monitoring#index'
 
   devise_for :users, ActiveAdmin::Devise.config
 

@@ -44,6 +44,8 @@ ru:
             min:
               too_large: должно быть меньше До
     models:
+      monitoring:
+        other: Мониторинг
       terminal_ping:
         few: Пинга
         many: Пингов
