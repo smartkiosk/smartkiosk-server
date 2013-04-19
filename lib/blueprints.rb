@@ -62,6 +62,8 @@ TerminalPing.blueprint do
   printer               { {'error' => nil, 'version' => '1.0'} }
   modem                 { {'error' => nil, 'version' => '1.0', 'signal_level' => 4, 'balance' => 44.5} }
   queues                { {'payments' => 4, 'orders' => 0} }
+  cash                  { 1000 }
+  cashless              { 1000 }
 end
 
 Provider.blueprint do

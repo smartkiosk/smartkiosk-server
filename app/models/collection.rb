@@ -29,8 +29,8 @@
   #
   # MODIFICATIONS
   #
-  serialize :banknotes
-  serialize :session_ids
+  serialize :banknotes, JSON
+  serialize :session_ids, JSON
 
   before_validation do
     self.agent = terminal.agent unless terminal.blank?

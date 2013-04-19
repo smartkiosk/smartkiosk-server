@@ -161,9 +161,9 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  serialize :fields
-  serialize :raw_fields
-  serialize :meta
+  serialize :fields, JSON
+  serialize :raw_fields, JSON
+  serialize :meta, JSON
 
   #
   # METHODS

@@ -13,6 +13,9 @@ class TerminalPing
   attribute :version
   attribute :ip, :type => String
 
+  attribute :cash, :type => Float
+  attribute :cashless, :type => Float
+
   # '100' => 1, '1000' => 5
   attribute :banknotes, :default => {}    
 

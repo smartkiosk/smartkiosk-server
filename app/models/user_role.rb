@@ -2,7 +2,7 @@ class UserRole < ActiveRecord::Base
   belongs_to :user
   belongs_to :role
 
-  serialize :priveleges
+  serialize :priveleges, JSON
 
   validates :role, :presence => true
 

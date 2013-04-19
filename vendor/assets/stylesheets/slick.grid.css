@@ -30,7 +30,9 @@ classes should alter those!
   height: 16px;
   line-height: 16px;
   margin: 0;
-  padding: 8px;
+  padding: 4px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-right: 1px solid silver;
   border-left: 0px;
   border-top: 0px;

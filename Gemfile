@@ -9,6 +9,8 @@ gem 'i18n-js', :git => 'git://github.com/fnando/i18n-js.git'
 gem 'trinidad', :require => nil, :platform => :jruby
 gem 'thin', :require => nil, :platform => :ruby
 
+gem 'em-websocket'
+
 gem 'rails', '3.2.12'
 gem 'sinatra', :require => nil
 gem 'jruby-openssl', :platform => :jruby
@@ -29,7 +31,7 @@ gem 'activerecord-jdbcpostgresql-adapter', :platform => :jruby
 gem 'activerecord-jdbcsqlite3-adapter', :platform => :jruby
 gem 'redis-objects', :require => 'redis/objects'
 gem 'redis-objects-rmap'
-gem 'active_attr'
+gem 'active_attr' 
 
 gem 'payzilla', '0.0.4'
 
@@ -68,11 +70,6 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.3.1.0'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-end
-
-group :development do
-  gem 'better_errors'
-  gem 'i18n_yaml_sorter'
 end
 
 gem 'iso8583-mkb', '0.0.3'

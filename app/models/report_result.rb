@@ -8,7 +8,7 @@ class ReportResult < ActiveRecord::Base
   #
   # MODIFICATIONS
   #
-  serialize :data
+  serialize :data, JSON
 
   def human_column_name(field)
     if field.starts_with?('_')

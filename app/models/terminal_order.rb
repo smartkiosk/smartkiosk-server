@@ -9,7 +9,7 @@ class TerminalOrder < ActiveRecord::Base
 
   validates :terminal, :presence => true
 
-  serialize :args
+  serialize :args, JSON
 
   after_save do
     terminal.update_attribute :incomplete_orders_count,

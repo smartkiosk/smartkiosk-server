@@ -9,7 +9,7 @@ class TerminalBuild < ActiveRecord::Base
   mount_uploader :source, ZipUploader
 
   validates :source, :presence => true
-  serialize :hashes
+  serialize :hashes, JSON
 
   validate do
     errors[:base] << I18n.t('activerecord.errors.models.terminal_build.no_version') if version.blank?

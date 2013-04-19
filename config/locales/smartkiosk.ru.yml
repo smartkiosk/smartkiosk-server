@@ -105,15 +105,35 @@ ru:
       monitoring:
         keyword: Ключ
         address: Адрес
-        "printer-error": Ошибка принтера
-        "cash-acceptor-error": Ошибка купюроприемника
-        "modem-error": Ошибка модема
-        "watchdog-error": Ошибка сторожевика
-        "collected-at": Дата инкассации
-        "notified-at": Дата связи
-        "issues-started-at": Дата начала проблем
-        "agent-id": Агент
-        "terminal-profile-id": Профиль
+        printer-error: Ошибка принтера
+        printer-model: Модель принтера
+        printer-version: Версия принтера
+        cash-acceptor-error: Ошибка купюроприемника
+        cash-acceptor-version: Версия купюроприемника
+        cash-acceptor-model: Модель купюроприемника
+        modem-error: Ошибка модема
+        modem-signal-level: Уровень сигнала
+        modem-balance: Баланс сим-карты
+        card-reader-error: Ошибка картоприемника
+        card-reader-version: Версия картоприемника
+        card-reader-model: Модель картоприемника
+        watchdog-error: Ошибка сторожевика
+        collected-at: Инкассация
+        notified-at: Время связи
+        issues-started-at: Время ошибки
+        agent-id: Агент
+        terminal-profile-id: Профиль
+        version: Версия
+        banknotes: Банкноты
+        cash: Сумма наличных платежей
+        cashless: Сумма безналичных платежей
+        upstream: Исходящий трафик
+        downstream: Входящий трафик
+        ip: IP
+        juristic-name: Юридическое имя
+        contract-number: Номер договора
+        rent: Аренда
+        rent-finish-date: Срок окончания аренды
     debug_levels:
       '0': 'DEBUG'
       '1': 'INFO'

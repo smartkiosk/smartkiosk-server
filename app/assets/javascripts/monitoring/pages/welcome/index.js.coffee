@@ -14,17 +14,36 @@ Joosy.namespace 'Welcome', ->
 
     defaultColumns: [
       'keyword',
-      'terminal_profile_title',
       'address',
-      'agent_title',
       'printer_error',
+      'printer_model',
+      'printer_version',
       'cash_acceptor_error',
+      'cash_acceptor_version',
+      'cash_acceptor_model',
       'modem_error',
+      'modem_signal_level',
+      'modem_balance',
       'card_reader_error',
+      'card_reader_version',
+      'card_reader_model',
       'watchdog_error',
       'collected_at',
       'notified_at',
-      'issues_started_at'
+      'issues_started_at',
+      'agent_id',
+      'terminal_profile_id',
+      'version',
+      'banknotes',
+      'cash',
+      'cashless',
+      'upstream',
+      'downstream',
+      'ip',
+      'juristic_name',
+      'contract_number',
+      'rent',
+      'rent_finish_date'
     ]
 
     elements:
@@ -35,6 +54,7 @@ Joosy.namespace 'Welcome', ->
       'agent': '#agent'
       'terminalProfile': '#terminal_profile'
       'address': '#address'
+      'date': '.brand small'
 
     events:
       'click #filter': 'filter'
@@ -75,6 +95,13 @@ Joosy.namespace 'Welcome', ->
       @sort()
       @setupCopier()
       @displayGrid()
+
+      @socket = new WebSocket("ws://localhost:3001/")
+      @socket.onmessage = (msg) =>
+        terminal = JSON.parse(msg.data)
+        Object.merge @index[terminal.id], terminal
+        @grid.invalidate()
+        @date.html Date.create().format(undefined, I18n.locale)
 
     setupCopier: ->
       @copier = new CopyPaste()
@@ -118,6 +145,16 @@ Joosy.namespace 'Welcome', ->
         if columns[offset]
           columns[offset].name = I18n.t("smartkiosk.hardware.#{device}.title")
           columns[offset].formatter = (r, c, v) -> Joosy.Helpers.Application.hardwareError(device, v)
+
+      columns[@columns.indexOf('banknotes')]?.formatter = (r, c, v) ->
+        return "" unless v
+        sum  = 0
+        list = Object.keys(v).map((banknote) ->
+          sum += banknote.toNumber() * v[banknote].toNumber()
+          "<b>#{banknote}</b>: #{v[banknote]}"
+        ).join(", ")
+
+        "#{sum} &mdash; #{list}"
 
       @grid = new Slick.Grid @listing, @terminals, columns,
         enableCellNavigation: true

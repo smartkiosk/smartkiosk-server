@@ -9,9 +9,15 @@ class Terminal < ActiveRecord::Base
   has_rmap({:id => lambda{|x| x.to_s}}, :keyword)
   has_paper_trail :ignore => [:incomplete_orders_count]
 
+  after_save do
+    Monitorer.notify Hash[*changed.map{|x| [x, send(x)]}.flatten].merge(:id => id)
+  end
+
   #
   # RELATIONS
   #
+  serialize :banknotes, JSON
+
   belongs_to :terminal_profile
   belongs_to :agent
   has_many :collections, :order => 'id DESC'
@@ -56,12 +62,21 @@ class Terminal < ActiveRecord::Base
       :state       => data.state,
       :condition   => data.condition,
       :notified_at => data.created_at,
-      :version     => data.version
+      :version     => data.version,
+      :banknotes   => data.banknotes,
+      :cash        => data.cash,
+      :cashless    => data.cashless,
+      :ip          => data.ip,
     }
 
     HARDWARE.each do |device|
       update["#{device}_error"] = data.error(device)
+      update["#{device}_model"] = data.value('model', device)
+      update["#{device}_version"] = data.value('version', device)
     end
+
+    update["modem_signal_level"] = data.value('signal_level', 'modem')
+    update["modem_balance"] = data.value('balance', 'modem')
 
     if data.ok?
       update[:issues_started_at] = nil

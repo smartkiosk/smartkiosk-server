@@ -12,7 +12,39 @@ class Role < ActiveRecord::Base
   def self.actions
     @actions ||= {
       'terminals' => %w(read create edit destroy reload reboot disable enable upgrade),
-      'monitoring' => %w(keyword address printer-error cash-acceptor-error modem-error watchdog-error collected-at notified-at issues-started-at agent-id terminal-profile-id)
+      'monitoring' => [
+        'keyword',
+        'address',
+        'printer-error',
+        'printer-model',
+        'printer-version',
+        'cash-acceptor-error',
+        'cash-acceptor-version',
+        'cash-acceptor-model',
+        'modem-error',
+        'modem-signal-level',
+        'modem-balance',
+        'card-reader-error',
+        'card-reader-version',
+        'card-reader-model',
+        'watchdog-error',
+        'collected-at',
+        'notified-at',
+        'issues-started-at',
+        'agent-id',
+        'terminal-profile-id',
+        'version',
+        'banknotes',
+        'cash',
+        'cashless',
+        'upstream',
+        'downstream',
+        'ip',
+        'juristic-name',
+        'contract-number',
+        'rent',
+        'rent-finish-date'
+      ]
     }
   end
 

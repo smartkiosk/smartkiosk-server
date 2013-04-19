@@ -10,7 +10,7 @@ class ProviderGateway < ActiveRecord::Base
   #
   # MODIFICATIONS
   #
-  serialize :fields_mapping
+  serialize :fields_mapping, JSON
 
   #
   # METHODS

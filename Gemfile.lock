@@ -96,9 +96,6 @@ GEM
       rubyzip (>= 0.9.5)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-java)
-    better_errors (0.3.2)
-      coderay (>= 1.0.0)
-      erubis (>= 2.7.0)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     bouncy-castle-java (1.5.0146.1)
@@ -154,6 +151,9 @@ GEM
       warden (~> 1.2.1)
     diff-lcs (1.1.3)
     digest-crc (0.3.0)
+    em-websocket (0.5.0)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.0)
     eventmachine (1.0.0-java)
@@ -187,10 +187,11 @@ GEM
     highline (1.6.15)
     hike (1.2.1)
     htmlentities (4.3.1)
+    http_parser.rb (0.5.3)
+    http_parser.rb (0.5.3-java)
     httpi (2.0.2)
       rack
     i18n (0.6.4)
-    i18n_yaml_sorter (0.2.0)
     inherited_resources (1.4.0)
       has_scope (~> 0.5.0)
       responders (~> 0.9)
@@ -410,7 +411,6 @@ DEPENDENCIES
   activerecord-jdbcpostgresql-adapter
   activerecord-jdbcsqlite3-adapter
   axlsx
-  better_errors
   bootstrap-sass (~> 2.3.1.0)
   bundler (~> 1.3)
   capistrano
@@ -420,12 +420,12 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   dav4rack (= 0.2.11)
+  em-websocket
   ffaker
   guard-rspec
   guard-spork!
   haml
   i18n-js!
-  i18n_yaml_sorter
   iso8583-mkb (= 0.0.3)
   joosy!
   jquery-rails

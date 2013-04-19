@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410142059) do
+ActiveRecord::Schema.define(:version => 20130419125334) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -434,7 +434,7 @@ ActiveRecord::Schema.define(:version => 20130410142059) do
     t.string   "address"
     t.string   "keyword"
     t.string   "description"
-    t.string   "state",                   :default => "unknown"
+    t.string   "state",                                                  :default => "unknown"
     t.string   "condition"
     t.datetime "notified_at"
     t.datetime "collected_at"
@@ -456,14 +456,32 @@ ActiveRecord::Schema.define(:version => 20130410142059) do
     t.integer  "cash_acceptor_error"
     t.integer  "modem_error"
     t.string   "version"
-    t.boolean  "has_adv_monitor",         :default => true,      :null => false
-    t.integer  "incomplete_orders_count", :default => 0,         :null => false
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.boolean  "has_adv_monitor",                                        :default => true,      :null => false
+    t.integer  "incomplete_orders_count",                                :default => 0,         :null => false
+    t.datetime "created_at",                                                                    :null => false
+    t.datetime "updated_at",                                                                    :null => false
     t.integer  "card_reader_error"
     t.integer  "watchdog_error"
-    t.integer  "last_session_started_at", :default => 0,         :null => false
+    t.integer  "last_session_started_at",                                :default => 0,         :null => false
     t.text     "address_details"
+    t.string   "banknotes"
+    t.decimal  "cash",                    :precision => 38, :scale => 2
+    t.decimal  "cashless",                :precision => 38, :scale => 2
+    t.string   "ip"
+    t.string   "cash_acceptor_version"
+    t.string   "cash_acceptor_model"
+    t.string   "modem_version"
+    t.string   "modem_model"
+    t.string   "modem_signal_level"
+    t.string   "modem_balance"
+    t.string   "printer_version"
+    t.string   "printer_model"
+    t.string   "card_reader_version"
+    t.string   "card_reader_model"
+    t.string   "watchdog_version"
+    t.string   "watchdog_model"
+    t.integer  "upstream"
+    t.integer  "downstream"
   end
 
   add_index "terminals", ["agent_id"], :name => "index_terminals_on_agent_id"

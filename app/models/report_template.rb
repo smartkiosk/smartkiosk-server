@@ -18,9 +18,9 @@ class ReportTemplate < ActiveRecord::Base
   #
   # MODIFCIATIONS
   #
-  serialize :fields
-  serialize :calculations
-  serialize :conditions
+  serialize :fields, JSON
+  serialize :calculations, JSON
+  serialize :conditions, JSON
 
   before_save do
     fields.select!{|x| !x.blank?}

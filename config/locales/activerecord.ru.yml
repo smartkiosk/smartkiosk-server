@@ -607,6 +607,17 @@ ru:
         watchdog_error: Ошибка сторожевика
         watchdog_model: Модель сторожевика
         watchdog_version: Версия сторожевика
+        printer_model: Модель принтера
+        printer_version: Версия принтера
+        cash_acceptor_version: Версия купюроприемника
+        cash_acceptor_model: Модель купюроприемника
+        modem_signal_level: Уровень связи
+        modem_balance: Баланс сим-карты
+        banknotes: Купюры
+        cash: Нал
+        cashless: Безнал
+        upstream: Входящий трафик
+        downstream: Исходящий трафик
       terminal_ping:
         terminal: Терминал
         condition: Состояние
