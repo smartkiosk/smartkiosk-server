@@ -421,6 +421,7 @@ DEPENDENCIES
   database_cleaner
   dav4rack (= 0.2.11)
   em-websocket
+  eventmachine
   ffaker
   guard-rspec
   guard-spork!

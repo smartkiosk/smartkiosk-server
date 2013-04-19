@@ -9,6 +9,7 @@ gem 'i18n-js', :git => 'git://github.com/fnando/i18n-js.git'
 gem 'trinidad', :require => nil, :platform => :jruby
 gem 'thin', :require => nil, :platform => :ruby
 
+gem 'eventmachine'
 gem 'em-websocket'
 
 gem 'rails', '3.2.12'
