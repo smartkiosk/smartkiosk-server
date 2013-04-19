@@ -28,7 +28,7 @@ namespace :deploy do
   end
 
   task :install do
-    run "cd #{release_path}; bundle exec rake db:install RAILS_ENV=#{rails_env} SEED_TEST=true"
+    run "cd #{current_path}; bundle exec rake db:install RAILS_ENV=#{rails_env} SEED_TEST=true"
   end
 
   task :restart do
