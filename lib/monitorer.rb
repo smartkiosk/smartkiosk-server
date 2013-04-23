@@ -1,3 +1,5 @@
+require 'em-websocket'
+
 class MonitorConnection < EventMachine::WebSocket::Connection
   def initialize(service)
     @service = service
