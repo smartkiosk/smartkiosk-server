@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    payment = Payment.build!(@terminal, Provider.find_by_keyword(params[:provider]), params[:payment])
+    payment = Payment.build!(@terminal, Provider.find_by_keyword(params[:provider].to_s), params[:payment])
 
     if payment
       payment.check!
