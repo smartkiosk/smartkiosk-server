@@ -1,4 +1,4 @@
-require 'monitorer'
+require_dependency 'monitorer'
 require_dependency 'terminal_ping'
 
 class Terminal < ActiveRecord::Base

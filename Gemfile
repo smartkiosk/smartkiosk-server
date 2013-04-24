@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'oj'
+gem 'oj', :platform => :ruby
+gem 'jrjackson', :platform => :jruby
 
 gem 'matrioshka'
 gem 'joosy', :git => 'git://github.com/joosy/joosy.git'
